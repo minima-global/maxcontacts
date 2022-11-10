@@ -1,0 +1,89 @@
+import create from 'zustand'
+import { commands, MaxContact } from 'npm-upload-9781'
+
+interface StoreState {
+    contacts: MaxContact[]
+    getContacts: () => void
+    getContactById: (id: number) => MaxContact | null
+    // toast stuff
+    isToastOpen: boolean
+    closeToast: () => void
+    message: string
+    toastType: 'success' | 'error' | 'warning'
+    toast: {
+        success: (message: string) => void
+        error: (message: string) => void
+        warning: (message: string) => void
+    }
+}
+
+export const useStore = create<StoreState>()((set, get) => ({
+    contacts: [],
+    // updates the store
+    getContacts: async () => {
+        const response = await commands.maxcontacts()
+        console.log('contacts', response.contacts)
+        set((state) => ({ contacts: response.contacts }))
+    },
+    getContactById: (id: number) => {
+        const foundContact = get().contacts.find((contact) => contact.id === id)
+        if (typeof foundContact === 'undefined') {
+            console.error(`contact id ${id} not found`)
+            return null
+        } else {
+            return foundContact
+        }
+    },
+    // toast stuff
+    isToastOpen: false,
+    closeToast: () => set(() => ({ isToastOpen: false })),
+    message: '',
+    toastType: 'success',
+    toast: {
+        success: (message: string) =>
+            set((state) => ({
+                isToastOpen: true,
+                toastType: 'success',
+                message,
+            })),
+        error: (message: string) =>
+            set((state) => ({
+                isToastOpen: true,
+                toastType: 'error',
+                message,
+            })),
+        warning: (message: string) =>
+            set((state) => ({
+                isToastOpen: true,
+                toastType: 'warning',
+                message,
+            })),
+    },
+}))
+
+export const removeContact = async (contactId: number) => {
+    const action = 'remove'
+    const id = contactId.toString()
+    const response = await commands.maxcontacts({ action, id })
+    console.log('remove contact response', response)
+    useStore.getState().toast.success(`contact removed`)
+
+    // refresh contacts in store
+    useStore.getState().getContacts()
+}
+
+export const createContact = async (newContactAddress: string) => {
+    const action = 'add'
+    const contact = newContactAddress
+
+    try {
+        const response = await commands.maxcontacts({ action, contact })
+        console.log('add contact response', response)
+        useStore.getState().toast.success(`new contact added`)
+
+        // refresh contacts in store
+        useStore.getState().getContacts()
+    } catch (error) {
+        useStore.getState().toast.error(`unknown contact not added`)
+    }
+}
