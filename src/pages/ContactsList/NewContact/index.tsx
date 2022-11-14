@@ -1,6 +1,8 @@
 import { useState, ChangeEvent } from 'react'
 import Modal from './../../../layout/Modal'
 import { createContact } from './../../../Store'
+import newContactIcon from './../../../assets/newContactIcon.svg'
+import styles from './NewContact.module.css'
 
 interface IProps {}
 function NewContact() {
@@ -30,20 +32,24 @@ function NewContact() {
 
     return (
         <>
-            <section>
-                <h3>New Contact</h3>
-
-                <div>
-                    <button onClick={() => setOpenModal(true)}>open modal</button>
-                </div>
-            </section>
+            <div className={styles.newContactListItem} onClick={() => setOpenModal(true)}>
+                <img alt="contacts_icon" src={newContactIcon} width={40} className="pointer" />
+                <div className="pointer underline">New Contact</div>
+            </div>
 
             <Modal open={openModal}>
-                <textarea rows={6} placeholder={placeholderText} value={newContactAddress} onChange={onContactAddressChange}></textarea>
-                <div>
-                    <button onClick={onAddContactClicked}>add contact</button>
-                </div>
-                <button onClick={onModalCloseClicked}>close</button>
+                <h4>New Contact</h4>
+                <label>
+                    Enter your contacts Minima address
+                    <textarea rows={6} placeholder={placeholderText} value={newContactAddress} onChange={onContactAddressChange}></textarea>
+                </label>
+
+                <button className="modal-button" onClick={onAddContactClicked}>
+                    add contact
+                </button>
+                <a onClick={onModalCloseClicked} className="pointer underline">
+                    close
+                </a>
             </Modal>
         </>
     )

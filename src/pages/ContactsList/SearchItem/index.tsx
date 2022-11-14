@@ -1,8 +1,10 @@
+import styles from './SearchItem.module.css'
+
 function SearchItem() {
     return (
         <>
             <li>
-                <input placeholder="search contacts"></input>
+                <input className={styles.searchInput} placeholder="search contacts"></input>
             </li>
         </>
     )

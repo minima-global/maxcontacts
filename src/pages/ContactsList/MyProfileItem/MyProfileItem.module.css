@@ -1,6 +1,17 @@
 .container {
     display: flex;
     flex-direction: row;
+    cursor: pointer;
+    background-color: #e5e5e5;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    box-shadow: 1px 1px 2px grey;
+}
+
+.container:hover {
+    /* background-color: aliceblue; */
 }
 
 .containerItem {

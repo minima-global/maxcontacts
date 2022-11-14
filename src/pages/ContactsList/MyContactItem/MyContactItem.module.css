@@ -1,23 +1,19 @@
-.contactDetailContainer {
+.myContactItem {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    align-items: flex-start;
+    margin-top: 10px;
     background-color: #f4f4f5;
     padding: 10px;
     border-radius: 10px;
-
     border: 1px solid #ccc;
     box-shadow: 1px 1px 2px grey;
 }
 
-.purpleColor {
-    filter: invert(17%) sepia(82%) saturate(5947%) hue-rotate(266deg) brightness(93%) contrast(110%);
-}
-
-.margin {
-    margin-top: 10px;
-}
-
 .chainRow {
     display: flex;
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .space {
@@ -30,17 +26,4 @@
 
 .redFilter {
     filter: invert(47%) sepia(95%) saturate(3367%) hue-rotate(325deg) brightness(96%) contrast(101%);
-}
-
-.back {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    cursor: pointer;
-}
-
-.back img {
-    margin-right: 10px;
 }

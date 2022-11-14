@@ -1,27 +1,26 @@
 import { useEffect, useState } from 'react'
-import { commands, MaxContact } from 'npm-upload-9781'
+import { commands, MaxContact, Maxima } from 'npm-upload-9781'
 import MyContactItem from './MyContactItem'
 import MyPropfileItem from './MyProfileItem'
 import SearchItem from './SearchItem'
 import NewContact from './NewContact'
+import styles from './ContactList.module.css'
 
 interface IProps {
+    myProfile: Maxima
     myContacts: MaxContact[]
 }
-function ContactsList({ myContacts }: IProps) {
+function ContactsList({ myProfile, myContacts }: IProps) {
     return (
         <>
-            <section>
-                <h3>Contacts List</h3>
-                <ul>
-                    <MyPropfileItem name="neil"></MyPropfileItem>
-                    <SearchItem></SearchItem>
-                    <NewContact></NewContact>
-                    {myContacts.map((contact, i) => (
-                        <MyContactItem contact={contact} key={i}></MyContactItem>
-                    ))}
-                </ul>
-            </section>
+            <div className={styles.contactsListContainer}>
+                <MyPropfileItem name={myProfile.name}></MyPropfileItem>
+                {/* <SearchItem></SearchItem> */}
+                <NewContact></NewContact>
+                {myContacts.map((contact, i) => (
+                    <MyContactItem contact={contact} key={i}></MyContactItem>
+                ))}
+            </div>
         </>
     )
 }

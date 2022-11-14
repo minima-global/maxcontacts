@@ -1,27 +1,14 @@
-.contactDetailContainer {
-    background-color: #f4f4f5;
+.profileContainer {
+    background-color: #e5e5e5;
     padding: 10px;
     border-radius: 10px;
-
     border: 1px solid #ccc;
+    margin-top: 10px;
     box-shadow: 1px 1px 2px grey;
 }
 
 .purpleColor {
     filter: invert(17%) sepia(82%) saturate(5947%) hue-rotate(266deg) brightness(93%) contrast(110%);
-}
-
-.margin {
-    margin-top: 10px;
-}
-
-.chainRow {
-    display: flex;
-    margin-top: 20px;
-}
-
-.space {
-    margin-right: 5px;
 }
 
 .greenFilter {

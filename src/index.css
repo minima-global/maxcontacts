@@ -4,6 +4,7 @@ body {
         sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* background-color: #f4f4f5; */
 }
 
 code {
@@ -26,6 +27,11 @@ h3 {
     text-decoration: underline;
 }
 
+h2,
+h4 {
+    margin-top: 10px;
+}
+
 textarea {
     width: 100%;
 }
@@ -37,4 +43,38 @@ input {
 ul {
     padding: 0;
     list-style-type: none;
+}
+
+button.modal-button {
+    background: #7a17f9;
+    border-radius: 12px;
+    border-width: 0;
+    width: 100%;
+    color: #ffffff;
+    height: 60px;
+    padding: 10px;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+button {
+    background: #7a17f9;
+    border-radius: 8px;
+    border-width: 0;
+    color: #ffffff;
+    height: 40px;
+    padding: 10px;
+    /* font-weight: 800; */
+    font-size: 18px;
+    line-height: 21px;
+    cursor: pointer;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.pointer {
+    cursor: pointer;
 }

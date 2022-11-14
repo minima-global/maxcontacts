@@ -1,7 +1,9 @@
 import create from 'zustand'
-import { commands, MaxContact } from 'npm-upload-9781'
+import { commands, MaxContact, Maxima } from 'npm-upload-9781'
 
 interface StoreState {
+    profile: Maxima | null
+    getProfile: () => void
     contacts: MaxContact[]
     getContacts: () => void
     getContactById: (id: number) => MaxContact | null
@@ -18,6 +20,12 @@ interface StoreState {
 }
 
 export const useStore = create<StoreState>()((set, get) => ({
+    profile: null,
+    getProfile: async () => {
+        const maxima = await commands.maxima()
+        console.log('profile', maxima)
+        set((state) => ({ profile: maxima }))
+    },
     contacts: [],
     // updates the store
     getContacts: async () => {
@@ -77,13 +85,32 @@ export const createContact = async (newContactAddress: string) => {
     const contact = newContactAddress
 
     try {
-        const response = await commands.maxcontacts({ action, contact })
+        const response: any = await commands.maxcontacts({ action, contact }) // maxcontacts returns a different object for 'add' action
         console.log('add contact response', response)
-        useStore.getState().toast.success(`new contact added`)
 
-        // refresh contacts in store
-        useStore.getState().getContacts()
+        if (response.maxima.delivered) {
+            useStore.getState().toast.success(`new contact added`)
+            // refresh contacts in store
+            useStore.getState().getContacts()
+        } else {
+            useStore.getState().toast.error(`unknown contact not added`)
+        }
     } catch (error) {
         useStore.getState().toast.error(`unknown contact not added`)
+    }
+}
+
+export const changeProfileName = async (newProfileName: string) => {
+    const action = 'setname'
+    const name = newProfileName
+
+    try {
+        const response = await commands.maxima({ action, name })
+        console.log('name change response', response)
+        useStore.getState().toast.success(`profile name successfully updated`)
+
+        useStore.getState().getProfile()
+    } catch (error) {
+        useStore.getState().toast.error(`could not update profile name`)
     }
 }

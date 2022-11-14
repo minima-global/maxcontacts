@@ -1,11 +1,16 @@
 import { commands, MaxContact } from 'npm-upload-9781'
 import { removeContact } from './../../../Store'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import styles from './MyContactItem.module.css'
+import exclamation from './../../../assets/exclamation.svg'
+import tick from './../../../assets/tick.svg'
 
 interface IProps {
     contact: MaxContact
 }
 function MyContactItem({ contact }: IProps) {
+    const navigate = useNavigate()
+
     const onRemoveContactClicked = async () => {
         removeContact(contact.id)
     }
@@ -61,16 +66,28 @@ function MyContactItem({ contact }: IProps) {
         return `last seen ${daysAgo} ${hoursAgo} ${minutesAgo} ago`
     }
 
+    const onContactClicked = () => {
+        navigate(`/contact/${contact.id}`)
+    }
+
     return (
-        <li>
-            <h4>{contact.extradata.name}</h4>
-            <div>{getLastSeenString(contact.lastseen)}</div>
-            {contact.samechain ? <div>same chain</div> : <div>different chain</div>}
-            <button onClick={onRemoveContactClicked}>remove</button>
-            <button>
-                <Link to={`/contact/${contact.id}`}>contact detail</Link>
-            </button>
-        </li>
+        <>
+            <div onClick={onContactClicked} className={styles.myContactItem}>
+                <h4>{contact.extradata.name}</h4>
+                <div>{getLastSeenString(contact.lastseen)}</div>
+                {contact.samechain ? (
+                    <div className={styles.chainRow}>
+                        <img alt="contacts_icon" src={tick} width={20} className={`${styles.space} ${styles.greenFilter} pointer`} />
+                        same chain
+                    </div>
+                ) : (
+                    <div className={styles.chainRow}>
+                        <img alt="contacts_icon" src={exclamation} width={20} className={`${styles.space} ${styles.redFilter} pointer`} />
+                        different chain
+                    </div>
+                )}
+            </div>
+        </>
     )
 }
 

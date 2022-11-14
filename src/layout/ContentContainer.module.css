@@ -3,6 +3,7 @@
         padding-left: calc((100vw - 600px) / 2);
         padding-right: calc((100vw - 600px) / 2);
         overflow-wrap: break-word;
+        margin: 10px;
     }
 }
 
@@ -11,5 +12,6 @@
         padding-left: 0px;
         padding-right: 0px;
         overflow-wrap: break-word;
+        margin: 10px;
     }
 }
