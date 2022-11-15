@@ -7,6 +7,7 @@ import exclamation from './../../../assets/exclamation.svg'
 import tick from './../../../assets/tick.svg'
 import { useState } from 'react'
 import leftArrow from './../../../assets/left-arrow.svg'
+import DisplayField from './../../../components/DisplayField'
 
 interface IProps {
     contact: MaxContact
@@ -24,14 +25,6 @@ function ContactDetailPage({ contact }: IProps) {
         // notification
     }
 
-    const onCopyButtonClicked = () => {
-        navigator.clipboard.writeText(contact.myaddress)
-        setCopied(true)
-        setTimeout(() => {
-            setCopied(false)
-        }, 3000)
-    }
-
     const onBackClicked = () => {
         navigate('/')
     }
@@ -45,14 +38,11 @@ function ContactDetailPage({ contact }: IProps) {
 
             <div className={styles.contactDetailContainer}>
                 <h2>{contact.extradata.name}</h2>
-                <div>{contact.myaddress}</div>
-                <img
-                    alt="copy_icon"
-                    src={copyIcon}
-                    width={40}
-                    className={copied ? `${styles.greenFilter} pointer` : `${styles.purpleColor} pointer`}
-                    onClick={onCopyButtonClicked}
-                />
+                <DisplayField name="Maxima Address" data={contact.myaddress}></DisplayField>
+                <DisplayField name="Public Key" data={contact.publickey}></DisplayField>
+                <DisplayField name="Mini Address" data={contact.extradata.minimaaddress}></DisplayField>
+                <DisplayField name="MLS" data={contact.extradata.mls}></DisplayField>
+                <DisplayField name="Top Block" data={contact.extradata.topblock}></DisplayField>
 
                 {contact.samechain ? (
                     <div className={styles.chainRow}>

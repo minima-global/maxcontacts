@@ -7,6 +7,10 @@
     box-shadow: 1px 1px 2px grey;
 }
 
+.profileContainer button {
+    margin-bottom: 20px;
+}
+
 .purpleColor {
     filter: invert(17%) sepia(82%) saturate(5947%) hue-rotate(266deg) brightness(93%) contrast(110%);
 }

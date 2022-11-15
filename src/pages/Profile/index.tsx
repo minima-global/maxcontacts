@@ -6,6 +6,7 @@ import Modal from './../../layout/Modal'
 import copyIcon from './../../assets/copy_120015.svg'
 import { useNavigate } from 'react-router-dom'
 import leftArrow from './../../assets/left-arrow.svg'
+import DisplayField from './../../components/DisplayField'
 
 interface IProps {
     myProfile: Maxima
@@ -56,14 +57,19 @@ function Profile({ myProfile }: IProps) {
                     <button onClick={() => setOpenModal(true)}>Edit your name</button>
                 </div>
 
-                <div style={{ paddingTop: '20px' }}>{myProfile.contact}</div>
+                <div style={{ fontWeight: 'bold', marginBottom: '5px' }}>Your Maxim Address</div>
+                <div>{myProfile.contact}</div>
                 <img
                     alt="copy_icon"
                     src={copyIcon}
                     width={40}
                     className={copied ? `${styles.greenFilter} pointer` : `${styles.purpleColor} pointer`}
+                    style={{ marginBottom: '10px' }}
                     onClick={onCopyButtonClicked}
                 />
+                <DisplayField name="Your Local Identity" data={myProfile.localidentity}></DisplayField>
+                <DisplayField name="Your MLS" data={myProfile.mls}></DisplayField>
+                <DisplayField name="Your Public Key" data={myProfile.publickey}></DisplayField>
             </div>
 
             <Modal open={openModal}>

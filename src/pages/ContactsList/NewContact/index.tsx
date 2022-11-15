@@ -33,8 +33,10 @@ function NewContact() {
     return (
         <>
             <div className={styles.newContactListItem} onClick={() => setOpenModal(true)}>
-                <img alt="contacts_icon" src={newContactIcon} width={40} className="pointer" />
-                <div className="pointer underline">New Contact</div>
+                <button>
+                    <img alt="contacts_icon" src={newContactIcon} width={50} className="pointer" />
+                    <div className="pointer">New Contact</div>
+                </button>
             </div>
 
             <Modal open={openModal}>
