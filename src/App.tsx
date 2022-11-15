@@ -3,18 +3,19 @@ import { events, Decimal, MDS } from 'npm-upload-9781'
 import ContactsList from './pages/ContactsList'
 import ContentContainer from './layout/ContentContainer'
 import { Routes, Route } from 'react-router-dom'
-import GettingStarted from './pages/GettingStarted'
+import GettingStarted from './pages/Onboarding'
 import Profile from './pages/Profile'
 import { useStore } from './Store'
 import ContactDetail from './pages/ContactDetail'
 import Header from './layout/Header'
+import Onboarding from './pages/Onboarding'
 
 // @ts-ignore: can assign
 MDS.DEBUG_HOST = '127.0.0.1'
 // @ts-ignore: can assign
 MDS.DEBUG_PORT = 9003
 // @ts-ignore: can assign
-MDS.DEBUG_MINIDAPPID = '0x2063CA44C85E6EF1A6C83AFECFECB04A1761D11367412EF0ABB4146AA011BDF1'
+MDS.DEBUG_MINIDAPPID = '0xD300B8B2AEFBC08402E883F7C43170D886FF377A8C0BB80588ED8BA6AEA8A2D5'
 
 function App() {
     const [appInitialised, setAppInitialised] = useState(false)
@@ -46,6 +47,7 @@ function App() {
                 <ContentContainer>
                     <Routes>
                         <Route path="/" element={<ContactsList myContacts={myContacts} myProfile={myProfile}></ContactsList>} />
+                        <Route path="/onboarding" element={<Onboarding></Onboarding>} />
                         <Route path="/contact/:id" element={<ContactDetail></ContactDetail>} />
                         <Route path="/profile" element={<Profile myProfile={myProfile}></Profile>} />
                     </Routes>
