@@ -14,7 +14,7 @@ MDS.DEBUG_HOST = '127.0.0.1'
 // @ts-ignore: can assign
 MDS.DEBUG_PORT = 9003
 // @ts-ignore: can assign
-MDS.DEBUG_MINIDAPPID = '0xC33D4A71ED92515668DBD669274F595EBFAB68748220453383032A2BDDE0B915'
+MDS.DEBUG_MINIDAPPID = '0x2063CA44C85E6EF1A6C83AFECFECB04A1761D11367412EF0ABB4146AA011BDF1'
 
 function App() {
     const [appInitialised, setAppInitialised] = useState(false)
@@ -31,6 +31,10 @@ function App() {
         events.onInit(() => {
             setAppInitialised(true)
             getProfile()
+            getContacts()
+        })
+        events.onMaxcontacts(() => {
+            console.log('new contacts event')
             getContacts()
         })
     }, [])

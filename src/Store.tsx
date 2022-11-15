@@ -76,8 +76,8 @@ export const removeContact = async (contactId: number) => {
     console.log('remove contact response', response)
     useStore.getState().toast.success(`contact removed`)
 
-    // refresh contacts in store
-    useStore.getState().getContacts()
+    // do not refresh contacts in store
+    // the maxcontacts event will notify us when the contact has been fully added
 }
 
 export const createContact = async (newContactAddress: string) => {
@@ -90,8 +90,8 @@ export const createContact = async (newContactAddress: string) => {
 
         if (response.maxima.delivered) {
             useStore.getState().toast.success(`new contact added`)
-            // refresh contacts in store
-            useStore.getState().getContacts()
+            // do not refresh contacts in store
+            // the maxcontacts event will notify us when the contact has been fully added
         } else {
             useStore.getState().toast.error(`unknown contact not added`)
         }

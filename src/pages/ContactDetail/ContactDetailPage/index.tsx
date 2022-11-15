@@ -38,8 +38,8 @@ function ContactDetailPage({ contact }: IProps) {
 
     return (
         <>
-            <div className={styles.back}>
-                <img alt="left_arrow" src={leftArrow} width={40} onClick={onBackClicked} />
+            <div className={styles.back} onClick={onBackClicked}>
+                <img alt="left_arrow" src={leftArrow} width={40} />
                 <b>Back</b>
             </div>
 

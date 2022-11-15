@@ -10,7 +10,7 @@
         "@types/node": "^16.18.3",
         "@types/react": "^18.0.25",
         "@types/react-dom": "^18.0.8",
-        "npm-upload-9781": "^1.0.51",
+        "npm-upload-9781": "^1.0.54",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-router-dom": "^6.4.3",
