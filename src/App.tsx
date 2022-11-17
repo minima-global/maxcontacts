@@ -3,18 +3,19 @@ import { events, Decimal, MDS } from 'npm-upload-9781'
 import ContactsList from './pages/ContactsList'
 import ContentContainer from './layout/ContentContainer'
 import { Routes, Route } from 'react-router-dom'
-import GettingStarted from './pages/GettingStarted'
 import Profile from './pages/Profile'
 import { useStore } from './Store'
 import ContactDetail from './pages/ContactDetail'
 import Header from './layout/Header'
 
-// @ts-ignore: can assign
-MDS.DEBUG_HOST = '127.0.0.1'
-// @ts-ignore: can assign
-MDS.DEBUG_PORT = 9003
-// @ts-ignore: can assign
-MDS.DEBUG_MINIDAPPID = '0xD300B8B2AEFBC08402E883F7C43170D886FF377A8C0BB80588ED8BA6AEA8A2D5'
+if (process.env.NODE_ENV === 'development') {
+    // @ts-ignore: can assign
+    MDS.DEBUG_HOST = '127.0.0.1'
+    // @ts-ignore: can assign
+    MDS.DEBUG_PORT = 10003
+    // @ts-ignore: can assign
+    MDS.DEBUG_MINIDAPPID = '0x985E14BD81EFF098A1ED29371B888EFBF5DD3B84EF545244F2137AEA6B24386E'
+}
 
 function App() {
     const [appInitialised, setAppInitialised] = useState(false)

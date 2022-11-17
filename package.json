@@ -22,9 +22,11 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "build-zip": "npm run build && cd build && zip -r contacts.mds.zip . && mv contacts.mds.zip ../",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "version-bump": "node bump-dapp-patch-version-number.js",
+        "package": "bash package.sh",
+        "build-zip": "npm run version-bump && npm run build && npm run package"
     },
     "eslintConfig": {
         "extends": [

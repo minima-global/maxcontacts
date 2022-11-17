@@ -1,6 +1,21 @@
 import create from 'zustand'
 import { commands, MaxContact, Maxima } from 'npm-upload-9781'
 
+interface Pending {
+    command: string
+    minidapp: {
+        conf: {
+            name: string
+            icon: string
+            version: string
+            description: string
+            permission: string
+        }
+        uid: string
+    }
+    uid: string
+}
+
 interface StoreState {
     profile: Maxima | null
     getProfile: () => void
