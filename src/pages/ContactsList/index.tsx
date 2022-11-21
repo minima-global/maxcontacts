@@ -11,6 +11,12 @@ interface IProps {
     myContacts: MaxContact[]
 }
 function ContactsList({ myProfile, myContacts }: IProps) {
+    const centerStyle = {
+        display: 'flex',
+        justifyContent: 'center',
+        marginTop: '75px',
+    }
+
     return (
         <>
             <div className={styles.contactsListContainer}>
@@ -20,6 +26,7 @@ function ContactsList({ myProfile, myContacts }: IProps) {
                 {myContacts.map((contact, i) => (
                     <MyContactItem contact={contact} key={i}></MyContactItem>
                 ))}
+                {myContacts.length === 0 ? <div style={centerStyle}>You have no contacts</div> : null}
             </div>
         </>
     )

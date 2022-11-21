@@ -12,9 +12,9 @@ if (process.env.NODE_ENV === 'development') {
     // @ts-ignore: can assign
     MDS.DEBUG_HOST = '127.0.0.1'
     // @ts-ignore: can assign
-    MDS.DEBUG_PORT = 10003
+    MDS.DEBUG_PORT = 9003
     // @ts-ignore: can assign
-    MDS.DEBUG_MINIDAPPID = '0x985E14BD81EFF098A1ED29371B888EFBF5DD3B84EF545244F2137AEA6B24386E'
+    MDS.DEBUG_MINIDAPPID = '0xA46A0DC65E41D2AFEBF64C24388C3F73D0C03AD958083A3B4E461A99A8D05632'
 }
 
 function App() {

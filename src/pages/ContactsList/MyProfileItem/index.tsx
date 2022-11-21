@@ -13,9 +13,6 @@ function MyProfileItem({ name }: IProps) {
     }
     return (
         <li className={styles.container} onClick={onViewProfileClicked}>
-            {/* <div className={styles.containerItem}>
-                <img alt="contacts_icon" src={contactsIcon} width={40} />
-            </div> */}
             <div className={styles.containerItem}>
                 <h2>{name}</h2>
                 <div>view your profile</div>

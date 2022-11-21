@@ -57,7 +57,7 @@ function Profile({ myProfile }: IProps) {
                     <button onClick={() => setOpenModal(true)}>Edit your name</button>
                 </div>
 
-                <div style={{ fontWeight: 'bold', marginBottom: '5px' }}>Your Maxim Address</div>
+                <div style={{ fontWeight: 'bold', marginBottom: '5px' }}>Your Maxima Address</div>
                 <div>{myProfile.contact}</div>
                 <img
                     alt="copy_icon"
