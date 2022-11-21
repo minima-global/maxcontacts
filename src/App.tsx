@@ -3,10 +3,12 @@ import { events, Decimal, MDS } from 'npm-upload-9781'
 import ContactsList from './pages/ContactsList'
 import ContentContainer from './layout/ContentContainer'
 import { Routes, Route } from 'react-router-dom'
+import GettingStarted from './pages/Onboarding'
 import Profile from './pages/Profile'
 import { useStore } from './Store'
 import ContactDetail from './pages/ContactDetail'
 import Header from './layout/Header'
+import Onboarding from './pages/Onboarding'
 
 if (process.env.NODE_ENV === 'development') {
     // @ts-ignore: can assign
@@ -47,6 +49,7 @@ function App() {
                 <ContentContainer>
                     <Routes>
                         <Route path="/" element={<ContactsList myContacts={myContacts} myProfile={myProfile}></ContactsList>} />
+                        <Route path="/onboarding" element={<Onboarding></Onboarding>} />
                         <Route path="/contact/:id" element={<ContactDetail></ContactDetail>} />
                         <Route path="/profile" element={<Profile myProfile={myProfile}></Profile>} />
                     </Routes>

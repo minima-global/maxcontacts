@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
+import { useStore } from './../Store'
 
-function GettingStarted() {
+function Onboarding() {
     return (
         <>
             <h4>Getting Started</h4>
@@ -11,4 +12,4 @@ function GettingStarted() {
     )
 }
 
-export default GettingStarted
+export default Onboarding

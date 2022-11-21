@@ -7,6 +7,8 @@ interface StoreState {
     contacts: MaxContact[]
     getContacts: () => void
     getContactById: (id: number) => MaxContact | null
+    skipOnboarding: boolean
+    setSkipOnboarding: (skip: boolean) => void
     // toast stuff
     isToastOpen: boolean
     closeToast: () => void
@@ -41,6 +43,10 @@ export const useStore = create<StoreState>()((set, get) => ({
         } else {
             return foundContact
         }
+    },
+    skipOnboarding: false,
+    setSkipOnboarding: (skip: boolean) => {
+        set((state) => ({ skipOnboarding: skip }))
     },
     // toast stuff
     isToastOpen: false,
