@@ -50,12 +50,12 @@ function App() {
         })
     }, [])
 
-    // minima or your profile has not loaded
-    const showLoading = appInitialised && myProfile
+    // minima, profile and contacts have loaded
+    const showLoading = appInitialised && myProfile && contactsLoaded
 
     // minima has loaded, profile has loaded, but no data so you are using the app for the first time
     // make sure to wait for contactsLoaded because its initialised to empty[]
-    const showOnboarding = myProfile && myProfile.name === 'noname' && contactsLoaded && myContacts.length === 0 && !skipOnboarding
+    const showOnboarding = myProfile && myProfile.name === 'noname' && myContacts.length === 0 && !skipOnboarding
 
     return (
         <div className="App">
