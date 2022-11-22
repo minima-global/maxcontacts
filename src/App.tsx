@@ -56,34 +56,31 @@ function App() {
 
     return (
         <div className="App">
-            {/* <Header></Header> */}
             {showLoading ? (
                 <>
-                    <OnboardingContainer>
-                        <Routes>
-                            <Route path="/onboardingp1" element={<Page1></Page1>} />
-                            <Route path="/onboardingp2" element={<Page2></Page2>} />
-                            <Route path="/onboardingp3" element={<Page3></Page3>} />
-                            <Route path="/onboardingp4" element={<Page4></Page4>} />
-                            <Route path="/onboardingp5" element={<Page5></Page5>} />
-                        </Routes>
-                    </OnboardingContainer>
-                    <ContentContainer>
-                        <Routes>
+                    <Routes>
+                        <Route element={<OnboardingContainer></OnboardingContainer>}>
+                            <Route path="onboardingp1" element={<Page1></Page1>} />
+                            <Route path="onboardingp2" element={<Page2></Page2>} />
+                            <Route path="onboardingp3" element={<Page3></Page3>} />
+                            <Route path="onboardingp4" element={<Page4></Page4>} />
+                            <Route path="onboardingp5" element={<Page5></Page5>} />
+                        </Route>
+                        <Route element={<ContentContainer></ContentContainer>}>
                             <Route
                                 path="/"
                                 element={
                                     showOnboarding ? (
-                                        <Navigate to="/onboardingp1" />
+                                        <Navigate to="onboardingp1" />
                                     ) : (
                                         <ContactsList myContacts={myContacts} myProfile={myProfile}></ContactsList>
                                     )
                                 }
                             />
-                            <Route path="/contact/:id" element={<ContactDetail></ContactDetail>} />
-                            <Route path="/profile" element={<Profile myProfile={myProfile}></Profile>} />
-                        </Routes>
-                    </ContentContainer>
+                            <Route path="contact/:id" element={<ContactDetail></ContactDetail>} />
+                            <Route path="profile" element={<Profile myProfile={myProfile}></Profile>} />
+                        </Route>
+                    </Routes>
                 </>
             ) : (
                 <div>...loading</div>
