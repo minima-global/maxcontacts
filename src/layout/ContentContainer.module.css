@@ -12,6 +12,7 @@
         padding-left: calc((100vw - 600px) / 2);
         padding-right: calc((100vw - 600px) / 2);
         overflow-wrap: break-word;
+        overflow-y: scroll;
     }
 }
 
@@ -21,5 +22,6 @@
         padding-left: 0px;
         padding-right: 0px;
         overflow-wrap: break-word;
+        overflow-y: scroll;
     }
 }

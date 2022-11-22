@@ -26,6 +26,7 @@ if (process.env.NODE_ENV === 'development') {
 
 function App() {
     const [appInitialised, setAppInitialised] = useState(false)
+    const [contactsLoaded, setContactsLoaded] = useState(false)
 
     const myProfile = useStore((state) => state.profile) // initialised to null
     const getProfile = useStore((state) => state.getProfile)
@@ -37,10 +38,11 @@ function App() {
     Decimal.set({ precision: 60 })
 
     useEffect(() => {
-        events.onInit(() => {
+        events.onInit(async () => {
             setAppInitialised(true)
             getProfile()
-            getContacts()
+            await getContacts()
+            setContactsLoaded(true)
         })
         events.onMaxcontacts(() => {
             console.log('new contacts event')
@@ -52,7 +54,8 @@ function App() {
     const showLoading = appInitialised && myProfile
 
     // minima has loaded, profile has loaded, but no data so you are using the app for the first time
-    const showOnboarding = myProfile && myProfile.name === 'noname' && myContacts.length === 0 && !skipOnboarding
+    // make sure to wait for contactsLoaded because its initialised to empty[]
+    const showOnboarding = myProfile && myProfile.name === 'noname' && contactsLoaded && myContacts.length === 0 && !skipOnboarding
 
     return (
         <div className="App">

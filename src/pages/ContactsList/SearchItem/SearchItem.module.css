@@ -3,4 +3,8 @@
     height: 40px;
     padding: 10px;
     box-sizing: border-box;
+
+    background-image: url('https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/search-512.png');
+    background-size: contain;
+    background-repeat: no-repeat;
 }

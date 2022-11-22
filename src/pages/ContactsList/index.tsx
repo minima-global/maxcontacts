@@ -19,20 +19,21 @@ function ContactsList({ myProfile, myContacts }: IProps) {
         marginTop: '75px',
     }
 
-    // const navigate = useNavigate()
-    // const skipOnboarding = useStore((state) => state.skipOnboarding)
-
-    // if (myProfile.name === 'noname' && myContacts.length === 0 && !skipOnboarding) {
-    //     navigate('/onboardingp1')
-    // }
+    // duplicate contact x10 for testing
+    let myContactsTest = []
+    for (let i = 0; i < 10; i++) {
+        if (myContacts.length !== 0) {
+            myContactsTest.push(myContacts[0])
+        }
+    }
 
     return (
         <>
             <div className={styles.contactsListContainer}>
-                <MyPropfileItem name={myProfile.name}></MyPropfileItem>
-                {/* <SearchItem></SearchItem> */}
+                {/* <MyPropfileItem name={myProfile.name}></MyPropfileItem> */}
+                <SearchItem></SearchItem>
                 <NewContact></NewContact>
-                {myContacts.map((contact, i) => (
+                {myContactsTest.map((contact, i) => (
                     <MyContactItem contact={contact} key={i}></MyContactItem>
                 ))}
                 {myContacts.length === 0 ? <div style={centerStyle}>You have no contacts</div> : null}
