@@ -23,7 +23,7 @@ function ContactsList({ myProfile, myContacts }: IProps) {
     const skipOnboarding = useStore((state) => state.skipOnboarding)
 
     if (myProfile.name === 'noname' && myContacts.length === 0 && !skipOnboarding) {
-        navigate('/onboarding')
+        navigate('/onboardingp1')
     }
 
     return (

@@ -1,0 +1,10 @@
+.onboardingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.link {
+    text-decoration: underline;
+    cursor: pointer;
+}

@@ -3,12 +3,16 @@ import { events, Decimal, MDS } from 'npm-upload-9781'
 import ContactsList from './pages/ContactsList'
 import ContentContainer from './layout/ContentContainer'
 import { Routes, Route } from 'react-router-dom'
-import GettingStarted from './pages/Onboarding'
+import GettingStarted from './pages/Onboarding/Page1'
 import Profile from './pages/Profile'
 import { useStore } from './Store'
 import ContactDetail from './pages/ContactDetail'
 import Header from './layout/Header'
-import Onboarding from './pages/Onboarding'
+import Page1 from './pages/Onboarding/Page1'
+import Page2 from './pages/Onboarding/Page2'
+import Page3 from './pages/Onboarding/Page3'
+import Page4 from './pages/Onboarding/Page4'
+import Page5 from './pages/Onboarding/Page5'
 
 if (process.env.NODE_ENV === 'development') {
     // @ts-ignore: can assign
@@ -16,7 +20,7 @@ if (process.env.NODE_ENV === 'development') {
     // @ts-ignore: can assign
     MDS.DEBUG_PORT = 9003
     // @ts-ignore: can assign
-    MDS.DEBUG_MINIDAPPID = '0xA87DBCD45D4D54C0B942EA04DCA1C601D21999A9A1E549F35339CB575364012C'
+    MDS.DEBUG_MINIDAPPID = '0x8F2993EF15911CB3E2D43E324315F37EC6186354BD73ED82831CC24848CAA3F4'
 }
 
 function App() {
@@ -44,12 +48,16 @@ function App() {
 
     return (
         <div className="App">
-            <Header></Header>
+            {/* <Header></Header> */}
             {appInitialised && myProfile ? (
                 <ContentContainer>
                     <Routes>
                         <Route path="/" element={<ContactsList myContacts={myContacts} myProfile={myProfile}></ContactsList>} />
-                        <Route path="/onboarding" element={<Onboarding></Onboarding>} />
+                        <Route path="/onboardingp1" element={<Page1></Page1>} />
+                        <Route path="/onboardingp2" element={<Page2></Page2>} />
+                        <Route path="/onboardingp3" element={<Page3></Page3>} />
+                        <Route path="/onboardingp4" element={<Page4></Page4>} />
+                        <Route path="/onboardingp5" element={<Page5></Page5>} />
                         <Route path="/contact/:id" element={<ContactDetail></ContactDetail>} />
                         <Route path="/profile" element={<Profile myProfile={myProfile}></Profile>} />
                     </Routes>
