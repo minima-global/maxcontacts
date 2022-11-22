@@ -6,11 +6,17 @@ import onboardingIcon from './../../assets/onboardingIcon.svg'
 function Page3() {
     const navigate = useNavigate()
     const profile = useStore((state) => state.profile)
+    const setSkipOnboarding = useStore((state) => state.setSkipOnboarding)
     let name = ''
     profile ? (name = profile.name) : (name = '')
 
     const onCreateProfileClicked = () => {
         navigate('/onboardingp4')
+    }
+
+    const onLaterClicked = () => {
+        setSkipOnboarding(true)
+        navigate('/')
     }
 
     return (
@@ -20,7 +26,9 @@ function Page3() {
                 <h2>Nice to meet you {name}</h2>
                 <p>Create and manage your contacts in one place. Your contacts can be easily used across other MiniDapps</p>
                 <button onClick={onCreateProfileClicked}>Get Started</button>
-                <Link to="/contacts">I'll do this later</Link>
+                <div onClick={onLaterClicked} className={styles.link}>
+                    I'll do this later
+                </div>
             </div>
         </>
     )

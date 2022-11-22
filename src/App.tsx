@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { events, Decimal, MDS } from 'npm-upload-9781'
 import ContactsList from './pages/ContactsList'
 import ContentContainer from './layout/ContentContainer'
-import { Routes, Route } from 'react-router-dom'
+import OnboardingContainer from './layout/OnboardingContainer'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import GettingStarted from './pages/Onboarding/Page1'
 import Profile from './pages/Profile'
 import { useStore } from './Store'
@@ -30,6 +31,7 @@ function App() {
     const getProfile = useStore((state) => state.getProfile)
     const myContacts = useStore((state) => state.contacts) // initialised to []
     const getContacts = useStore((state) => state.getContacts)
+    const skipOnboarding = useStore((state) => state.skipOnboarding)
 
     // Decimal.js is used to handle floating point numbers
     Decimal.set({ precision: 60 })
@@ -46,22 +48,43 @@ function App() {
         })
     }, [])
 
+    // minima or your profile has not loaded
+    const showLoading = appInitialised && myProfile
+
+    // minima has loaded, profile has loaded, but no data so you are using the app for the first time
+    const showOnboarding = myProfile && myProfile.name === 'noname' && myContacts.length === 0 && !skipOnboarding
+
     return (
         <div className="App">
             {/* <Header></Header> */}
-            {appInitialised && myProfile ? (
-                <ContentContainer>
-                    <Routes>
-                        <Route path="/" element={<ContactsList myContacts={myContacts} myProfile={myProfile}></ContactsList>} />
-                        <Route path="/onboardingp1" element={<Page1></Page1>} />
-                        <Route path="/onboardingp2" element={<Page2></Page2>} />
-                        <Route path="/onboardingp3" element={<Page3></Page3>} />
-                        <Route path="/onboardingp4" element={<Page4></Page4>} />
-                        <Route path="/onboardingp5" element={<Page5></Page5>} />
-                        <Route path="/contact/:id" element={<ContactDetail></ContactDetail>} />
-                        <Route path="/profile" element={<Profile myProfile={myProfile}></Profile>} />
-                    </Routes>
-                </ContentContainer>
+            {showLoading ? (
+                <>
+                    <OnboardingContainer>
+                        <Routes>
+                            <Route path="/onboardingp1" element={<Page1></Page1>} />
+                            <Route path="/onboardingp2" element={<Page2></Page2>} />
+                            <Route path="/onboardingp3" element={<Page3></Page3>} />
+                            <Route path="/onboardingp4" element={<Page4></Page4>} />
+                            <Route path="/onboardingp5" element={<Page5></Page5>} />
+                        </Routes>
+                    </OnboardingContainer>
+                    <ContentContainer>
+                        <Routes>
+                            <Route
+                                path="/"
+                                element={
+                                    showOnboarding ? (
+                                        <Navigate to="/onboardingp1" />
+                                    ) : (
+                                        <ContactsList myContacts={myContacts} myProfile={myProfile}></ContactsList>
+                                    )
+                                }
+                            />
+                            <Route path="/contact/:id" element={<ContactDetail></ContactDetail>} />
+                            <Route path="/profile" element={<Profile myProfile={myProfile}></Profile>} />
+                        </Routes>
+                    </ContentContainer>
+                </>
             ) : (
                 <div>...loading</div>
             )}

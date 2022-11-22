@@ -19,12 +19,12 @@ function ContactsList({ myProfile, myContacts }: IProps) {
         marginTop: '75px',
     }
 
-    const navigate = useNavigate()
-    const skipOnboarding = useStore((state) => state.skipOnboarding)
+    // const navigate = useNavigate()
+    // const skipOnboarding = useStore((state) => state.skipOnboarding)
 
-    if (myProfile.name === 'noname' && myContacts.length === 0 && !skipOnboarding) {
-        navigate('/onboardingp1')
-    }
+    // if (myProfile.name === 'noname' && myContacts.length === 0 && !skipOnboarding) {
+    //     navigate('/onboardingp1')
+    // }
 
     return (
         <>
