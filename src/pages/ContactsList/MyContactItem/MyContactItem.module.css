@@ -1,29 +1,28 @@
 .myContactItem {
     display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    align-items: flex-start;
-    margin-top: 10px;
-    background-color: #f4f4f5;
+    justify-content: space-between;
     padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    box-shadow: 1px 1px 2px grey;
 }
 
-.chainRow {
+.leftSection {
     display: flex;
-    margin-top: 5px;
 }
 
-.space {
-    margin-right: 5px;
+.textSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
 }
 
-.greenFilter {
-    filter: invert(64%) sepia(88%) saturate(1520%) hue-rotate(111deg) brightness(106%) contrast(98%);
+.textSection .name {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: 0.02em;
+    color: #363a3f;
 }
 
-.redFilter {
-    filter: invert(47%) sepia(95%) saturate(3367%) hue-rotate(325deg) brightness(96%) contrast(101%);
+.greenIconSection img {
+    padding: 2px;
 }

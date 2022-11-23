@@ -4,6 +4,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import styles from './MyContactItem.module.css'
 import exclamation from './../../../assets/exclamation.svg'
 import tick from './../../../assets/tick.svg'
+import profilePic from './../../../assets/profile_pic.png'
+import link from './../../../assets/link.svg'
+import cellular from './../../../assets/signal_cellular_alt.svg'
 
 interface IProps {
     contact: MaxContact
@@ -72,20 +75,19 @@ function MyContactItem({ contact }: IProps) {
 
     return (
         <>
-            <div onClick={onContactClicked} className={styles.myContactItem}>
-                <h4>{contact.extradata.name}</h4>
-                <div>{getLastSeenString(contact.lastseen)}</div>
-                {contact.samechain ? (
-                    <div className={styles.chainRow}>
-                        <img alt="contacts_icon" src={tick} width={20} className={`${styles.space} ${styles.greenFilter} pointer`} />
-                        same chain
+            <div onClick={onContactClicked} className={`${styles.myContactItem} pointer`}>
+                <div className={styles.leftSection}>
+                    <img alt="profile_pic" src={profilePic} width={60} />
+                    <div className={styles.textSection}>
+                        <div className={styles.name}>{contact.extradata.name}</div>
+                        <div>{getLastSeenString(contact.lastseen)}</div>
                     </div>
-                ) : (
-                    <div className={styles.chainRow}>
-                        <img alt="contacts_icon" src={exclamation} width={20} className={`${styles.space} ${styles.redFilter} pointer`} />
-                        different chain
-                    </div>
-                )}
+                </div>
+
+                <div className={styles.greenIconSection}>
+                    <img alt="cellular" src={cellular} width={15} />
+                    <img alt="link" src={link} width={20} />
+                </div>
             </div>
         </>
     )

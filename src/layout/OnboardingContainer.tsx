@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './ContentContainer.module.css'
 import { Outlet } from 'react-router-dom'
 
-function ContentContainer() {
+function OnboardingContainer() {
     return (
         <>
             <div className={styles.container}>
@@ -12,4 +12,4 @@ function ContentContainer() {
     )
 }
 
-export default ContentContainer
+export default OnboardingContainer
