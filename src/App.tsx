@@ -51,15 +51,15 @@ function App() {
     }, [])
 
     // minima, profile and contacts have loaded
-    const showLoading = appInitialised && myProfile && contactsLoaded
+    const dataLoaded = appInitialised && myProfile && contactsLoaded
 
-    // minima has loaded, profile has loaded, but no data so you are using the app for the first time
-    // make sure to wait for contactsLoaded because its initialised to empty[]
-    const showOnboarding = myProfile && myProfile.name === 'noname' && myContacts.length === 0 && !skipOnboarding
+    // minima, profile and contacts have loaded
+    // but the user has not input any data so they are using the app for the first time
+    const showOnboarding = dataLoaded && myProfile.name === 'noname' && myContacts.length === 0 && !skipOnboarding
 
     return (
         <div className="App">
-            {showLoading ? (
+            {dataLoaded ? (
                 <>
                     <Routes>
                         <Route element={<OnboardingContainer></OnboardingContainer>}>
