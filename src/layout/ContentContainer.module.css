@@ -13,6 +13,7 @@
         padding-right: calc((100vw - 600px) / 2);
         overflow-wrap: break-word;
         overflow-y: scroll;
+        background-color: #e9e9eb;
     }
 }
 
@@ -23,5 +24,6 @@
         padding-right: 0px;
         overflow-wrap: break-word;
         overflow-y: scroll;
+        background-color: #e9e9eb;
     }
 }

@@ -8,7 +8,8 @@ import tick from './../../../assets/tick.svg'
 import { useState } from 'react'
 import leftArrow from './../../../assets/left-arrow.svg'
 import DisplayField from './../../../components/DisplayField'
-
+import profilePic from './../../../assets/profile_pic.png'
+import star from './../../../assets/star.svg'
 interface IProps {
     contact: MaxContact
 }
@@ -36,28 +37,49 @@ function ContactDetailPage({ contact }: IProps) {
                 <b>Back</b>
             </div>
 
-            <div className={styles.contactDetailContainer}>
-                <h2>{contact.extradata.name}</h2>
+            <div className={styles.contactDetailSection}>
+                <div className={styles.topRow}>
+                    <div className={styles.topRowLeft}>
+                        <img alt="profile_pic" src={profilePic} height={60} />
+                        <div>
+                            <div className={styles.name}>{contact.extradata.name}</div>
+                            <div>Add nickname</div>
+                        </div>
+                    </div>
+                    <div>
+                        <img alt="star" src={star} height={30} />
+                    </div>
+                </div>
+                <div className={styles.bottomRow}>
+                    <button>Share Contact</button>
+                </div>
+            </div>
+
+            <div className={styles.contactFieldsContainer}>
                 <DisplayField name="Maxima Address" data={contact.myaddress}></DisplayField>
                 <DisplayField name="Public Key" data={contact.publickey}></DisplayField>
                 <DisplayField name="Mini Address" data={contact.extradata.minimaaddress}></DisplayField>
                 <DisplayField name="MLS" data={contact.extradata.mls}></DisplayField>
                 <DisplayField name="Top Block" data={contact.extradata.topblock}></DisplayField>
+            </div>
 
-                {contact.samechain ? (
-                    <div className={styles.chainRow}>
-                        <img alt="contacts_icon" src={tick} width={20} className={`${styles.space} ${styles.greenFilter} pointer`} />
-                        same chain
-                    </div>
-                ) : (
-                    <div className={styles.chainRow}>
-                        <img alt="contacts_icon" src={exclamation} width={20} className={`${styles.space} ${styles.redFilter} pointer`} />
-                        different chain
-                    </div>
-                )}
-                <button className={styles.margin} onClick={onRemoveContactClicked}>
-                    Remove contact
-                </button>
+            <div className={styles.booleanContainer}>
+                <div className={styles.booleanItem}>
+                    <div>Network:</div>
+                    <div>icon</div>
+                </div>
+                <div className={styles.booleanItem}>
+                    <div>Chain:</div>
+                    <div>icon</div>
+                </div>
+                <div className={styles.booleanItem}>
+                    <div>Same Chain:</div>
+                    <div>icon</div>
+                </div>
+            </div>
+
+            <div className={`${styles.remove} pointer underline`} onClick={onRemoveContactClicked}>
+                <div>Remove contact</div>
             </div>
         </>
     )

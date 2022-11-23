@@ -13,7 +13,7 @@ code {
 
 section {
     padding: 10px 0px;
-    overflow-wrap: break-word;
+    /* overflow-wrap: break-word; */
 }
 
 h1 {

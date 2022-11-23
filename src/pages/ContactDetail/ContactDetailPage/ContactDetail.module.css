@@ -1,46 +1,93 @@
-.contactDetailContainer {
-    background-color: #f4f4f5;
-    padding: 10px;
-    border-radius: 10px;
-
-    border: 1px solid #ccc;
-    box-shadow: 1px 1px 2px grey;
-}
-
-.purpleColor {
-    filter: invert(17%) sepia(82%) saturate(5947%) hue-rotate(266deg) brightness(93%) contrast(110%);
-}
-
-.margin {
-    margin-top: 10px;
-}
-
-.chainRow {
+.contactDetailSection {
     display: flex;
-    margin-top: 20px;
+    flex-direction: column;
+    padding: 0 20px;
+    background-color: #ffffff;
 }
 
-.space {
-    margin-right: 5px;
+.contactDetailSection > div {
+    padding: 10px 0;
 }
 
-.greenFilter {
-    filter: invert(64%) sepia(88%) saturate(1520%) hue-rotate(111deg) brightness(106%) contrast(98%);
+.topRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.redFilter {
-    filter: invert(47%) sepia(95%) saturate(3367%) hue-rotate(325deg) brightness(96%) contrast(101%);
+.topRowLeft {
+    display: flex;
+    align-items: center;
+}
+
+.topRowLeft img {
+    margin-right: 10px;
+}
+
+/* name and nickname div */
+.topRowLeft > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+.topRowLeft .name {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: 0.02em;
+    color: #363a3f;
+}
+
+.bottomRow {
+    width: 100%;
+}
+
+.bottomRow button {
+    width: 100%;
 }
 
 .back {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    padding: 10px;
     cursor: pointer;
+    background: #f4f4f5;
 }
 
 .back img {
     margin-right: 10px;
+}
+
+.contactFieldsContainer {
+    background: #f4f4f5;
+    padding: 10px;
+}
+
+.booleanContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background: #f4f4f5;
+    margin-top: 10px;
+}
+
+.booleanContainer .booleanItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.remove {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 30px;
+    letter-spacing: 0.02em;
+    color: #363a3f;
 }
