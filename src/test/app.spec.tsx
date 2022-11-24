@@ -2,7 +2,6 @@ import App from './../App'
 import { commands, events } from 'npm-upload-9781'
 import { waitFor, screen, fireEvent, render, act, getByText } from '@testing-library/react'
 import { HashRouter, MemoryRouter } from 'react-router-dom'
-import MyProfileItem from './../pages/ContactsList/MyProfileItem'
 
 const mockProfile = {
     logs: false,

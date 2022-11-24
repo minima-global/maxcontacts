@@ -1,6 +1,5 @@
 import { screen, fireEvent, render, waitFor } from '@testing-library/react'
 import { commands, events } from 'npm-upload-9781'
-import MyProfileItem from './../pages/ContactsList/MyProfileItem'
 import Profile from './../pages/Profile'
 
 jest.mock('react-router-dom', () => ({
@@ -29,19 +28,6 @@ const mockProfile = {
 beforeEach(() => {})
 
 afterEach(() => {})
-
-it('profile card should navigate to profile page', async () => {
-    render(
-        <MemoryRouter>
-            <MyProfileItem name="test"></MyProfileItem>
-        </MemoryRouter>
-    )
-
-    fireEvent.click(screen.getByText('view your profile'))
-
-    expect(mockedUsedNavigate).toBeCalledTimes(1)
-    expect(mockedUsedNavigate).toBeCalledWith('/profile')
-})
 
 it('can edit user name', async () => {
     const mockedMaxima1 = jest.fn()
