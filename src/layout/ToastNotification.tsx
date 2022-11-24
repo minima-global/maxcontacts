@@ -12,7 +12,7 @@ function ToastNotification() {
         if (toastOpen) {
             setTimeout(() => {
                 closeToast()
-            }, 5000)
+            }, 7000)
         }
     }, [toastOpen])
 

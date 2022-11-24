@@ -12,6 +12,7 @@ function ContentContainer() {
             <div className={styles.container}>
                 <Outlet></Outlet>
             </div>
+
             <ToastNotification></ToastNotification>
             <Footer></Footer>
         </div>
