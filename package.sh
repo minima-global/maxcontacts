@@ -1,3 +1,3 @@
 version=$(node getVersion.js)
 
-cd build && zip -r contacts-${version}.mds.zip . && mv contacts-${version}.mds.zip ../
+cd build && zip -r contacts_DEV-${version}.mds.zip . && mv contacts_DEV-${version}.mds.zip ../
