@@ -14,8 +14,16 @@ interface IProps {
     contact: MaxContact
 }
 function ContactDetailPage({ contact }: IProps) {
-    const [copied, setCopied] = useState(false)
+    const [shareContactText, setShareContactText] = useState('Share Contact')
     const navigate = useNavigate()
+
+    const onShareContactButtonClicked = () => {
+        navigator.clipboard.writeText(contact.currentaddress)
+        setShareContactText('Address copied to clipboard')
+        setTimeout(() => {
+            setShareContactText('Share Contact')
+        }, 5000)
+    }
 
     const onRemoveContactClicked = async () => {
         await removeContact(contact.id)
@@ -51,12 +59,13 @@ function ContactDetailPage({ contact }: IProps) {
                     </div>
                 </div>
                 <div className={styles.bottomRow}>
-                    <button>Share Contact</button>
+                    <button onClick={onShareContactButtonClicked}>{shareContactText}</button>
                 </div>
             </div>
 
             <div className={styles.contactFieldsContainer}>
-                <DisplayField name="Maxima Address" data={contact.myaddress}></DisplayField>
+                <DisplayField name="Current Address" data={contact.currentaddress}></DisplayField>
+                <DisplayField name="My Address" data={contact.myaddress}></DisplayField>
                 <DisplayField name="Public Key" data={contact.publickey}></DisplayField>
                 <DisplayField name="Mini Address" data={contact.extradata.minimaaddress}></DisplayField>
                 <DisplayField name="MLS" data={contact.extradata.mls}></DisplayField>

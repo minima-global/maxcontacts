@@ -16,7 +16,16 @@ interface IProps {
 function Profile({ myProfile }: IProps) {
     const [openModal, setOpenModal] = useState(false)
     const [newName, setNewName] = useState('')
+    const [shareAddressText, setShareAddressText] = useState('Share Address')
     const navigate = useNavigate()
+
+    const onShareAddressButtonClicked = () => {
+        navigator.clipboard.writeText(myProfile.contact)
+        setShareAddressText('Address copied to clipboard')
+        setTimeout(() => {
+            setShareAddressText('Share Address')
+        }, 5000)
+    }
 
     const onNameChange = (event: ChangeEvent<HTMLInputElement>) => {
         const newVal = event.target.value
@@ -61,7 +70,7 @@ function Profile({ myProfile }: IProps) {
                     </div>
                 </div>
                 <div className={styles.bottomRow}>
-                    <button>Share Address</button>
+                    <button onClick={onShareAddressButtonClicked}>{shareAddressText}</button>
                 </div>
             </div>
 
