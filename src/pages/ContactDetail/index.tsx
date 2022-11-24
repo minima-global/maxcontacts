@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useStore } from './../../Store'
 import { useParams } from 'react-router-dom'
-import { MaxContact } from 'npm-upload-9781'
+import { MaxContactPlus } from './../../Store'
 import ContactDetailPage from './ContactDetailPage'
 
 function ContactDetail() {
-    const [aContact, setAContact] = useState<MaxContact | null>(null)
+    const [aContact, setAContact] = useState<MaxContactPlus | null>(null)
     const { id } = useParams()
     const getContacts = useStore((state) => state.getContactById)
+
+    // When we update contacts, getContacts doesnt cause a re-render for some reason.
+    // So grab the contacts directly and use it in the useEffect to trigger a re-render
+    const contacts = useStore((state) => state.contacts)
 
     useEffect(() => {
         if (id) {
@@ -20,7 +24,7 @@ function ContactDetail() {
                 // redirect away
             }
         }
-    }, [id, getContacts])
+    }, [id, getContacts, contacts])
 
     return (
         <>

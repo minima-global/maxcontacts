@@ -1,12 +1,17 @@
 import create from 'zustand'
 import { commands, MaxContact, Maxima } from 'npm-upload-9781'
 
+export interface MaxContactPlus extends MaxContact {
+    favourite: boolean
+    nickname: string
+}
+
 interface StoreState {
     profile: Maxima | null
     getProfile: () => void
-    contacts: MaxContact[]
+    contacts: MaxContactPlus[]
     getContacts: () => void
-    getContactById: (id: number) => MaxContact | null
+    getContactById: (id: number) => MaxContactPlus | null
     skipOnboarding: boolean
     setSkipOnboarding: (skip: boolean) => void
     // toast stuff
@@ -32,8 +37,13 @@ export const useStore = create<StoreState>()((set, get) => ({
     // updates the store
     getContacts: async () => {
         const response = await commands.maxcontacts()
-        console.log('contacts', response.contacts)
-        set((state) => ({ contacts: response.contacts }))
+
+        // decorate contact with favourite and nickname data stored locally
+        const updatedContacts = decorateContacts(response.contacts)
+
+        console.log('contacts', updatedContacts)
+
+        set((state) => ({ contacts: updatedContacts }))
     },
     getContactById: (id: number) => {
         const foundContact = get().contacts.find((contact) => contact.id === id)
@@ -119,4 +129,77 @@ export const changeProfileName = async (newProfileName: string) => {
     } catch (error) {
         useStore.getState().toast.error(`could not update profile name`)
     }
+}
+
+//////////// localstorage ////////////////////
+
+// update the local data persisted for each contact
+// eg nickname and favourite
+export const updateLocalData = (contact: MaxContactPlus) => {
+    const { favourite, nickname, id } = contact
+
+    // get data from local storage
+    const oldData = getLocalData()
+
+    // remove the old data for this contact
+    const updated = oldData.filter((contactData) => contactData.id !== id)
+
+    // add the new contact data
+    updated.push({ favourite, nickname, id })
+
+    // store them back in local storage
+    setLocalData(updated)
+
+    // get all contacts so they can be decorated with the new data, and cause a page refresh
+    useStore.getState().getContacts()
+}
+
+////////// private localstorage helpers /////////
+
+const LOCALSTORAGE_KEY = 'contactdata'
+interface MaxContactPlusData {
+    favourite: boolean
+    nickname: string
+    id: number
+}
+
+// get the whole local data store object
+const getLocalData: () => MaxContactPlusData[] = () => {
+    const localDataString = localStorage.getItem(LOCALSTORAGE_KEY)
+    if (localDataString) {
+        const dataObj: MaxContactPlusData[] = JSON.parse(localDataString)
+        return dataObj
+    } else {
+        return []
+    }
+}
+
+// pass the whole datastore object with updated fields
+const setLocalData = (newData: MaxContactPlusData[]) => {
+    const localDataString = JSON.stringify(newData)
+    localStorage.setItem(LOCALSTORAGE_KEY, localDataString)
+}
+
+// add the data we store locally to each contact (eg favourites, nickname)
+const decorateContacts = (contacts: MaxContactPlus[]) => {
+    const updatedContacts = contacts.map((contact) => {
+        let favourite = false
+        let nickname = ''
+
+        // check if we have local data for this contact
+        const localData = getLocalData()
+        const foundContact = localData.find((localContactData) => localContactData.id === contact.id)
+        if (typeof foundContact !== 'undefined') {
+            favourite = foundContact.favourite
+            nickname = foundContact.nickname
+        }
+
+        return {
+            ...contact,
+            favourite,
+            nickname,
+        }
+    })
+
+    return updatedContacts
 }

@@ -1,17 +1,13 @@
-import { MaxContact } from 'npm-upload-9781'
-import copyIcon from './../../../assets/copy_120015.svg'
-import { removeContact } from './../../../Store'
+import { removeContact, updateLocalData, MaxContactPlus } from './../../../Store'
 import { useNavigate } from 'react-router-dom'
 import styles from './ContactDetail.module.css'
-import exclamation from './../../../assets/exclamation.svg'
-import tick from './../../../assets/tick.svg'
 import { useState } from 'react'
 import leftArrow from './../../../assets/left-arrow.svg'
 import DisplayField from './../../../components/DisplayField'
 import profilePic from './../../../assets/profile_pic.png'
 import star from './../../../assets/star.svg'
 interface IProps {
-    contact: MaxContact
+    contact: MaxContactPlus
 }
 function ContactDetailPage({ contact }: IProps) {
     const [shareContactText, setShareContactText] = useState('Share Contact')
@@ -38,6 +34,14 @@ function ContactDetailPage({ contact }: IProps) {
         navigate('/')
     }
 
+    const onFavouriteClicked = () => {
+        const updatedContact = {
+            ...contact,
+            favourite: !contact.favourite,
+        }
+        updateLocalData(updatedContact)
+    }
+
     return (
         <>
             <div className={styles.back} onClick={onBackClicked}>
@@ -52,10 +56,11 @@ function ContactDetailPage({ contact }: IProps) {
                         <div>
                             <div className={styles.name}>{contact.extradata.name}</div>
                             <div>Add nickname</div>
+                            <div>{contact.favourite ? 'favourite' : 'not fav'}</div>
                         </div>
                     </div>
                     <div>
-                        <img alt="star" src={star} height={30} />
+                        <img alt="star" src={star} height={30} onClick={onFavouriteClicked} />
                     </div>
                 </div>
                 <div className={styles.bottomRow}>

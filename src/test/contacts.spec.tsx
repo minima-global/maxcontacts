@@ -38,6 +38,8 @@ const mockContacts = [
         },
         chaintip: '235205',
         samechain: true,
+        favourite: false,
+        nickname: '',
     },
     {
         id: 261,
@@ -59,6 +61,8 @@ const mockContacts = [
         },
         chaintip: '235205',
         samechain: true,
+        favourite: false,
+        nickname: '',
     },
 ]
 
