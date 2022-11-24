@@ -9,7 +9,7 @@ function ContentContainer() {
     return (
         <div className={styles.layoutContainer}>
             <Header></Header>
-            <div className={styles.container}>
+            <div className={`${styles.container} ${styles.contentBackground}`}>
                 <Outlet></Outlet>
             </div>
 

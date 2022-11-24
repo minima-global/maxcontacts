@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom'
 function OnboardingContainer() {
     return (
         <>
-            <div className={styles.container}>
+            <div className={`${styles.container} ${styles.onboardingBackground}`}>
                 <Outlet></Outlet>
             </div>
         </>
