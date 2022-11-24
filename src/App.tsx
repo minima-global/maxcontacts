@@ -70,16 +70,7 @@ function App() {
                             <Route path="onboardingp5" element={<Page5></Page5>} />
                         </Route>
                         <Route element={<ContentContainer></ContentContainer>}>
-                            <Route
-                                path="/"
-                                element={
-                                    showOnboarding ? (
-                                        <Navigate to="onboardingp1" />
-                                    ) : (
-                                        <ContactsList myContacts={myContacts} myProfile={myProfile}></ContactsList>
-                                    )
-                                }
-                            />
+                            <Route path="/" element={showOnboarding ? <Navigate to="onboardingp1" /> : <ContactsList myContacts={myContacts}></ContactsList>} />
                             <Route path="contact/:id" element={<ContactDetail></ContactDetail>} />
                             <Route path="profile" element={<Profile myProfile={myProfile}></Profile>} />
                         </Route>

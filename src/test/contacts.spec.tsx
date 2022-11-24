@@ -65,7 +65,7 @@ const mockContacts = [
 it('should render the correct number of contacts', async () => {
     render(
         <MemoryRouter>
-            <ContactsList myProfile={mockProfile} myContacts={mockContacts}></ContactsList>
+            <ContactsList myContacts={mockContacts}></ContactsList>
         </MemoryRouter>
     )
 
@@ -84,7 +84,7 @@ it('shoud be able to add a new contact', async () => {
 
     render(
         <MemoryRouter>
-            <ContactsList myProfile={mockProfile} myContacts={mockContacts}></ContactsList>
+            <ContactsList myContacts={mockContacts}></ContactsList>
         </MemoryRouter>
     )
 
