@@ -20,12 +20,12 @@ function ContactsList({ myProfile, myContacts }: IProps) {
     }
 
     // duplicate contact x10 for testing
-    let myContactsTest = []
-    for (let i = 0; i < 10; i++) {
-        if (myContacts.length !== 0) {
-            myContactsTest.push(myContacts[0])
-        }
-    }
+    // let myContactsTest = []
+    // for (let i = 0; i < 10; i++) {
+    //     if (myContacts.length !== 0) {
+    //         myContactsTest.push(myContacts[0])
+    //     }
+    // }
 
     return (
         <>
@@ -33,7 +33,7 @@ function ContactsList({ myProfile, myContacts }: IProps) {
                 {/* <MyPropfileItem name={myProfile.name}></MyPropfileItem> */}
                 <SearchItem></SearchItem>
                 <NewContact></NewContact>
-                {myContactsTest.map((contact, i) => (
+                {myContacts.map((contact, i) => (
                     <MyContactItem contact={contact} key={i}></MyContactItem>
                 ))}
                 {myContacts.length === 0 ? <div style={centerStyle}>You have no contacts</div> : null}

@@ -7,6 +7,8 @@ import copyIcon from './../../assets/copyIcon.svg'
 import { useNavigate } from 'react-router-dom'
 import leftArrow from './../../assets/left-arrow.svg'
 import DisplayField from './../../components/DisplayField'
+import profilePic2 from './../../assets/profile_pic2.png'
+import star from './../../assets/star.svg'
 
 interface IProps {
     myProfile: Maxima
@@ -14,13 +16,16 @@ interface IProps {
 function Profile({ myProfile }: IProps) {
     const [openModal, setOpenModal] = useState(false)
     const [newName, setNewName] = useState('')
-    const [copied, setCopied] = useState(false)
     const navigate = useNavigate()
 
     const onNameChange = (event: ChangeEvent<HTMLInputElement>) => {
         const newVal = event.target.value
         // console.log('event new val', newVal)
         setNewName(newVal)
+    }
+
+    const onEditDisplayNameClicked = () => {
+        setOpenModal(true)
     }
 
     const onUpdateNameClicked = async () => {
@@ -33,14 +38,6 @@ function Profile({ myProfile }: IProps) {
         setNewName('')
     }
 
-    const onCopyButtonClicked = () => {
-        navigator.clipboard.writeText(myProfile.contact)
-        setCopied(true)
-        setTimeout(() => {
-            setCopied(false)
-        }, 3000)
-    }
-
     const onBackClicked = () => {
         navigate('/')
     }
@@ -51,25 +48,39 @@ function Profile({ myProfile }: IProps) {
                 <img alt="left_arrow" src={leftArrow} width={40} />
                 <b>Back</b>
             </div>
-            <div className={styles.profileContainer}>
-                <h2>{myProfile.name}</h2>
-                <div>
-                    <button onClick={() => setOpenModal(true)}>Edit your name</button>
+            <div className={styles.profileDetailSection}>
+                <div className={styles.topRow}>
+                    <div className={styles.topRowLeft}>
+                        <img alt="profile_pic" src={profilePic2} height={60} />
+                        <div>
+                            <div className={styles.name}>{myProfile.name}</div>
+                            <div onClick={onEditDisplayNameClicked} className="pointer">
+                                Edit Display Name
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <div className={styles.bottomRow}>
+                    <button>Share Address</button>
+                </div>
+            </div>
 
-                <div style={{ fontWeight: 'bold', marginBottom: '5px' }}>Your Maxima Address</div>
-                <div>{myProfile.contact}</div>
-                <img
-                    alt="copy_icon"
-                    src={copyIcon}
-                    width={40}
-                    className={copied ? `${styles.greenFilter} pointer` : `${styles.purpleColor} pointer`}
-                    style={{ marginBottom: '10px' }}
-                    onClick={onCopyButtonClicked}
-                />
-                <DisplayField name="Your Local Identity" data={myProfile.localidentity}></DisplayField>
-                <DisplayField name="Your MLS" data={myProfile.mls}></DisplayField>
-                <DisplayField name="Your Public Key" data={myProfile.publickey}></DisplayField>
+            <div className={styles.contactFieldsContainer}>
+                <DisplayField name="My Address" data={myProfile.contact}></DisplayField>
+                <DisplayField name="Local Identity" data={myProfile.localidentity}></DisplayField>
+                <DisplayField name="MLS" data={myProfile.mls}></DisplayField>
+                <DisplayField name="Public Key" data={myProfile.publickey}></DisplayField>
+            </div>
+
+            <div className={styles.booleanContainer}>
+                <div className={styles.booleanItem}>
+                    <div>Network:</div>
+                    <div>icon</div>
+                </div>
+                <div className={styles.booleanItem}>
+                    <div>Chain:</div>
+                    <div>icon</div>
+                </div>
             </div>
 
             <Modal open={openModal}>
