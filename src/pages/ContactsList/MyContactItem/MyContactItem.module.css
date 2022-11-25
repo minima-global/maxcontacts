@@ -5,6 +5,10 @@
     background-color: #f4f4f5;
 }
 
+.myContactItem:not(:last-child) {
+    border-bottom: 1px solid #d3d3d8;
+}
+
 .leftSection {
     display: flex;
 }

@@ -1,3 +1,5 @@
+/* Used by content container and onboarding container */
+
 .layoutContainer {
     display: flex;
     flex-direction: column;
@@ -12,7 +14,7 @@
         padding-left: calc((100vw - 600px) / 2);
         padding-right: calc((100vw - 600px) / 2);
         overflow-wrap: break-word;
-        overflow-y: scroll;
+        overflow-y: auto;
     }
 }
 
@@ -22,7 +24,7 @@
         padding-left: 0px;
         padding-right: 0px;
         overflow-wrap: break-word;
-        overflow-y: scroll;
+        overflow-y: auto;
     }
 }
 
@@ -32,4 +34,8 @@
 
 .onboardingBackground {
     background-color: white;
+}
+
+.spacer {
+    height: 20vh; /* other 80vh is in onboarding container */
 }

@@ -53,7 +53,6 @@ function ContactsList({ myContacts }: IProps) {
     return (
         <>
             <div className={styles.contactsListContainer}>
-                {/* <MyPropfileItem name={myProfile.name}></MyPropfileItem> */}
                 <SearchItem searchQuery={searchQuery} onSearchQueryChange={onSearchQueryChange}></SearchItem>
                 <NewContact></NewContact>
                 {filteredContacts.map((contact, i) => (

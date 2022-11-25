@@ -6,6 +6,8 @@ import leftArrow from './../../../assets/left-arrow.svg'
 import DisplayField from './../../../components/DisplayField'
 import profilePic from './../../../assets/profile_pic.png'
 import star from './../../../assets/star.svg'
+import link from './../../../assets/link.svg'
+import cellular from './../../../assets/signal_cellular_alt.svg'
 interface IProps {
     contact: MaxContactPlus
 }
@@ -80,15 +82,19 @@ function ContactDetailPage({ contact }: IProps) {
             <div className={styles.booleanContainer}>
                 <div className={styles.booleanItem}>
                     <div>Network:</div>
-                    <div>icon</div>
+                    <div>
+                        <img alt="cellular" src={cellular} width={15} />
+                    </div>
                 </div>
                 <div className={styles.booleanItem}>
                     <div>Chain:</div>
-                    <div>icon</div>
+                    <div>
+                        <img alt="link" src={link} width={20} />
+                    </div>
                 </div>
                 <div className={styles.booleanItem}>
                     <div>Same Chain:</div>
-                    <div>icon</div>
+                    <div>{contact.samechain ? 'true' : 'false'}</div>
                 </div>
             </div>
 

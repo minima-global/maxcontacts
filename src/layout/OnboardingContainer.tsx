@@ -6,6 +6,7 @@ function OnboardingContainer() {
     return (
         <>
             <div className={`${styles.container} ${styles.onboardingBackground}`}>
+                <div className={styles.spacer}></div>
                 <Outlet></Outlet>
             </div>
         </>

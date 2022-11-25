@@ -20,11 +20,13 @@ function Page1() {
         <>
             <div className={styles.onboardingContainer}>
                 <img alt="onboarding_icon" src={onboardingIcon} width={100} />
-                <h2>Welcom to Contacts!</h2>
+                <h2>Welcome to Contacts!</h2>
                 <p>Create and manage your contacts in one place. Your contacts can be easily used across other MiniDapps</p>
-                <button onClick={onCreateProfileClicked}>Create profile</button>
-                <div onClick={onLaterClicked} className={styles.link}>
-                    I'll do this later
+                <div className={styles.actionButtons}>
+                    <button onClick={onCreateProfileClicked}>Create profile</button>
+                    <div onClick={onLaterClicked} className={styles.link}>
+                        I'll do this later
+                    </div>
                 </div>
             </div>
         </>

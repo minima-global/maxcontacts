@@ -25,9 +25,12 @@ function Page3() {
                 <img alt="onboarding_icon" src={onboardingIcon} width={100} />
                 <h2>Nice to meet you {name}</h2>
                 <p>Create and manage your contacts in one place. Your contacts can be easily used across other MiniDapps</p>
-                <button onClick={onCreateProfileClicked}>Get Started</button>
-                <div onClick={onLaterClicked} className={styles.link}>
-                    I'll do this later
+
+                <div className={styles.actionButtons}>
+                    <button onClick={onCreateProfileClicked}>Get Started</button>
+                    <div onClick={onLaterClicked} className={styles.link}>
+                        I'll do this later
+                    </div>
                 </div>
             </div>
         </>

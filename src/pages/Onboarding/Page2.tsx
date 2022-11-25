@@ -34,9 +34,11 @@ function Page2() {
                     <input value={displayName} onChange={onDisplayNameChange}></input>
                 </label>
 
-                <button onClick={onUpdateNameClicked}>Save and continue</button>
-                <div onClick={onLaterClicked} className={styles.link}>
-                    I'll do this later
+                <div className={styles.actionButtons}>
+                    <button onClick={onUpdateNameClicked}>Save and continue</button>
+                    <div onClick={onLaterClicked} className={styles.link}>
+                        I'll do this later
+                    </div>
                 </div>
             </div>
         </>

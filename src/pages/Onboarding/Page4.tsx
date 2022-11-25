@@ -36,9 +36,11 @@ function Page4() {
                     <textarea rows={6} placeholder={placeholderText} value={contactAddress} onChange={onContactAddressChange}></textarea>
                 </label>
 
-                <button onClick={onAddContactClicked}>Add Contact</button>
-                <div onClick={onLaterClicked} className={styles.link}>
-                    I'll do this later
+                <div className={styles.actionButtons}>
+                    <button onClick={onAddContactClicked}>Add Contact</button>
+                    <div onClick={onLaterClicked} className={styles.link}>
+                        I'll do this later
+                    </div>
                 </div>
             </div>
         </>
