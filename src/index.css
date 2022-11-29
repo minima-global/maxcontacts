@@ -40,6 +40,14 @@ input {
     width: 100%;
 }
 
+label > input {
+    margin-top: 5px;
+}
+
+label > textarea {
+    margin-top: 5px;
+}
+
 ul {
     padding: 0;
     list-style-type: none;
