@@ -96,6 +96,14 @@ button.modal-button {
     background: #7A17F9;
 }
 
+.bg-custom-faded-red {
+    background: #FFD6D9;
+}
+
+.bg-custom-purple:disabled {
+    opacity: 0.8;
+}
+
 .avatar {
     min-width: 56px;
     width: 56px;
@@ -160,4 +168,34 @@ button.modal-button {
     font-size: 1.5rem;
     font-weight: bold;
     text-transform: uppercase;
+}
+
+.button-loading {
+    height: 48px;
+}
+
+.splash {
+    transition: 0.2s all;
+}
+
+.splash--hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.desktop-nav-bar {
+    position: fixed;
+    left: 0;
+}
+
+.input--invalid {
+    border: 2px solid #F5455C !important;
+}
+
+@media (min-width: 968px) {
+    .onboarding-desktop {
+        min-width: 640px;
+        background: white;
+        border-radius: 30px;
+    }
 }

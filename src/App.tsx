@@ -7,6 +7,7 @@ import ViewContact from './pages/ViewContact';
 import AppProvider from './AppContext';
 import LastActive from './pages/LastActive';
 import Favourites from './pages/Favourites';
+import Splash from './components/Splash';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -24,6 +25,7 @@ function App() {
   return (
     <AppProvider>
       <div>
+        <Splash />
         <Routes>
           <Route element={<ContentContainer />}>
             <Route path="/" element={<ContactsList />} />

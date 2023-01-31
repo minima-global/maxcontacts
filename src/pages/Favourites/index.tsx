@@ -18,6 +18,7 @@ const Favourites: React.FC = () => {
   }, [loaded, getContacts]);
 
   const queriedContacts = queryContacts(searchQuery, true);
+  const onlyFavourites = queriedContacts.filter((i: any) => i.favourite);
 
   return (
     <>
@@ -25,7 +26,17 @@ const Favourites: React.FC = () => {
         <SearchBar searchQuery={searchQuery} onSearchQueryChange={setSearchQuery} />
         <AddContact />
         <div className="grid grid-col-12">
-          {queriedContacts && queriedContacts.map((c: any) => <ContactItem key={c.id} id={c.id} name={c.extradata.name} lastSeen={c.lastseen} sameChain={c.samechain} favourite={c.favourite} />)}
+          {(searchQuery !== '' && onlyFavourites.length === 0) && (
+            <div className="h-fit flex items-center justify-center">
+              <div className="pt-36">No results</div>
+            </div>
+          )}
+          {onlyFavourites.length === 0 && (
+            <div className="h-fit flex items-center justify-center">
+              <div className="pt-36">No favourites</div>
+            </div>
+          )}
+          {onlyFavourites && onlyFavourites.map((c: any) => <ContactItem key={c.id} id={c.id} name={c.extradata.name} lastSeen={c.lastseen} sameChain={c.samechain} favourite={c.favourite} />)}
         </div>
       </div>
     </>

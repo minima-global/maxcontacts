@@ -212,7 +212,7 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   };
 
   const queryContacts = React.useCallback(
-    (searchQuery: string, sort = false, favourites = false) => {
+    (searchQuery: string, sort = false) => {
       if (_contacts) {
         let contacts: any = [..._contacts];
         const transformedSearchQuery = searchQuery.toLowerCase();
@@ -279,9 +279,6 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     _showChangeDisplayName,
     _removeContact,
   };
-
-  console.debug('favourites', _favourites);
-  console.debug('nicknames', _nicknames);
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
 };

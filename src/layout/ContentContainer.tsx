@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import NavBar from './NavBar';
+import MobileNavBar from './MobileNavBar';
 import AddContact from '../pages/AddContact';
 import Notification from '../components/Notification';
 import { appContext } from '../AppContext';
@@ -8,6 +8,7 @@ import Onboarding from '../pages/Onboarding';
 import EditDisplayName from '../pages/EditDisplayName';
 import RemoveContactModal from '../pages/RemoveContact';
 import EditNickname from '../pages/EditNickname';
+import DesktopNavBar from './DesktopNavBar';
 
 function ContentContainer() {
   const location = useLocation();
@@ -30,12 +31,13 @@ function ContentContainer() {
       <EditNickname />
       <div className="h-screen relative flex flex-col">
         <div className="grow relative w-full mx-auto" style={{ maxWidth: '480px' }}>
+          <DesktopNavBar />
           <div className={`${hideNavBar ? 'h-screen overflow-scroll' : ''}`}>
             <Outlet />
           </div>
           <Notification />
         </div>
-        {!hideNavBar && <NavBar />}
+        {!hideNavBar && <MobileNavBar />}
       </div>
     </div>
   );

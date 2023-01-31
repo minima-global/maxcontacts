@@ -2,20 +2,16 @@ import React, { useContext, useEffect, useState } from 'react';
 import onboardingLogo from '../../assets/onboardingIcon.svg';
 import { appContext } from '../../AppContext';
 import { useNavigate } from 'react-router-dom';
+import warningRed from '../../assets/warning_red.svg';
 
 function Onboarding() {
   const navigate = useNavigate();
-  const {
-    _maxima,
-    _latestContact,
-    _showOnboarding,
-    setDisplayName,
-    addContact,
-    dismissOnboarding,
-  } = useContext(appContext);
+  const { _maxima, _latestContact, _showOnboarding, setDisplayName, addContact, dismissOnboarding } = useContext(appContext);
   const [step, setStep] = useState(1);
   const [name, setName] = useState('');
   const [contactAddress, setContactAddress] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [invalidAddress, setInvalidAddress] = useState(false);
 
   useEffect(() => {
     if (!_showOnboarding) {
@@ -34,14 +30,21 @@ function Onboarding() {
   };
 
   const handleAddContact = async (evt: React.FormEvent) => {
-    evt.preventDefault();
-    await addContact(contactAddress);
-    setStep(5);
+    try {
+      evt.preventDefault();
+      setIsLoading(true);
+      await addContact(contactAddress);
+      setStep(5);
+    } catch {
+      setInvalidAddress(true);
+      setStep(4);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleContactAddress = (
-    evt: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
+  const handleContactAddress = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInvalidAddress(false);
     setContactAddress(evt.target.value);
   };
 
@@ -52,47 +55,30 @@ function Onboarding() {
 
   return (
     <>
-      <div
-        className="h-full text-center max-w-sm px-5 lg:px-0"
-        style={{ background: '##BFBFBF' }}
-      >
+      <div className="h-full lg:h-fit text-center max-w-sm px-5 lg:px-32 lg:p-10 lg:pt-16 onboarding-desktop">
         <>
           {step === 1 && (
             <div className="h-full flex flex-col">
               <div className="flex items-center grow">
                 <div>
                   <div className="w-full text-center mt-10 mb-14">
-                    <img
-                      width="137"
-                      src={onboardingLogo}
-                      alt="max contact logo"
-                      className="mx-auto"
-                    />
+                    <img width="137" src={onboardingLogo} alt="max contact logo" className="mx-auto" />
                   </div>
                   <p className="text-3xl font-medium mb-8">
                     Welcome to
                     <br /> Contacts!
                   </p>
-                  <p className="w-10/12 mx-auto">
-                    Create and manage your contacts in one place. Your contacts
-                    can be easily used across other MiniDapps.
-                  </p>
+                  <p className="w-10/12 mx-auto">Create and manage your contacts in one place. Your contacts can be easily used across other MiniDapps.</p>
                 </div>
               </div>
-              <div className="py-10">
+              <div className="py-10 lg:pt-10 lg:pb-4">
                 <div className="mt-5">
-                  <button
-                    onClick={() => setStep(2)}
-                    className="text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple"
-                  >
+                  <button onClick={() => setStep(2)} className="text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple">
                     Create profile
                   </button>
                 </div>
                 <div className="pt-5 text-center">
-                  <div
-                    onClick={dismissAndGoToProfile}
-                    className="cursor-pointer text-custom-grey font-medium link"
-                  >
+                  <div onClick={dismissAndGoToProfile} className="cursor-pointer text-custom-grey font-medium link">
                     I'll do this later
                   </div>
                 </div>
@@ -100,18 +86,11 @@ function Onboarding() {
             </div>
           )}
           {step === 2 && (
-            <form
-              onSubmit={handleSetDisplayName}
-              className="h-full flex flex-col"
-            >
+            <form onSubmit={handleSetDisplayName} className="h-full flex flex-col">
               <div className="flex items-center grow">
                 <div className="text-center w-full px-3">
-                  <p className="text-3xl font-medium mb-20">
-                    Let’s get you set up
-                  </p>
-                  <label className="text-left font-bold block mb-3 ml-2 text-sm">
-                    Choose a Display Name
-                  </label>
+                  <p className="text-3xl font-medium mb-20">Let’s get you set up</p>
+                  <label className="text-left font-bold block mb-3 ml-2 text-sm">Choose a Display Name</label>
                   <input
                     value={name}
                     onChange={handleNameOnChange}
@@ -122,20 +101,14 @@ function Onboarding() {
                   />
                 </div>
               </div>
-              <div className="py-10">
+              <div className="py-10 lg:pt-10 lg:pb-4">
                 <div className="mt-5">
-                  <button
-                    disabled={name === ''}
-                    className="disabled:opacity-40 text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple"
-                  >
+                  <button disabled={name === ''} className="disabled:opacity-40 text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple">
                     Save and continue
                   </button>
                 </div>
                 <div className="pt-5 text-center">
-                  <div
-                    onClick={dismissAndGoToProfile}
-                    className="cursor-pointer text-custom-grey font-medium link"
-                  >
+                  <div onClick={dismissAndGoToProfile} className="cursor-pointer text-custom-grey font-medium link">
                     I'll do this later
                   </div>
                 </div>
@@ -147,12 +120,7 @@ function Onboarding() {
               <div className="flex items-center grow">
                 <div className="text-center w-full px-3">
                   <div className="w-full text-center mt-10 mb-14">
-                    <img
-                      width="137"
-                      src={onboardingLogo}
-                      alt="max contact logo"
-                      className="mx-auto"
-                    />
+                    <img width="137" src={onboardingLogo} alt="max contact logo" className="mx-auto" />
                   </div>
                   <p className="text-3xl font-bold mb-20">
                     Nice to meet you,
@@ -160,19 +128,14 @@ function Onboarding() {
                   </p>
                 </div>
               </div>
-              <div className="py-10">
+              <div className="py-10 lg:pt-10 lg:pb-4">
                 <div className="mt-5">
-                  <button
-                    onClick={() => setStep(4)}
-                    className="text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple"
-                  >
+                  <button onClick={() => setStep(4)} className="text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple">
                     Get started
                   </button>
                 </div>
                 <div className="pt-5 text-center">
-                  <div className="cursor-pointer text-custom-grey font-medium link">
-                    I'll do this later
-                  </div>
+                  <div className="cursor-pointer text-custom-grey font-medium link">I'll do this later</div>
                 </div>
               </div>
             </div>
@@ -181,29 +144,40 @@ function Onboarding() {
             <form onSubmit={handleAddContact} className="h-full flex flex-col">
               <div className="flex items-center grow">
                 <div className="text-center w-full px-3">
-                  <p className="text-3xl font-bold mt-10 mb-16">
-                    Add your first contact
-                  </p>
+                  <p className="text-3xl font-bold mt-10 mb-16 lg:mt-0">Add your first contact</p>
                   <p className="mb-5">Enter your contact’s Minima address</p>
                   <textarea
                     value={contactAddress}
                     onChange={handleContactAddress}
-                    rows={8}
-                    className="rounded rounded-lg p-3 text-xs text-left"
+                    rows={9}
                     style={{ border: '2px solid #7A17F9' }}
+                    className={`rounded rounded-lg p-3 text-xs text-left ${invalidAddress ? 'input--invalid' : ''}`}
                   />
+                  {invalidAddress && (
+                    <div className="bg-custom-faded-red flex p-3 rounded rounded-xl mt-2 font-medium">
+                      <img src={warningRed} alt="warning" className="mr-4" />
+                      This address is not recognised.
+                    </div>
+                  )}
                 </div>
               </div>
-              <div className="py-10">
+              <div className="py-10 lg:pt-10 lg:pb-4">
                 <div className="mt-5">
-                  <button className="text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple">
-                    Add contact
-                  </button>
+                  {!isLoading && <button className="text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple">Add contact</button>}
+                  {isLoading && (
+                    <button disabled={true} className="flex items-center justify-center text-white w-full text-base font-bold py-3 rounded rounded-xl button-loading bg-custom-purple bg-custom-purple--disabled">
+                      <svg className="animate-spin -ml-1 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                    </button>
+                  )}
                   <div className="pt-5 text-center">
-                    <div
-                      onClick={dismissAndGoToProfile}
-                      className="cursor-pointer text-custom-grey font-medium link"
-                    >
+                    <div onClick={dismissAndGoToProfile} className="cursor-pointer text-custom-grey font-medium link">
                       Go to Contacts
                     </div>
                   </div>
@@ -216,38 +190,20 @@ function Onboarding() {
               <div className="flex items-center grow">
                 <div className="text-center w-full px-3">
                   {_latestContact && (
-                    <p className="text-3xl mt-16 mb-16">
-                      <strong className="capitalize">
-                        {_latestContact.extradata.name}
-                      </strong>{' '}
-                      was added to your contacts!
+                    <p className="text-3xl mt-16 mb-16 lg:mt-4">
+                      <strong className="capitalize">{_latestContact.extradata.name}</strong> was added to your contacts!
                     </p>
                   )}
-                  <div
-                    className="w-32 h-32 rounded rounded-full flex items-center justify-center text-xs text-left mx-auto mb-16"
-                    style={{ background: '#7A17F9' }}
-                  >
-                    <svg
-                      width="49"
-                      height="36"
-                      viewBox="0 0 49 36"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M17.2468 35.1763L0.804199 18.7337L3.96058 15.5773L17.2468 28.8635L45.434 0.67627L48.5904 3.83265L17.2468 35.1763Z"
-                        fill="white"
-                      />
+                  <div className="w-32 h-32 rounded rounded-full flex items-center justify-center text-xs text-left mx-auto mb-16" style={{ background: '#7A17F9' }}>
+                    <svg width="49" height="36" viewBox="0 0 49 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M17.2468 35.1763L0.804199 18.7337L3.96058 15.5773L17.2468 28.8635L45.434 0.67627L48.5904 3.83265L17.2468 35.1763Z" fill="white" />
                     </svg>
                   </div>
                 </div>
               </div>
-              <div className="py-10">
-                <div className="mt-5" style={{ paddingBottom: '2.95rem' }}>
-                  <button
-                    onClick={dismissAndGoToProfile}
-                    className="cursor-pointer text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple"
-                  >
+              <div className="py-10 lg:pt-10 lg:pb-4">
+                <div className="mt-5 pb-2">
+                  <button onClick={dismissAndGoToProfile} className="cursor-pointer text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple">
                     Get started
                   </button>
                 </div>

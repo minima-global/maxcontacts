@@ -9,11 +9,11 @@ import profile from '../assets/nav_bar/profile.svg'
 import profileActive from '../assets/nav_bar/profile_filled.svg'
 import { Link, useLocation } from 'react-router-dom'
 
-const NavBar = () => {
+const MobileNavBar = () => {
     const location = useLocation()
 
     return (
-        <div className="nav-bar">
+        <div className="nav-bar block lg:hidden">
             <div className="flex items-center text-white font-bold pt-1 pb-1" style={{ height: '80px', background: '#363A3F', fontSize: '10px' }}>
                 <div className="w-full max-w-sm mx-auto flex grid grid-cols-4 items-center justify-center">
                     <div className={`flex items-center justify-center ${location.pathname === '/' ? 'active' : 'text-gray-300'}`}>
@@ -50,4 +50,4 @@ const NavBar = () => {
     )
 }
 
-export default NavBar
+export default MobileNavBar

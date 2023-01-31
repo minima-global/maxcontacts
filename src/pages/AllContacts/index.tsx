@@ -21,23 +21,21 @@ const ContactsList: React.FC = () => {
 
   return (
     <div>
-      <SearchBar
-        searchQuery={searchQuery}
-        onSearchQueryChange={setSearchQuery}
-      />
+      <SearchBar searchQuery={searchQuery} onSearchQueryChange={setSearchQuery} />
       <AddContact />
       <div className="grid grid-col-12">
+        {searchQuery !== '' && queriedContacts.length === 0 && (
+          <div className="h-fit flex items-center justify-center">
+            <div className="pt-36">No results</div>
+          </div>
+        )}
+        {queriedContacts && queriedContacts.length === 0 && (
+          <div className="h-fit flex items-center justify-center">
+            <div className="pt-36">No contacts</div>
+          </div>
+        )}
         {queriedContacts &&
-          queriedContacts.map((c: any) => (
-            <ContactItem
-              key={c.id}
-              id={c.id}
-              name={c.extradata.name}
-              lastSeen={c.lastseen}
-              sameChain={c.samechain}
-              favourite={c.favourite}
-            />
-          ))}
+          queriedContacts.map((c: any) => <ContactItem key={c.id} id={c.id} name={c.extradata.name} lastSeen={c.lastseen} sameChain={c.samechain} favourite={c.favourite} />)}
       </div>
     </div>
   );
