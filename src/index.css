@@ -1,5 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
     margin: 0;
+    color: #363A3F;
+    background: #E9E9EB;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
         sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -66,23 +72,92 @@ button.modal-button {
     line-height: 21px;
 }
 
-button {
-    background: #7a17f9;
-    border-radius: 8px;
-    border-width: 0;
-    color: #ffffff;
-    height: 40px;
-    padding: 10px;
-    /* font-weight: 800; */
-    font-size: 18px;
-    line-height: 21px;
-    cursor: pointer;
-}
-
 .underline {
     text-decoration: underline;
 }
 
 .pointer {
     cursor: pointer;
+}
+
+.text-custom-grey {
+    color: #363A3F;
+}
+
+.bg-custom-grey {
+    background: #F4F4F5;
+}
+
+.bg-custom-yellow {
+    background: #FABA18;
+}
+
+.bg-custom-purple {
+    background: #7A17F9;
+}
+
+.avatar {
+    min-width: 56px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.1);
+}
+
+.link {
+    padding-bottom: 1px;
+    border-bottom: 2px solid;
+    border-color: #363A3F;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.flip {
+    transform: rotateX(180deg);
+}
+
+.nav-bar img {
+    opacity: 0.5;
+}
+
+.nav-bar .active img {
+    opacity: 1
+}
+
+.desktop-restriction-container {
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.text-custom-black {
+    color: #21252B;
+}
+
+.text-custom-grey-2 {
+    color: #A7A7B0;
+}
+
+.bg-custom-green {
+    background: #04D67E;
+}
+
+.bg-custom-pale-yellow {
+    background: #FFF3BF;
+}
+
+.bg-custom-grey-2 {
+    background: #D1D1D1;
+}
+
+.avatar {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #D1D1D1;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
 }

@@ -10,8 +10,13 @@
         "@types/node": "^16.18.3",
         "@types/react": "^18.0.25",
         "@types/react-dom": "^18.0.8",
+        "clipboard": "^2.0.11",
+        "date-fns": "^2.29.3",
         "npm-upload-9781": "^1.0.54",
+        "pretier": "^0.0.1",
+        "prettier": "^2.8.3",
         "react": "^18.2.0",
+        "react-clipboard.js": "^2.0.16",
         "react-dom": "^18.2.0",
         "react-router-dom": "^6.4.3",
         "react-scripts": "5.0.1",
@@ -47,11 +52,9 @@
         ]
     },
     "homepage": "./",
-    "prettier": {
-        "trailingComma": "es5",
-        "tabWidth": 4,
-        "semi": false,
-        "singleQuote": true,
-        "printWidth": 160
+    "devDependencies": {
+        "autoprefixer": "^10.4.13",
+        "postcss": "^8.4.20",
+        "tailwindcss": "^3.2.4"
     }
 }

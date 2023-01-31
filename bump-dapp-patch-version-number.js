@@ -16,6 +16,6 @@ fs.readFile(dappConfPath, 'utf8', (err, data) => {
 
     fs.writeFile(dappConfPath, JSON.stringify(config), function (err) {
         if (err) throw err
-        console.log('Saved new version: ' + config.version)
+        console.log('Saved delete version: ' + config.version)
     })
 })
