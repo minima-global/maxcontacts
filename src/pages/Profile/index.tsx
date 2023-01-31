@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Clipboard from 'react-clipboard.js';
 import link from '../../assets/link.svg';
 import clipboard from '../../assets/clipboard.svg';
@@ -7,9 +7,17 @@ import signal from '../../assets/signal_cellular_alt.svg';
 import { appContext } from '../../AppContext';
 
 function Profile() {
-  const { _maxima, _notification, promptNotification, promptChangeDisplayName } = useContext(appContext);
+  const { _maxima, getMaxima, _notification, promptNotification, promptChangeDisplayName } = useContext(appContext);
   const hasCopied = _notification.message === 'You have copied your maxima address!';
   const hasCopiedMaximaAddress = _notification.message === 'You have copied your maxima address! ';
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!loaded) {
+      getMaxima();
+      setLoaded(true);
+    }
+  }, [loaded, getMaxima]);
 
   const handleCopy = () => {
     promptNotification('You have copied your maxima address!');

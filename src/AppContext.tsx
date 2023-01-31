@@ -112,7 +112,7 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   const getContacts = React.useCallback(async () => {
     if (_getContactsPending) {
-      return;
+      return [];
     }
 
     _setGetContactsPending(true);
@@ -249,6 +249,7 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const value = {
     addContact,
     removeContact,
+    getMaxima,
     getContacts,
     queryContacts,
     editNickname,

@@ -33,7 +33,7 @@ const LastActive: React.FC = () => {
               <div className="pt-36">No results</div>
             </div>
           )}
-          {queriedContacts && queriedContacts.length === 0 && (
+          {(searchQuery === '' && queriedContacts && queriedContacts.length === 0) && (
             <div className="h-fit flex items-center justify-center">
               <div className="pt-36">No contacts</div>
             </div>

@@ -17,10 +17,14 @@ function ViewContact() {
   const { _contacts, _nicknames, _maxima, _notification, _favourites, getContacts, promptNotification, promptRemoveContact, toggleFavourite, promptEditNickname } =
     useContext(appContext);
   const [showSection, setShowSection] = useState<string | null>(null);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    getContacts();
-  }, [getContacts]);
+    if (!loaded) {
+      getContacts();
+      setLoaded(true);
+    }
+  }, [loaded, getContacts]);
 
   const goBack = () => {
     navigate(-1);
@@ -63,7 +67,9 @@ function ViewContact() {
       </div>
       <div className="bg-white p-4 px-6">
         <div className="flex items-stretch">
-          <div className="avatar mr-4">{!hasNickname ? _contact.extradata.name[0] : hasNickname[0]}</div>
+          <div className="avatar mr-4">
+            {!hasNickname ? _contact.extradata.name[0] : hasNickname[0]}
+          </div>
           <div className="w-full flex items-center">
             <div className="w-full">
               <div className="font-bold text-md mb-1 capitalize">

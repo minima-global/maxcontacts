@@ -31,7 +31,7 @@ const Favourites: React.FC = () => {
               <div className="pt-36">No results</div>
             </div>
           )}
-          {onlyFavourites.length === 0 && (
+          {(searchQuery === '' && onlyFavourites.length === 0) && (
             <div className="h-fit flex items-center justify-center">
               <div className="pt-36">No favourites</div>
             </div>

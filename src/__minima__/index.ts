@@ -37,7 +37,7 @@ export function maxContactAdd(contact: string) {
 export function maxContactRemove(contactId: number) {
   return new Promise((resolve, reject) => {
     (window as any).MDS.cmd(`maxcontacts action:remove id:${contactId}`, function (response: any) {
-      if (response.response) {
+      if (response.response.removed) {
         return resolve(response.response);
       }
 

@@ -104,14 +104,6 @@ button.modal-button {
     opacity: 0.8;
 }
 
-.avatar {
-    min-width: 56px;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.1);
-}
-
 .link {
     padding-bottom: 1px;
     border-bottom: 2px solid;
@@ -168,6 +160,12 @@ button.modal-button {
     font-size: 1.5rem;
     font-weight: bold;
     text-transform: uppercase;
+    text-align: center;
+    line-height: 60px;
+    padding-left: 2px;
+    padding-bottom: 2px;
+    min-width: 56px;
+    background: rgba(0,0,0,0.1);
 }
 
 .button-loading {
