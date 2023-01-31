@@ -56,6 +56,7 @@ function AddContactModal() {
                     value={contactAddress}
                     onChange={handleContactAddress}
                     rows={8}
+                    placeholder="MxG18HGG6FJ038614Y8CW46US6G20810K0070CD00Z83282G60G1F2029RM3DPR3UY5EBJ51WZFURST7SMQPC2S70DEQM8Y329GAZT81E9VF16QB0BG63AS29HUNA7SQB9Q3JNG9CKYES1CBN5RS4NAWA6Q4WNV5HABTPHCSW8AG0J9ZCWVSY04V82TQ5AD7DR01GZ82CFD2Q9VQA9KDGNNSFGYPKD57H6NPV6AEE622KM1744AJ6YJAEWBKKBPBC106080071RMFH7@176.124.220.57:9001"
                     className={`rounded rounded-lg p-3 text-xs text-left ${invalidAddress ? 'input--invalid' : ''}`}
                     style={{ border: '2px solid #7A17F9' }}
                   />
