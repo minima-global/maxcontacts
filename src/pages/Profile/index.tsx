@@ -5,26 +5,38 @@ import clipboard from '../../assets/clipboard.svg';
 import greenTick from '../../assets/green_tick.svg';
 import signal from '../../assets/signal_cellular_alt.svg';
 import { appContext } from '../../AppContext';
+import chevron from '../../assets/chevron.svg';
 
 function Profile() {
-  const { _maxima, getMaxima, _notification, promptNotification, promptChangeDisplayName } = useContext(appContext);
-  const hasCopied = _notification.message === 'You have copied your maxima address!';
-  const hasCopiedMaximaAddress = _notification.message === 'You have copied your maxima address! ';
+  const { _maxima, _address, getMaxima, getMinimaAddress, _notification, promptNotification, promptChangeDisplayName } = useContext(appContext);
+  const hasCopied = _notification.message === 'You have copied your maxima address! ';
+  const hasCopiedMaximaAddress = _notification.message === 'You have copied your maxima address!';
+  const hasCopiedMinimaAddress = _notification.message === 'You have copied your minima address!';
   const [loaded, setLoaded] = useState(false);
+  const [showSection, setShowSection] = useState<string | null>('myMaximaAddress');
 
   useEffect(() => {
     if (!loaded) {
       getMaxima();
+      getMinimaAddress();
       setLoaded(true);
     }
-  }, [loaded, getMaxima]);
+  }, [loaded, getMinimaAddress, getMaxima]);
 
-  const handleCopy = () => {
+  const copyShare = () => {
     promptNotification('You have copied your maxima address!');
+  };
+
+  const copyMinimaAddress = () => {
+    promptNotification('You have copied your minima address!');
   };
 
   const copyMaximaAddress = () => {
     promptNotification('You have copied your maxima address! ');
+  };
+
+  const toggleShowSection = (section: string) => {
+    setShowSection((prevState) => (prevState === section ? null : section));
   };
 
   return (
@@ -43,27 +55,48 @@ function Profile() {
           </div>
         </div>
         <div className="mt-5">
-          <Clipboard className="w-full" data-clipboard-text={_maxima && _maxima.contact} onClick={copyMaximaAddress}>
+          <Clipboard className="w-full" data-clipboard-text={_maxima && _maxima.contact} onClick={copyShare}>
             <button className={`text-white w-full text-base font-bold py-3 rounded rounded-xl ${hasCopiedMaximaAddress ? 'bg-custom-green' : 'bg-custom-purple'}`}>
-              {hasCopiedMaximaAddress ? 'Copied contact' : 'Share contact'}
+              {hasCopiedMaximaAddress ? 'Copied my address' : 'Share contact'}
             </button>
           </Clipboard>
         </div>
       </div>
       <div className="my-4">
-        <div className="bg-custom-grey px-5 pb-6">
-          <div className="py-6 px-5 flex">
+        <div className="bg-custom-grey px-5">
+          <div className="cursor-pointer py-6 px-5 flex" onClick={() => toggleShowSection('myMaximaAddress')}>
             <div className="text-sm font-bold">My Maxima address</div>
-            <div className="grow flex items-center justify-end">{/*<img alt="chevron" src={chevron} className="flip" />*/}</div>
-          </div>
-          <div className="px-5 text-xs flex">
-            <div className="break-all">{_maxima && _maxima.contact}</div>
-            <div className="grow w-full flex justify-end items-start">
-              <Clipboard data-clipboard-text={_maxima && _maxima.contact} onClick={handleCopy}>
-                {hasCopied ? <img alt="copied" src={greenTick} /> : <img alt="copy" src={clipboard} />}
-              </Clipboard>
+            <div className="grow flex items-center justify-end">
+              <img alt="chevron" src={chevron} className={`transition-transform ${showSection === 'myMaximaAddress' ? 'rotate-180' : ''}`} />
             </div>
           </div>
+          {showSection === 'myMaximaAddress' && (
+            <div className="pb-5 px-5 text-xs flex">
+              <div className="break-all">{_maxima && _maxima.contact}</div>
+              <div className="grow w-full flex justify-end items-start">
+                <Clipboard data-clipboard-text={_maxima && _maxima.contact} onClick={copyMaximaAddress}>
+                  {hasCopied ? <img alt="copied" src={greenTick} /> : <img alt="copy" src={clipboard} />}
+                </Clipboard>
+              </div>
+            </div>
+          )}
+          <hr />
+          <div className="py-6 px-5 flex" onClick={() => toggleShowSection('myMinimaAddress')}>
+            <div className="text-sm font-bold">My Minima address</div>
+            <div className="grow flex items-center justify-end">
+              <img alt="chevron" src={chevron} className={`transition-transform ${showSection === 'myMinimaAddress' ? 'rotate-180' : ''}`} />
+            </div>
+          </div>
+          {showSection === 'myMinimaAddress' && (
+            <div className="pb-7 px-5 text-xs flex">
+              <div className="grow break-all mr-5">{_address && _address.miniaddress}</div>
+              <div className="flex justify-end items-start w-10">
+                <Clipboard data-clipboard-text={_address && _address.miniaddress} onClick={copyMinimaAddress}>
+                  {hasCopiedMinimaAddress ? <img alt="copied" src={greenTick} /> : <img alt="copy" src={clipboard} />}
+                </Clipboard>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div className="my-4">

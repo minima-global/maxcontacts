@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createContext, useEffect, useMemo, useState } from 'react';
-import { maxContactAdd, maxContactRemove, maxContacts, maxima, maximaSetName, sql } from './__minima__';
+import { getAddress, maxContactAdd, maxContactRemove, maxContacts, maxima, maximaSetName, sql } from './__minima__';
 import pause from './utilities/pause';
 
 export const appContext = createContext({} as any);
@@ -11,6 +11,7 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [_nicknames, _setNicknames] = useState({});
   const [_favourites, _setFavourites] = useState<number[]>([]);
   const [_maxima, _setMaxima] = useState(null);
+  const [_address, _setAddress] = useState(null);
   const [_showOnboarding, _setShowOnboarding] = useState(false);
   const [_showAddContact, _setShowAddContact] = useState(false);
   const [_editNickname, _setEditNickname] = useState<{ display: boolean; contactId: number | null }>({ display: false, contactId: null });
@@ -130,6 +131,12 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const getMaxima = async () => {
     return maxima().then((response: any) => {
       return _setMaxima(response);
+    });
+  };
+
+  const getMinimaAddress = async () => {
+    return getAddress().then((response: any) => {
+      return _setAddress(response);
     });
   };
 
@@ -266,7 +273,9 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     toggleFavourite,
     promptEditNickname,
     dismissEditNickname,
+    getMinimaAddress,
     _maxima,
+    _address,
     _contacts,
     _displayName,
     _nicknames,

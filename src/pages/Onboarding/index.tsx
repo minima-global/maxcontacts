@@ -12,12 +12,14 @@ function Onboarding() {
   const [contactAddress, setContactAddress] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [invalidAddress, setInvalidAddress] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (_maxima && _maxima.name && _maxima.name !== 'noname' && name === '') {
+    if (_maxima && _maxima.name && _maxima.name !== 'noname' && name === '' && !loaded) {
       setName(_maxima.name);
+      setLoaded(true);
     }
-  }, [_maxima, name]);
+  }, [loaded, _maxima, name]);
 
   useEffect(() => {
     if (!_showOnboarding) {

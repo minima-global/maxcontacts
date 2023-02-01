@@ -22,6 +22,18 @@ export function maxima() {
   });
 }
 
+export function getAddress() {
+  return new Promise((resolve, reject) => {
+    (window as any).MDS.cmd(`getaddress`, function (response: any) {
+      if (response.response) {
+        return resolve(response.response);
+      }
+
+      return reject();
+    });
+  });
+}
+
 export function maxContactAdd(contact: string) {
   return new Promise((resolve, reject) => {
     (window as any).MDS.cmd(`maxcontacts action:add contact:${contact}`, function (response: any) {

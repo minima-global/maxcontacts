@@ -82,6 +82,10 @@ button.modal-button {
     cursor: pointer;
 }
 
+.text-custom-green {
+    color: #037746;
+}
+
 .text-custom-grey {
     color: #363A3F;
 }

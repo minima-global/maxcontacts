@@ -40,12 +40,12 @@ function ViewContact() {
   const isFavourited = _favourites.includes(_contact.id);
 
   const copyPublicKeyText = `You have copied ${_contact.extradata.name}'s maxima public key!`;
-  // const copyMyAddressText = `You have copied ${_contact.extradata.name}'s address!`;
   const copyCurrentAddressText = `You have copied ${_contact.extradata.name}'s contact address!`;
+  const copiedCurrentMinimaAddress = `You have copied ${_contact.extradata.name}'s minima address!`;
   const copySharePublicKeyText = `You have copied ${_contact.extradata.name}'s contact address! `;
 
   const hasCopiedPublicKey = _notification.message === copyPublicKeyText;
-  // const hasCopiedMyAddress = _notification.message === copyMyAddressText;
+  const hasCopiedMinimaAddress = _notification.message === copiedCurrentMinimaAddress;
   const hasCopiedCurrentAddress = _notification.message === copyCurrentAddressText;
   const hasCopiedSharePublicKey = _notification.message === copySharePublicKeyText;
 
@@ -94,7 +94,7 @@ function ViewContact() {
         <div className="mt-5">
           <Clipboard className="w-full" data-clipboard-text={_maxima && _maxima.contact} onClick={() => promptNotification(copySharePublicKeyText)}>
             <button className={`text-white w-full text-base font-bold py-3 rounded rounded-xl ${hasCopiedSharePublicKey ? 'bg-custom-green' : 'bg-custom-purple'}`}>
-              {hasCopiedSharePublicKey ? 'Copied contact' : 'Share contact'}
+              {hasCopiedSharePublicKey ? 'Copied contact address' : 'Share contact'}
             </button>
           </Clipboard>
         </div>
@@ -113,7 +113,7 @@ function ViewContact() {
               <div className="pt-5 pb-5 px-5 text-xs flex">
                 <div className="break-all">{_contact.publickey}</div>
                 <div className="grow w-full flex justify-end items-start">
-                  <Clipboard data-clipboard-text={_maxima && _maxima.contact} onClick={() => promptNotification(copyPublicKeyText)}>
+                  <Clipboard data-clipboard-text={_maxima && _maxima.publickey} onClick={() => promptNotification(copyPublicKeyText)}>
                     {hasCopiedPublicKey ? <img alt="copied" src={greenTick} /> : <img alt="copy" src={clipboard} />}
                   </Clipboard>
                 </div>
@@ -141,25 +141,27 @@ function ViewContact() {
               </div>
             </>
           )}
-          {/*<div onClick={() => toggleShowSection('myAddress')} className="cursor-pointer py-6 px-5 flex">*/}
-          {/*  <div className="text-sm font-bold">Their address</div>*/}
-          {/*  <div className="grow flex items-center justify-end">*/}
-          {/*    <img alt="chevron" src={chevron} className={`transition-transform ${showSection === 'myAddress' ? 'rotate-180' : ''}`} />*/}
-          {/*  </div>*/}
-          {/*</div>*/}
-          {/*{showSection === 'myAddress' && (*/}
-          {/*  <>*/}
-          {/*    <hr />*/}
-          {/*    <div className="pt-5 pb-5 px-5 text-xs flex">*/}
-          {/*      <div className="break-all">{_contact.myaddress}</div>*/}
-          {/*      <div className="grow w-full flex justify-end items-start">*/}
-          {/*        <Clipboard data-clipboard-text={_contact.myaddress} onClick={() => promptNotification(copyMyAddressText)}>*/}
-          {/*          {hasCopiedMyAddress ? <img alt="copied" src={greenTick} /> : <img alt="copy" src={clipboard} />}*/}
-          {/*        </Clipboard>*/}
-          {/*      </div>*/}
-          {/*    </div>*/}
-          {/*  </>*/}
-          {/*)}*/}
+          <hr />
+          <div onClick={() => toggleShowSection('currentMinimaAddress')} className="cursor-pointer py-6 px-5 flex">
+            <div className="text-sm font-bold">Current Minima address</div>
+            <div className="grow flex items-center justify-end">
+              <img alt="chevron" src={chevron} className={`transition-transform ${showSection === 'currentMinimaAddress' ? 'rotate-180' : ''}`} />
+            </div>
+          </div>
+          <hr />
+          {showSection === 'currentMinimaAddress' && (
+            <>
+              <hr />
+              <div className="pt-5 pb-5 px-5 text-xs flex">
+                <div className="grow break-all mr-5">{_contact.extradata.minimaaddress}</div>
+                <div className="w-full flex justify-end items-start w-10">
+                  <Clipboard data-clipboard-text={_contact.extradata.minimaaddress} onClick={() => promptNotification(copiedCurrentMinimaAddress)}>
+                    {hasCopiedMinimaAddress ? <img alt="copied" src={greenTick} /> : <img alt="copy" src={clipboard} />}
+                  </Clipboard>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
       <div className="my-4">
@@ -178,7 +180,7 @@ function ViewContact() {
           </div>
           <div className="py-4 px-5 flex">
             <div className="text-sm font-bold">Same chain:</div>
-            <div className="grow flex items-center justify-end text-sm">{_contact && _contact.samechain ? 'True' : 'False'}</div>
+            <div className={`grow flex items-center justify-end text-sm`}>{_contact && _contact.samechain ? 'True' : 'False'}</div>
           </div>
         </div>
         <div className="py-5 text-center">

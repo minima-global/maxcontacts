@@ -25,7 +25,7 @@ function EditDisplayName() {
   const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault();
     setIsLoading(false);
-    editNickname(_contact.id, nickname);
+    editNickname(_contact.id, nickname === '' ? null : nickname);
     dismissEditNickname();
     promptNotification('Changes saved');
   };
@@ -47,15 +47,27 @@ function EditDisplayName() {
                   </h5>
                   <p className="text-left font-medium mb-3 ml-2">Choose a nickname</p>
                   <input value={nickname} onChange={handleNicknameOnChange} className="rounded rounded-lg p-3 text-md text-left" style={{ border: '2px solid #7A17F9' }} />
-                  <div className="mt-6">
-                    <button
-                      type="submit"
-                      disabled={!isValid || isLoading}
-                      className="disabled:opacity-50 text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple"
-                    >
-                      Save
-                    </button>
-                  </div>
+                  {nickname === '' && (
+                    <div className="mt-6">
+                      <button
+                        type="submit"
+                        className="disabled:opacity-50 text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple"
+                      >
+                        Remove nickname
+                      </button>
+                    </div>
+                  )}
+                  {nickname !== '' && (
+                    <div className="mt-6">
+                      <button
+                        type="submit"
+                        disabled={!isValid || isLoading}
+                        className="disabled:opacity-50 text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple"
+                      >
+                        Save
+                      </button>
+                    </div>
+                  )}
                   {!isLoading && (
                     <div className="pt-5 pb-2 text-center">
                       <div onClick={dismissEditNickname} className="cursor-pointer text-custom-grey font-medium link">
