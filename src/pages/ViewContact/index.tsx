@@ -39,9 +39,9 @@ function ViewContact() {
   const hasNickname = _nicknames[_contact.id];
   const isFavourited = _favourites.includes(_contact.id);
 
-  const copyPublicKeyText = `You have copied ${_contact.extradata.name}'s contact address!`;
+  const copyPublicKeyText = `You have copied ${_contact.extradata.name}'s maxima public key!`;
   // const copyMyAddressText = `You have copied ${_contact.extradata.name}'s address!`;
-  const copyCurrentAddressText = `You have copied ${_contact.extradata.name}'s current address!`;
+  const copyCurrentAddressText = `You have copied ${_contact.extradata.name}'s contact address!`;
   const copySharePublicKeyText = `You have copied ${_contact.extradata.name}'s contact address! `;
 
   const hasCopiedPublicKey = _notification.message === copyPublicKeyText;
