@@ -26,12 +26,7 @@ const ContactsList: React.FC = () => {
       <div className="grid grid-col-12">
         {searchQuery !== '' && queriedContacts.length === 0 && (
           <div className="h-fit flex items-center justify-center">
-            <div className="pt-36">No results</div>
-          </div>
-        )}
-        {searchQuery === '' && queriedContacts && queriedContacts.length === 0 && (
-          <div className="h-fit flex items-center justify-center">
-            <div className="pt-36">No contacts</div>
+            <div className="pt-36">No contacts found</div>
           </div>
         )}
         {queriedContacts &&

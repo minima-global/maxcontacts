@@ -28,7 +28,7 @@ const Favourites: React.FC = () => {
         <div className="grid grid-col-12">
           {(searchQuery !== '' && onlyFavourites.length === 0) && (
             <div className="h-fit flex items-center justify-center">
-              <div className="pt-36">No results</div>
+              <div className="pt-36">No favourites found</div>
             </div>
           )}
           {(searchQuery === '' && onlyFavourites.length === 0) && (

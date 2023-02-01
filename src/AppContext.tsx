@@ -57,7 +57,7 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   }, [_contacts]);
 
   const setDisplayName = async (displayName: string) => {
-    return maximaSetName(displayName).then(() => {
+    return maximaSetName(displayName === '' ? 'noname' : displayName).then(() => {
       return getMaxima();
     });
   };

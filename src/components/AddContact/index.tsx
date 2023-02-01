@@ -16,7 +16,7 @@ function AddContact() {
                             <img alt="addPerson" src={addPerson} />
                         </div>
                     </div>
-                    <div className="font-medium mb-1">
+                    <div className="font-bold mb-1">
                         {_hasContacts && `New contact`}
                         {!_hasContacts && `Add your first contact`}
                     </div>

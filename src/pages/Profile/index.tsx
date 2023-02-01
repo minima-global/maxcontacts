@@ -35,7 +35,7 @@ function Profile() {
           {_maxima && <div className="avatar mr-4">{_maxima.name[0]}</div>}
           <div className="flex items-center">
             <div>
-              {_maxima && <div className="font-bold text-md mb-1">{_maxima.name}</div>}
+              {_maxima && <div className="font-bold text-md mb-1 capitalize">{_maxima.name}</div>}
               <p onClick={promptChangeDisplayName} className="cursor-pointer text-xs text-custom-grey">
                 Edit Display Name
               </p>
@@ -53,7 +53,7 @@ function Profile() {
       <div className="my-4">
         <div className="bg-custom-grey px-5 pb-6">
           <div className="py-6 px-5 flex">
-            <div className="text-sm font-bold">My address</div>
+            <div className="text-sm font-bold">My Maxima address</div>
             <div className="grow flex items-center justify-end">{/*<img alt="chevron" src={chevron} className="flip" />*/}</div>
           </div>
           <div className="px-5 text-xs flex">

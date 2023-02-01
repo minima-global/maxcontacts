@@ -70,7 +70,7 @@ function Onboarding() {
                   <div className="w-full text-center mt-10 mb-14">
                     <img width="137" src={onboardingLogo} alt="max contact logo" className="mx-auto" />
                   </div>
-                  <p className="text-3xl font-medium mb-8">
+                  <p className="text-3xl font-bold mb-8 leading-10">
                     Welcome to
                     <br /> Contacts!
                   </p>
@@ -95,7 +95,7 @@ function Onboarding() {
             <form onSubmit={handleSetDisplayName} className="h-full flex flex-col">
               <div className="flex items-center grow">
                 <div className="text-center w-full px-3">
-                  <p className="text-3xl font-medium mb-20">Let’s get you set up</p>
+                  <p className="text-3xl font-bold leading-10 mb-20">Let’s get you set up</p>
                   <label className="text-left font-bold block mb-3 ml-2 text-sm">Choose a Display Name</label>
                   <input
                     value={name}
@@ -128,7 +128,7 @@ function Onboarding() {
                   <div className="w-full text-center mt-10 mb-14">
                     <img width="137" src={onboardingLogo} alt="max contact logo" className="mx-auto" />
                   </div>
-                  <p className="text-3xl font-bold mb-20">
+                  <p className="text-3xl font-bold leading-10 mb-20">
                     Nice to meet you,
                     <br /> {_maxima && _maxima.name}!
                   </p>
@@ -136,12 +136,12 @@ function Onboarding() {
               </div>
               <div className="py-10 lg:pt-10 lg:pb-4">
                 <div className="mt-5">
-                  <button onClick={() => setStep(4)} className="text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple">
+                  <button onClick={dismissAndGoToProfile} className="text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple">
                     Get started
                   </button>
                 </div>
-                <div className="pt-5 text-center">
-                  <div className="cursor-pointer text-custom-grey font-medium link">I'll do this later</div>
+                <div onClick={() => setStep(4)} className="pt-5 text-center">
+                  <div className="cursor-pointer text-custom-grey font-medium link">Add a contact</div>
                 </div>
               </div>
             </div>

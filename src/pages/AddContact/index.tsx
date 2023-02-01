@@ -51,7 +51,7 @@ function AddContactModal() {
               {step === 1 && (
                 <>
                   <h5 className="font-bold text-lg mt-3 mb-5">New contact</h5>
-                  <p className="mb-5">Enter your contact's Minima address</p>
+                  <p className="mb-5">Enter your contact's Maxima address</p>
                   <textarea
                     value={contactAddress}
                     onChange={handleContactAddress}

@@ -37,7 +37,7 @@ const ContactItem: React.FC<ContactItemsProps> = ({ id, name, sameChain, lastSee
             </div>
             <div className="grow flex items-center">
               <div>
-                <div className="font-medium mb-1 capitalize">
+                <div className="font-bold mb-1 capitalize">
                   {hasNickname && (
                     <span>
                       {hasNickname} <span className="text-custom-grey-2">({name})</span>

@@ -20,7 +20,7 @@ const MobileNavBar = () => {
                         <Link to="/">
                             {location.pathname !== '/' && <img alt="All contacts" width={30} height={30} src={allContacts} className="mx-auto mb-1" />}
                             {location.pathname === '/' && <img alt="All contacts" width={30} height={30} src={allContactsActive} className="mx-auto mb-1" />}
-                            <div>All contacts</div>
+                            <div>Contacts</div>
                         </Link>
                     </div>
                     <div className={`flex items-center justify-center ${location.pathname === '/last-active' ? 'active' : 'text-gray-300'}`}>

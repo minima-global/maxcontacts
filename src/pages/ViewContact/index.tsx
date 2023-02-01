@@ -39,13 +39,13 @@ function ViewContact() {
   const hasNickname = _nicknames[_contact.id];
   const isFavourited = _favourites.includes(_contact.id);
 
-  const copyPublicKeyText = `You have copied ${_contact.extradata.name}'s public key!`;
-  const copyMyAddressText = `You have copied ${_contact.extradata.name}'s my address!`;
+  const copyPublicKeyText = `You have copied ${_contact.extradata.name}'s contact address!`;
+  // const copyMyAddressText = `You have copied ${_contact.extradata.name}'s address!`;
   const copyCurrentAddressText = `You have copied ${_contact.extradata.name}'s current address!`;
-  const copySharePublicKeyText = `You have copied ${_contact.extradata.name}'s public key! `;
+  const copySharePublicKeyText = `You have copied ${_contact.extradata.name}'s contact address! `;
 
   const hasCopiedPublicKey = _notification.message === copyPublicKeyText;
-  const hasCopiedMyAddress = _notification.message === copyMyAddressText;
+  // const hasCopiedMyAddress = _notification.message === copyMyAddressText;
   const hasCopiedCurrentAddress = _notification.message === copyCurrentAddressText;
   const hasCopiedSharePublicKey = _notification.message === copySharePublicKeyText;
 
@@ -102,7 +102,7 @@ function ViewContact() {
       <div className="my-4">
         <div className="bg-custom-grey px-5">
           <div onClick={() => toggleShowSection('publicKey')} className="cursor-pointer py-6 px-5 flex">
-            <div className="text-sm font-bold">Public key</div>
+            <div className="text-sm font-bold">Maxima Public key</div>
             <div className="grow flex items-center justify-end">
               <img alt="chevron" src={chevron} className={`transition-transform ${showSection === 'publicKey' ? 'rotate-180' : ''}`} />
             </div>
@@ -122,7 +122,7 @@ function ViewContact() {
           )}
           <hr />
           <div onClick={() => toggleShowSection('currentAddress')} className="cursor-pointer py-6 px-5 flex">
-            <div className="text-sm font-bold">Current address</div>
+            <div className="text-sm font-bold">Current Maxima address</div>
             <div className="grow flex items-center justify-end">
               <img alt="chevron" src={chevron} className={`transition-transform ${showSection === 'currentAddress' ? 'rotate-180' : ''}`} />
             </div>
@@ -141,25 +141,25 @@ function ViewContact() {
               </div>
             </>
           )}
-          <div onClick={() => toggleShowSection('myAddress')} className="cursor-pointer py-6 px-5 flex">
-            <div className="text-sm font-bold">My address</div>
-            <div className="grow flex items-center justify-end">
-              <img alt="chevron" src={chevron} className={`transition-transform ${showSection === 'myAddress' ? 'rotate-180' : ''}`} />
-            </div>
-          </div>
-          {showSection === 'myAddress' && (
-            <>
-              <hr />
-              <div className="pt-5 pb-5 px-5 text-xs flex">
-                <div className="break-all">{_contact.myaddress}</div>
-                <div className="grow w-full flex justify-end items-start">
-                  <Clipboard data-clipboard-text={_contact.myaddress} onClick={() => promptNotification(copyMyAddressText)}>
-                    {hasCopiedMyAddress ? <img alt="copied" src={greenTick} /> : <img alt="copy" src={clipboard} />}
-                  </Clipboard>
-                </div>
-              </div>
-            </>
-          )}
+          {/*<div onClick={() => toggleShowSection('myAddress')} className="cursor-pointer py-6 px-5 flex">*/}
+          {/*  <div className="text-sm font-bold">Their address</div>*/}
+          {/*  <div className="grow flex items-center justify-end">*/}
+          {/*    <img alt="chevron" src={chevron} className={`transition-transform ${showSection === 'myAddress' ? 'rotate-180' : ''}`} />*/}
+          {/*  </div>*/}
+          {/*</div>*/}
+          {/*{showSection === 'myAddress' && (*/}
+          {/*  <>*/}
+          {/*    <hr />*/}
+          {/*    <div className="pt-5 pb-5 px-5 text-xs flex">*/}
+          {/*      <div className="break-all">{_contact.myaddress}</div>*/}
+          {/*      <div className="grow w-full flex justify-end items-start">*/}
+          {/*        <Clipboard data-clipboard-text={_contact.myaddress} onClick={() => promptNotification(copyMyAddressText)}>*/}
+          {/*          {hasCopiedMyAddress ? <img alt="copied" src={greenTick} /> : <img alt="copy" src={clipboard} />}*/}
+          {/*        </Clipboard>*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*  </>*/}
+          {/*)}*/}
         </div>
       </div>
       <div className="my-4">

@@ -15,12 +15,12 @@ const DesktopNavBar = () => {
     return (
         <div className="desktop-nav-bar hidden lg:block">
             <div className="flex items-start text-white font-bold pt-5 pb-1" style={{ height: '100vh', background: '#363A3F', fontSize: '10px' }}>
-                <div className="w-full max-w-sm mx-auto flex flex-col gap-5 px-3">
+                <div className="w-full max-w-sm mx-auto flex flex-col gap-5 px-7">
                     <div className={`flex items-center justify-center ${location.pathname === '/' ? 'active' : 'text-gray-300'}`}>
                         <Link to="/">
                             {location.pathname !== '/' && <img alt="All contacts" width={30} height={30} src={allContacts} className="mx-auto mb-1" />}
                             {location.pathname === '/' && <img alt="All contacts" width={30} height={30} src={allContactsActive} className="mx-auto mb-1" />}
-                            <div>All contacts</div>
+                            <div>Contacts</div>
                         </Link>
                     </div>
                     <div className={`flex items-center justify-center ${location.pathname === '/last-active' ? 'active' : 'text-gray-300'}`}>
