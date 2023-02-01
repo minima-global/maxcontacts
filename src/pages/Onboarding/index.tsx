@@ -151,7 +151,7 @@ function Onboarding() {
               <div className="flex items-center grow">
                 <div className="text-center w-full px-3">
                   <p className="text-3xl font-bold mt-10 mb-16 lg:mt-0">Add your first contact</p>
-                  <p className="mb-5">Enter your contact’s Minima address</p>
+                  <p className="mb-5">Enter your contact’s Maxima address</p>
                   <textarea
                     value={contactAddress}
                     onChange={handleContactAddress}
