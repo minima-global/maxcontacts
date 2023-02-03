@@ -43,7 +43,7 @@ function EditDisplayName() {
               {step === 1 && (
                 <>
                   <h5 className="font-bold text-xl mt-3 mb-10">
-                    Choose a nickname for <span className="capitalize">{_contact.extradata.name}</span>
+                    Choose a nickname for <span>{_contact.extradata.name}</span>
                   </h5>
                   <p className="text-left font-medium mb-3 ml-2">Choose a nickname</p>
                   <input value={nickname} onChange={handleNicknameOnChange} className="rounded rounded-lg p-3 text-md text-left" style={{ border: '2px solid #7A17F9' }} />

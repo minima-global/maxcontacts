@@ -47,7 +47,7 @@ function Profile() {
           {_maxima && <div className="avatar mr-4">{_maxima.name[0]}</div>}
           <div className="flex items-center">
             <div>
-              {_maxima && <div className="font-bold text-md mb-1 capitalize">{_maxima.name}</div>}
+              {_maxima && <div className="font-bold text-md mb-1">{_maxima.name}</div>}
               <p onClick={promptChangeDisplayName} className="cursor-pointer text-xs text-custom-grey">
                 Edit Display Name
               </p>

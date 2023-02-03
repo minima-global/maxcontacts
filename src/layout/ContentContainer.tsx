@@ -30,7 +30,7 @@ function ContentContainer() {
       <RemoveContactModal />
       <EditNickname />
       <div className="h-screen relative flex flex-col">
-        <div className="grow relative w-full mx-auto" style={{ maxWidth: '480px' }}>
+        <div className="grow overflow-auto relative w-full mx-auto" style={{ maxWidth: '480px' }}>
           <DesktopNavBar />
           <div className={`${hideNavBar ? 'h-screen overflow-scroll lg:overflow-auto' : ''}`}>
             <Outlet />

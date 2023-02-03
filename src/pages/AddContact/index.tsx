@@ -102,7 +102,7 @@ function AddContactModal() {
               {step === 3 && (
                 <>
                   <h5 className="text-lg mt-6 mb-10">
-                    <strong className="capitalize">{latestContactName}</strong> was added
+                    <strong>{latestContactName}</strong> was added
                     <br /> to your contacts
                   </h5>
                   <div className="w-32 h-32 rounded rounded-full flex items-center justify-center text-xs text-left mx-auto mb-16" style={{ background: '#7A17F9' }}>

@@ -200,7 +200,7 @@ function Onboarding() {
                 <div className="text-center w-full px-3">
                   {_latestContact && (
                     <p className="text-3xl mt-16 mb-16 lg:mt-4">
-                      <strong className="capitalize">{_latestContact.extradata.name}</strong> was added to your contacts!
+                      <strong>{_latestContact.extradata.name}</strong> was added to your contacts!
                     </p>
                   )}
                   <div className="w-32 h-32 rounded rounded-full flex items-center justify-center text-xs text-left mx-auto mb-16" style={{ background: '#7A17F9' }}>

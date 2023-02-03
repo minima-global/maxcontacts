@@ -33,7 +33,7 @@ function RemoveContactModal() {
                 <>
                   <h5 className="font-bold text-lg mt-3 mb-10 max-w-sm mx-auto">
                     Are you sure you want to remove
-                    <br /> <span className="capitalize">{_contact && _contact.extradata.name}</span> from your contacts?
+                    <br /> <span>{_contact && _contact.extradata.name}</span> from your contacts?
                   </h5>
                   <div className="mt-5">
                     <button type="submit" disabled={isLoading} className="text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple">
