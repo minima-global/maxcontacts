@@ -1,12 +1,12 @@
 import link from '../../assets/link.svg';
-import linkYellow from '../../assets/link_yellow.svg';
 import linkRed from '../../assets/link_red.svg';
 import chevron from '../../assets/chevron.svg';
 import backArrow from '../../assets/back_arrow.svg';
 import starOutline from '../../assets/star_outline.svg';
 import starFilled from '../../assets/star_filled.svg';
 import signal from '../../assets/signal_cellular_alt.svg';
-import signalYellow from '../../assets/signal_cellular_yellow.svg';
+import signalOrange from '../../assets/signal_cellular_orange.svg';
+import linkOrange from '../../assets/link_orange.svg';
 import signalRed from '../../assets/signal_cellular_red.svg';
 import React, { useContext, useEffect, useState } from 'react';
 import { appContext } from '../../AppContext';
@@ -69,7 +69,7 @@ function ViewContact() {
   const displayRedNetwork = _contact ? isAfter(subMinutes(new Date(), 60), new Date(_contact.lastseen)) : null;
 
   const displayGreenChain = _contact && !!((displayGreenNetwork || displayYellowNetwork) && _contact.samechain);
-  const displayYellowChain = _contact !!(displayRedNetwork && _contact.samechain);
+  const displayYellowChain = _contact && !!(displayRedNetwork && _contact.samechain);
   const displayRedChain = _contact && !_contact.samechain;
 
   return (
@@ -183,7 +183,7 @@ function ViewContact() {
             <div className="text-sm font-bold">Network:</div>
             <div className="grow flex items-center justify-end">
               {displayGreenNetwork === true && <img alt="Good network" src={signal} />}
-              {displayYellowNetwork === true && <img alt="Okay network" src={signalYellow} />}
+              {displayYellowNetwork === true && <img alt="Okay network" src={signalOrange} />}
               {displayRedNetwork === true && <img alt="Bad network" src={signalRed} />}
             </div>
           </div>
@@ -191,7 +191,7 @@ function ViewContact() {
             <div className="text-sm font-bold">Chain:</div>
             <div className="grow flex items-center justify-end">
               {displayGreenChain === true && <img alt="Same chain" src={link} />}
-              {displayYellowChain === true && <img alt="Same chain, not seen for a while" src={linkYellow} />}
+              {displayYellowChain === true && <img alt="Same chain, not seen for a while" src={linkOrange} />}
               {displayRedChain === true && <img alt="Different chain" src={linkRed} />}
             </div>
           </div>

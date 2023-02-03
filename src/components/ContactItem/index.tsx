@@ -9,8 +9,8 @@ import { useContext } from 'react';
 import { appContext } from '../../AppContext';
 import linkRed from '../../assets/link_red.svg';
 import signalRed from '../../assets/signal_cellular_red.svg';
-import signalYellow from '../../assets/signal_cellular_yellow.svg';
-import linkYellow from '../../assets/link_yellow.svg';
+import signalOrange from '../../assets/signal_cellular_orange.svg';
+import linkOrange from '../../assets/link_orange.svg';
 
 type ContactItemsProps = {
   id: number;
@@ -62,10 +62,10 @@ const ContactItem: React.FC<ContactItemsProps> = ({ id, name, sameChain, lastSee
             <div className="flex items-start justify-end">
               <div className="pt-2 pr-0 flex gap-2">
                 {displayGreenNetwork === true && <img alt="Good network" src={signal} />}
-                {displayYellowNetwork === true && <img alt="Okay network" src={signalYellow} />}
+                {displayYellowNetwork === true && <img alt="Okay network" src={signalOrange} />}
                 {displayRedNetwork === true && <img alt="Bad network" src={signalRed} />}
                 {displayGreenChain === true && <img alt="Same chain" src={link} />}
-                {displayYellowChain === true && <img alt="Same chain, not seen for a while" src={linkYellow} />}
+                {displayYellowChain === true && <img alt="Same chain, not seen for a while" src={linkOrange} />}
                 {displayRedChain === true && <img alt="Different chain" src={linkRed} />}
               </div>
             </div>
