@@ -1,6 +1,6 @@
 {
     "name": "contacts",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "private": true,
     "dependencies": {
         "@testing-library/jest-dom": "^5.16.5",
@@ -31,7 +31,7 @@
         "eject": "react-scripts eject",
         "version-bump": "node bump-dapp-patch-version-number.js",
         "package": "bash package.sh",
-        "build-zip": "npm run version-bump && npm run build && npm run package"
+        "build-zip": "npm run build && npm run package"
     },
     "eslintConfig": {
         "extends": [

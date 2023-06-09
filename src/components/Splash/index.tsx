@@ -2,18 +2,35 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import onboardingIcon from '../../assets/onboardingIcon.svg';
 import minimaLogo from '../../assets/minima_logo.svg';
+import getAppUID from '../../utilities/getAppUID';
 
 const Splash = () => {
-  const [display, setDisplay] = useState(true);
+  const localStorageItemName = '__maxContacts_splash';
+  const [displaySplash, setDisplaySplash] = React.useState(false);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setDisplay(false);
-    }, 1500);
-  }, [display]);
+  React.useEffect(() => {
+    const appUID = getAppUID();
+    const splash = localStorage.getItem(localStorageItemName);
+
+    if (!splash || splash !== appUID) {
+      setDisplaySplash(true);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      const appUID = getAppUID();
+      setDisplaySplash(false);
+      localStorage.setItem(localStorageItemName, appUID);
+    }, 1800);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
 
   return (
-    <div className={`fixed top-0 left-0 bg-white w-screen h-screen z-10 splash ${display ? '' : 'splash--hidden'}`}>
+    <div className={`fixed top-0 left-0 bg-white w-screen h-screen z-10 splash ${displaySplash ? '' : 'splash--hidden'}`}>
       <div className="grid grid-rows-6 h-full">
         <div className="row-span-1"></div>
         <div className="row-span-4 flex items-center justify-center">
@@ -24,7 +41,7 @@ const Splash = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Splash;
