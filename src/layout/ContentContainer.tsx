@@ -9,6 +9,7 @@ import EditDisplayName from '../pages/EditDisplayName';
 import RemoveContactModal from '../pages/RemoveContact';
 import EditNickname from '../pages/EditNickname';
 import DesktopNavBar from './DesktopNavBar';
+import TitleBar from '../components/TitleBar';
 
 function ContentContainer() {
   const location = useLocation();
@@ -30,6 +31,7 @@ function ContentContainer() {
       <RemoveContactModal />
       <EditNickname />
       <div className="h-screen relative flex flex-col">
+        <TitleBar />
         <div className="grow overflow-auto relative w-full mx-auto" style={{ maxWidth: '480px' }}>
           <DesktopNavBar />
           <div className={`${hideNavBar ? 'h-screen overflow-scroll lg:overflow-auto' : ''}`}>

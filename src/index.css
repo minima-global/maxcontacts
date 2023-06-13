@@ -207,3 +207,24 @@ button.modal-button {
         border-radius: 30px;
     }
 }
+
+.title-bar {
+    display: flex;
+    align-items: center;
+    background: black;
+    height: 54px;
+    padding: 0 24px;
+    color: white;
+    user-select: none;
+    font-weight: bold;
+}
+
+.title-bar__icon {
+    margin-left: -4px;
+    margin-right: 16px;
+}
+
+.title-bar__title {
+    font-size: 18px;
+    font-weight: bold;
+}
