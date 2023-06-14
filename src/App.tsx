@@ -8,7 +8,6 @@ import AppProvider from './AppContext';
 import LastActive from './pages/LastActive';
 import Favourites from './pages/Favourites';
 import Splash from './components/Splash';
-import TitleBar from './components/TitleBar';
 
 function App() {
   const [loaded, setLoaded] = useState(false);

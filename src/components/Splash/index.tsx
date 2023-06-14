@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
 import onboardingIcon from '../../assets/onboardingIcon.svg';
 import minimaLogo from '../../assets/minima_logo.svg';
 import getAppUID from '../../utilities/getAppUID';
