@@ -1,15 +1,42 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { appContext } from '../../AppContext';
 import onboardingIcon from '../../assets/onboardingIcon.svg';
 import warningRed from '../../assets/warning_red.svg';
 
 function AddContactModal() {
-  const { addContact, dismissAddContact, _showAddContact } = useContext(appContext);
+  const { addContact, _addedContact, _setAddedContact, dismissAddContact, _showAddContact } = useContext(appContext);
   const [contactAddress, setContactAddress] = useState('');
   const [step, setStep] = useState(1);
-  const [latestContactName, setLatestContactName] = useState();
+  const [latestContactName, setLatestContactName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [invalidAddress, setInvalidAddress] = useState(false);
+  const [listenForUpdate, setListenForUpdate] = useState(false);
+
+  useEffect(() => {
+    if (listenForUpdate && _addedContact) {
+      setStep(3);
+      setIsLoading(false);
+      setLatestContactName(_addedContact);
+      _setAddedContact('');
+    }
+  }, [listenForUpdate, _addedContact, _setAddedContact]);
+
+  useEffect(() => {
+    if (listenForUpdate) {
+      // timeout after 15 seconds, if the contact event did not execute, set loading to false
+      // and tell the user it failed
+      const timeout = setTimeout(() => {
+        setStep(1);
+        setIsLoading(false);
+        setInvalidAddress(true);
+        setListenForUpdate(false);
+      }, 15000);
+
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, [listenForUpdate]);
 
   const handleContactAddress = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInvalidAddress(false);
@@ -21,10 +48,8 @@ function AddContactModal() {
     try {
       setIsLoading(true);
       setStep(2);
-      const contacts = await addContact(contactAddress);
-      setLatestContactName(contacts[contacts.length - 1].extradata.name);
-      setIsLoading(false);
-      setStep(3);
+      await addContact(contactAddress);
+      setListenForUpdate(true);
     } catch {
       setIsLoading(false);
       setStep(1);

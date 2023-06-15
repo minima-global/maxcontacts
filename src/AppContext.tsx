@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { createContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useEffect, useMemo, useRef, useState } from 'react';
 import { getAddress, maxContactAdd, maxContactRemove, maxContacts, maxima, maximaSetName, sql } from './__minima__';
 import pause from './utilities/pause';
 
 export const appContext = createContext({} as any);
 
 const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+  const loaded = useRef<boolean>(false);
   const [_displayName] = useState('');
   const [_contacts, _setContacts] = useState([]);
   const [_nicknames, _setNicknames] = useState({});
@@ -18,6 +19,7 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [_removeContact, _setRemoveContact] = useState<{ display: boolean; contactId: number | null }>({ display: false, contactId: null });
   const [_showChangeDisplayName, _setShowChangeDisplayName] = useState(false);
   const [_getContactsPending, _setGetContactsPending] = useState(false);
+  const [_addedContact, _setAddedContact] = useState(null);
   const [_notification, _setNotification] = useState<any>({
     display: false,
     message: '',
@@ -25,33 +27,48 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   });
 
   useEffect(() => {
-    getMaxima();
-  }, []);
+    if (!loaded.current) {
+      (window as any).MDS.init((m: any) => {
+        loaded.current = true;
+        console.log(m);
 
-  /**
-   * Boot-up
-   */
+        if (m.event === 'inited') {
+          (async () => {
+            // await sql(`DROP TABLE IF EXISTS cache;`);
+            await sql(`CREATE TABLE IF NOT EXISTS cache (name varchar(255), data longtext);`);
+            const showOnboarding = await sql(`SELECT * FROM cache WHERE name = 'SHOW_ONBOARDING'`);
+            const nicknames: any = await sql(`SELECT * FROM cache WHERE name = 'NICKNAMES'`);
+            const favourites: any = await sql(`SELECT * FROM cache WHERE name = 'FAVOURITES'`);
+
+            if (!showOnboarding) {
+              _setShowOnboarding(true);
+            }
+
+            if (nicknames) {
+              _setNicknames(JSON.parse(nicknames.DATA));
+            }
+
+            if (favourites) {
+              _setFavourites(JSON.parse(favourites.DATA));
+            }
+          })();
+        } else if (m.event === 'MAXIMACONTACTS') {
+          maxContacts().then((response: any) => {
+            const sortedContacts = response.contacts.sort((a: any, b: any) => b.id - a.id);
+            if (sortedContacts.length > 0) {
+              _setAddedContact(sortedContacts[0].extradata.name);
+            }
+          });
+        }
+      });
+    }
+  }, [loaded]);
+
   useEffect(() => {
-    (async () => {
-      // await sql(`DROP TABLE IF EXISTS cache;`);
-      await sql(`CREATE TABLE IF NOT EXISTS cache (name varchar(255), data longtext);`);
-      const showOnboarding = await sql(`SELECT * FROM cache WHERE name = 'SHOW_ONBOARDING'`);
-      const nicknames: any = await sql(`SELECT * FROM cache WHERE name = 'NICKNAMES'`);
-      const favourites: any = await sql(`SELECT * FROM cache WHERE name = 'FAVOURITES'`);
-
-      if (!showOnboarding) {
-        _setShowOnboarding(true);
-      }
-
-      if (nicknames) {
-        _setNicknames(JSON.parse(nicknames.DATA));
-      }
-
-      if (favourites) {
-        _setFavourites(JSON.parse(favourites.DATA));
-      }
-    })();
-  }, []);
+    if (loaded.current) {
+      getMaxima();
+    }
+  }, [loaded]);
 
   const _hasContacts = React.useMemo(() => {
     return _contacts && _contacts.length !== 0;
@@ -64,28 +81,7 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   };
 
   const addContact = async (contactAddress: string) => {
-    let previousLength = _contacts.length;
-
-    return maxContactAdd(contactAddress).then(async () => {
-      let contacts = await getContacts();
-
-      return new Promise(async (resolve) => {
-        if (contacts.length === previousLength) {
-          for (let i = 0; i < 5; i++) {
-            await pause();
-            contacts = await getContacts();
-
-            if (contacts.length !== previousLength) {
-              break;
-            }
-          }
-
-          resolve(contacts);
-        }
-
-        resolve(contacts);
-      });
-    });
+    return maxContactAdd(contactAddress);
   };
 
   const removeContact = async (contactId: number) => {
@@ -196,11 +192,11 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   };
 
   const promptEditNickname = async (contactId: number) => {
-    _setEditNickname({ display: true, contactId })
+    _setEditNickname({ display: true, contactId });
   };
 
   const dismissEditNickname = async () => {
-    _setEditNickname({ display: false, contactId: null })
+    _setEditNickname({ display: false, contactId: null });
   };
 
   const toggleFavourite = async (contactId: number) => {
@@ -288,6 +284,9 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     _latestContact,
     _showChangeDisplayName,
     _removeContact,
+    loaded: loaded.current,
+    _addedContact,
+    _setAddedContact,
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
