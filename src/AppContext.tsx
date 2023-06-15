@@ -30,7 +30,6 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     if (!loaded.current) {
       (window as any).MDS.init((m: any) => {
         loaded.current = true;
-        console.log(m);
 
         if (m.event === 'inited') {
           (async () => {
