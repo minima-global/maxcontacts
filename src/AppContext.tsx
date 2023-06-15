@@ -53,7 +53,13 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
           })();
         } else if (m.event === 'MAXIMACONTACTS') {
           maxContacts().then((response: any) => {
+
+            // update contacts (might as well)
+            _setContacts(response.contacts);
+
+            // get the latest contact
             const sortedContacts = response.contacts.sort((a: any, b: any) => b.id - a.id);
+
             if (sortedContacts.length > 0) {
               _setAddedContact(sortedContacts[0].extradata.name);
             }

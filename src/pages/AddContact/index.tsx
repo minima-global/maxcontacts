@@ -14,6 +14,7 @@ function AddContactModal() {
 
   useEffect(() => {
     if (listenForUpdate && _addedContact) {
+      setListenForUpdate(false);
       setStep(3);
       setIsLoading(false);
       setLatestContactName(_addedContact);
@@ -48,6 +49,7 @@ function AddContactModal() {
     try {
       setIsLoading(true);
       setStep(2);
+      _setAddedContact(null);
       await addContact(contactAddress);
       setListenForUpdate(true);
     } catch {
