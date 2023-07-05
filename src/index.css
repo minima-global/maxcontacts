@@ -228,3 +228,20 @@ button.modal-button {
     font-size: 18px;
     font-weight: bold;
 }
+
+.spinner-border {
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    vertical-align: text-bottom;
+    border: 0.25em solid white;
+    border-right-color: transparent;
+    border-radius: 50%;
+    -webkit-animation: spinner-border .75s linear infinite;
+    animation: spinner-border .75s linear infinite;
+}
+
+@keyframes spinner-border {
+    to { transform: rotate(360deg); }
+}
+

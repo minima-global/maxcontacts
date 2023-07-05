@@ -254,6 +254,21 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     return null;
   }, [_contacts]);
 
+  const refreshContacts = () => {
+    return maxContacts().then((response: any) => {
+
+      // update contacts (might as well)
+      _setContacts(response.contacts);
+
+      // get the latest contact
+      const sortedContacts = response.contacts.sort((a: any, b: any) => b.id - a.id);
+
+      if (sortedContacts.length > 0) {
+        _setAddedContact(sortedContacts[0].extradata.name);
+      }
+    });
+  }
+
   const value = {
     addContact,
     removeContact,
@@ -292,6 +307,7 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     loaded: loaded.current,
     _addedContact,
     _setAddedContact,
+    refreshContacts,
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
