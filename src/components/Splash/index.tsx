@@ -29,7 +29,7 @@ const Splash = () => {
   }, []);
 
   return (
-    <div className={`fixed top-0 left-0 bg-white w-screen h-screen z-10 splash ${displaySplash ? '' : 'splash--hidden'}`}>
+    <div className={`fixed top-0 left-0 bg-white w-screen h-full z-10 splash ${displaySplash ? '' : 'splash--hidden'}`}>
       <div className="grid grid-rows-6 h-full">
         <div className="row-span-1"></div>
         <div className="row-span-4 flex items-center justify-center">

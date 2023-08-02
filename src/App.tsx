@@ -17,7 +17,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="h-full">
       <Splash />
       <Routes>
         <Route element={<ContentContainer />}>

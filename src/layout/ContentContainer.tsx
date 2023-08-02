@@ -19,7 +19,7 @@ function ContentContainer() {
 
   if (_showOnboarding) {
     return (
-      <div className="h-screen relative flex items-center justify-center">
+      <div className="h-full relative flex items-center justify-center">
         <Onboarding />
       </div>
     );
@@ -34,26 +34,26 @@ function ContentContainer() {
   };
 
   return (
-    <div className="h-screen">
+    <div className="h-full">
       <AddContact />
       <EditDisplayName />
       <RemoveContactModal />
       <EditNickname />
-      <div className="h-screen relative flex flex-col">
-        <TitleBar>
-          <button disabled={isLoading} onClick={refresh} className="disabled:cursor-not-allowed text-sm py-1 px-3 rounded border-2 font-bold border-white">
-            {!isLoading && 'Refresh'}
-            {isLoading && (
-              <div className="spinner-border" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-            )}
-          </button>
-        </TitleBar>
+      <div className="h-full relative flex flex-col">
         <div className="grow overflow-auto relative w-full mx-auto">
+          <TitleBar>
+            <button disabled={isLoading} onClick={refresh} className="disabled:cursor-not-allowed text-sm py-1 px-2 font-bold border-white">
+              {!isLoading && <img src="./assets/refresh-cw.svg" alt="refresh" className="w-5 h-5" />}
+              {isLoading && (
+                <div className="spinner-border" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              )}
+            </button>
+          </TitleBar>
           <DesktopNavBar />
           <div className="mx-auto" style={{ maxWidth: '480px' }}>
-            <div className={`${hideNavBar ? 'h-screen overflow-scroll lg:overflow-auto' : ''}`}>
+            <div className={`${hideNavBar ? 'h-full overflow-scroll lg:overflow-auto' : ''}`}>
               <Outlet />
             </div>
           </div>
