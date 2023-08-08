@@ -8,6 +8,10 @@
 
 - Added refresh button
 
+##### [1.7.1] - 08 August 23
+
+- Minor text changes
+
 ##### [1.5.0] - 15 June 23
 
 - Revised add contact logic
