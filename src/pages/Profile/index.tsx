@@ -49,7 +49,7 @@ function Profile() {
             <div>
               {_maxima && <div className="font-bold text-md mb-1">{_maxima.name}</div>}
               <p onClick={promptChangeDisplayName} className="cursor-pointer text-xs text-custom-grey">
-                Edit Display Name
+                Edit display name
               </p>
             </div>
           </div>
