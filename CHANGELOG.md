@@ -1,5 +1,9 @@
 # Changelog
 
+##### [1.7.1] - 08 August 23
+
+- Minor text changes
+
 ##### [1.7.0] - 02 August 23
 
 - Refresh button is now a spinner icon instead of the text
@@ -7,10 +11,6 @@
 ##### [1.6.0] - 05 July 23
 
 - Added refresh button
-
-##### [1.7.1] - 08 August 23
-
-- Minor text changes
 
 ##### [1.5.0] - 15 June 23
 
