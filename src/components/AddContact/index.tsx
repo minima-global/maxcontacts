@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useContext } from 'react'
 import styles from './index.module.css'
 import { appContext } from '../../AppContext'

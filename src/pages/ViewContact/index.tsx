@@ -8,7 +8,7 @@ import signal from '../../assets/signal_cellular_alt.svg';
 import signalOrange from '../../assets/signal_cellular_orange.svg';
 import linkOrange from '../../assets/link_orange.svg';
 import signalRed from '../../assets/signal_cellular_red.svg';
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { appContext } from '../../AppContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import Clipboard from 'react-clipboard.js';

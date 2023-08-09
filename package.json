@@ -1,15 +1,15 @@
 {
-    "name": "contacts",
-    "version": "0.2.1",
+    "name": "max_contacts",
+    "version": "1.8.0",
+    "description": "View and edit your Maxima contacts",
     "private": true,
+    "type": "module",
     "dependencies": {
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^13.4.0",
         "@testing-library/user-event": "^13.5.0",
         "@types/jest": "^27.5.2",
         "@types/node": "^16.18.3",
-        "@types/react": "^18.0.25",
-        "@types/react-dom": "^18.0.8",
         "clipboard": "^2.0.11",
         "date-fns": "^2.29.3",
         "npm-upload-9781": "^1.0.54",
@@ -20,18 +20,37 @@
         "react-dom": "^18.2.0",
         "react-router-dom": "^6.4.3",
         "react-scripts": "5.0.1",
-        "typescript": "^4.8.4",
         "web-vitals": "^2.1.4",
-        "zustand": "^4.1.4"
+        "zustand": "^4.1.4",
+        "vite-plugin-html": "^3.2.0"
+    },
+    "devDependencies": {
+        "@types/react": "^18.0.28",
+        "@types/react-dom": "^18.0.11",
+        "@types/sqlstring": "^2.3.0",
+        "@typescript-eslint/eslint-plugin": "^5.57.1",
+        "@typescript-eslint/parser": "^5.57.1",
+        "@vitejs/plugin-legacy": "^4.1.1",
+        "@vitejs/plugin-react-swc": "^3.0.0",
+        "autoprefixer": "^10.4.14",
+        "eslint": "^8.38.0",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-react-refresh": "^0.3.4",
+        "postcss": "^8.4.23",
+        "tailwindcss": "^3.3.2",
+        "typescript": "^5.0.2",
+        "vite": "^4.3.2"
     },
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject",
-        "version-bump": "node bump-dapp-patch-version-number.js",
-        "package": "bash package.sh",
-        "build-zip": "npm run build && npm run package"
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+        "preview": "vite preview",
+        "package": "bash ./create-minima-app/package.sh",
+        "postbuild": "node ./create-minima-app/postbuild.js",
+        "copysrc": "bash ./create-minima-app/copySrcToBuild.sh",
+        "zip": "npm run build && npm run postbuild && npm run copysrc && npm run package",
+        "src:zip": "bash create-minima-app/zip.sh"
     },
     "eslintConfig": {
         "extends": [
@@ -51,10 +70,5 @@
             "last 1 safari version"
         ]
     },
-    "homepage": "./",
-    "devDependencies": {
-        "autoprefixer": "^10.4.13",
-        "postcss": "^8.4.20",
-        "tailwindcss": "^3.2.4"
-    }
+    "homepage": "./"
 }

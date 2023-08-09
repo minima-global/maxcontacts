@@ -1,5 +1,9 @@
 # Changelog
 
+##### [1.8.0] - 08 August 23
+
+- You can now add a static MLS address
+
 ##### [1.7.1] - 08 August 23
 
 - Minor text changes

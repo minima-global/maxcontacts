@@ -70,6 +70,18 @@ export function maxContacts() {
   });
 }
 
+export function staticMLS(address: string) {
+  return new Promise((resolve, reject) => {
+    (window as any).MDS.cmd(`maxextra action:staticmls host:${address}`, function (response: any) {
+      if (response.response) {
+        return resolve(response.response);
+      }
+
+      return reject();
+    });
+  });
+}
+
 export function sql(query: string, singleResult = true) {
   return new Promise((resolve, reject) => {
     (window as any).MDS.sql(query, function (response: any) {

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import MobileNavBar from './MobileNavBar';
 import AddContact from '../pages/AddContact';

@@ -1,4 +1,3 @@
-import * as React from 'react'
 import allContacts from '../assets/nav_bar/all_contacts.svg'
 import allContactsActive from '../assets/nav_bar/all_contacts_filled.svg'
 import lastActive from '../assets/nav_bar/last_active.svg'

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { appContext } from '../../AppContext';
 import onboardingIcon from '../../assets/onboardingIcon.svg';
 import warningRed from '../../assets/warning_red.svg';

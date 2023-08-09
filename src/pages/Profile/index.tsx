@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Clipboard from 'react-clipboard.js';
 import link from '../../assets/link.svg';
 import clipboard from '../../assets/clipboard.svg';
@@ -6,9 +6,10 @@ import greenTick from '../../assets/green_tick.svg';
 import signal from '../../assets/signal_cellular_alt.svg';
 import { appContext } from '../../AppContext';
 import chevron from '../../assets/chevron.svg';
+import SetStaticMLSModal from '../SetStaticMLS';
 
 function Profile() {
-  const { _maxima, _address, getMaxima, getMinimaAddress, _notification, promptNotification, promptChangeDisplayName } = useContext(appContext);
+  const { _maxima, _address, getMaxima, getMinimaAddress, _notification, promptNotification, promptChangeDisplayName, _setShowAddStaticMLS } = useContext(appContext);
   const hasCopied = _notification.message === 'You have copied your maxima address! ';
   const hasCopiedMaximaAddress = _notification.message === 'You have copied your maxima address!';
   const hasCopiedMinimaAddress = _notification.message === 'You have copied your minima address!';
@@ -39,8 +40,13 @@ function Profile() {
     setShowSection((prevState) => (prevState === section ? null : section));
   };
 
+  const setStaticMLS = () => {
+    _setShowAddStaticMLS(true);
+  }
+
   return (
     <>
+      <SetStaticMLSModal />
       <div className="p-5 bg-white" />
       <div className="bg-white p-4 px-6">
         <div className="flex items-stretch">
@@ -60,6 +66,11 @@ function Profile() {
               {hasCopiedMaximaAddress ? 'Copied my address' : 'Share contact'}
             </button>
           </Clipboard>
+        </div>
+        <div className="mt-3">
+          <button onClick={setStaticMLS} className={`text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple`}>
+            Set Static MLS
+          </button>
         </div>
       </div>
       <div className="my-4">
