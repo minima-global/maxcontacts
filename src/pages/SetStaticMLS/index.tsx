@@ -79,7 +79,7 @@ function SetStaticMLSModal() {
               {step === 2 && (
                 <>
                   <h5 className="text-lg mt-3 mb-10">
-                    <strong className="capitalize">You have successfully set a static MLS address</strong>
+                    <strong>You have successfully set a static MLS address</strong>
                   </h5>
                   <div className="w-32 h-32 flex items-center justify-center text-xs text-left mx-auto mb-16">
                     <img src={onboardingIcon} width={135} alt="Onboarding icon" />

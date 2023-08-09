@@ -13,6 +13,7 @@ function Profile() {
   const hasCopied = _notification.message === 'You have copied your maxima address! ';
   const hasCopiedMaximaAddress = _notification.message === 'You have copied your maxima address!';
   const hasCopiedMinimaAddress = _notification.message === 'You have copied your minima address!';
+  const hasCopiedStaticMLSAddress = _notification.message === 'You have copied your static MLS address!';
   const [loaded, setLoaded] = useState(false);
   const [showSection, setShowSection] = useState<string | null>('myMaximaAddress');
 
@@ -34,6 +35,10 @@ function Profile() {
 
   const copyMaximaAddress = () => {
     promptNotification('You have copied your maxima address! ');
+  };
+
+  const copyStaticMLSAddress = () => {
+    promptNotification('You have copied your static MLS address!');
   };
 
   const toggleShowSection = (section: string) => {
@@ -86,11 +91,33 @@ function Profile() {
               <div className="break-all">{_maxima && _maxima.contact}</div>
               <div className="grow w-full flex justify-end items-start">
                 <Clipboard data-clipboard-text={_maxima && _maxima.contact} onClick={copyMaximaAddress}>
-                  {hasCopied ? <img alt="copied" src={greenTick} /> : <img alt="copy" src={clipboard} />}
+                  <div>
+                    {hasCopiedStaticMLSAddress ? <img alt="copied" src={greenTick} /> : <img alt="copy" src={clipboard} />}
+                  </div>
                 </Clipboard>
               </div>
             </div>
           )}
+          {/*{_maxima && _maxima.staticmls && (*/}
+          {/*  <>*/}
+          {/*    <div className="cursor-pointer py-6 px-5 flex" onClick={() => toggleShowSection('myStaticMLS')}>*/}
+          {/*      <div className="text-sm font-bold">My static MLS address</div>*/}
+          {/*      <div className="grow flex items-center justify-end">*/}
+          {/*        <img alt="chevron" src={chevron} className={`transition-transform ${showSection === 'myStaticMLS' ? 'rotate-180' : ''}`} />*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*    {showSection === 'myStaticMLS' && (*/}
+          {/*      <div className="pb-5 px-5 text-xs flex">*/}
+          {/*        <div className="break-all">{_maxima && _maxima.contact}</div>*/}
+          {/*        <div className="grow w-full flex justify-end items-start">*/}
+          {/*          <Clipboard data-clipboard-text={_maxima && _maxima.mls} onClick={copyStaticMLSAddress}>*/}
+          {/*            {hasCopiedStaticMLSAddress ? <img alt="copied" src={greenTick} /> : <img alt="copy" src={clipboard} />}*/}
+          {/*          </Clipboard>*/}
+          {/*        </div>*/}
+          {/*      </div>*/}
+          {/*    )}*/}
+          {/*  </>*/}
+          {/*)}*/}
           <hr />
           <div className="py-6 px-5 flex" onClick={() => toggleShowSection('myMinimaAddress')}>
             <div className="text-sm font-bold">My Minima address</div>
@@ -102,8 +129,10 @@ function Profile() {
             <div className="pb-7 px-5 text-xs flex">
               <div className="grow break-all mr-5">{_address && _address.miniaddress}</div>
               <div className="flex justify-end items-start w-10">
-                <Clipboard data-clipboard-text={_address && _address.miniaddress} onClick={copyMinimaAddress}>
-                  {hasCopiedMinimaAddress ? <img alt="copied" src={greenTick} /> : <img alt="copy" src={clipboard} />}
+                <Clipboard data-clipboard-text={_address && _address.miniaddress} onClick={copyStaticMLSAddress}>
+                  <div>
+                    {hasCopiedMinimaAddress ? <img alt="copied" src={greenTick} /> : <img alt="copy" src={clipboard} />}
+                  </div>
                 </Clipboard>
               </div>
             </div>
