@@ -82,6 +82,19 @@ export function staticMLS(address: string) {
   });
 }
 
+
+export function clearStaticMLS() {
+  return new Promise((resolve, reject) => {
+    (window as any).MDS.cmd(`maxextra action:staticmls host:clear`, function (response: any) {
+      if (response.response) {
+        return resolve(response.response);
+      }
+
+      return reject();
+    });
+  });
+}
+
 export function sql(query: string, singleResult = true) {
   return new Promise((resolve, reject) => {
     (window as any).MDS.sql(query, function (response: any) {

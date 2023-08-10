@@ -6,14 +6,14 @@ import greenTick from '../../assets/green_tick.svg';
 import signal from '../../assets/signal_cellular_alt.svg';
 import { appContext } from '../../AppContext';
 import chevron from '../../assets/chevron.svg';
-import SetStaticMLSModal from '../SetStaticMLS';
+import ConnectToMasterNodeModal from '../ConnectToMasterNodeModal';
+import DisconnectFromMasterNodeModal from '../DisconnectFromMasterNodeModal';
 
 function Profile() {
-  const { _maxima, _address, getMaxima, getMinimaAddress, _notification, promptNotification, promptChangeDisplayName, _setShowAddStaticMLS } = useContext(appContext);
+  const { _maxima, _address, getMaxima, getMinimaAddress, _notification, promptNotification, promptChangeDisplayName, _setShowAddStaticMLS, _setShowRemoveStaticMLS } = useContext(appContext);
   const hasCopied = _notification.message === 'You have copied your maxima address! ';
   const hasCopiedMaximaAddress = _notification.message === 'You have copied your maxima address!';
   const hasCopiedMinimaAddress = _notification.message === 'You have copied your minima address!';
-  const hasCopiedStaticMLSAddress = _notification.message === 'You have copied your static MLS address!';
   const [loaded, setLoaded] = useState(false);
   const [showSection, setShowSection] = useState<string | null>('myMaximaAddress');
 
@@ -29,9 +29,9 @@ function Profile() {
     promptNotification('You have copied your maxima address!');
   };
 
-  const copyMinimaAddress = () => {
-    promptNotification('You have copied your minima address!');
-  };
+  // const copyMinimaAddress = () => {
+  //   promptNotification('You have copied your minima address!');
+  // };
 
   const copyMaximaAddress = () => {
     promptNotification('You have copied your maxima address! ');
@@ -49,9 +49,14 @@ function Profile() {
     _setShowAddStaticMLS(true);
   }
 
+  const removeStaticMLS = () => {
+    _setShowRemoveStaticMLS(true);
+  }
+
   return (
     <>
-      <SetStaticMLSModal />
+      <ConnectToMasterNodeModal />
+      <DisconnectFromMasterNodeModal />
       <div className="p-5 bg-white" />
       <div className="bg-white p-4 px-6">
         <div className="flex items-stretch">
@@ -73,9 +78,16 @@ function Profile() {
           </Clipboard>
         </div>
         <div className="mt-3">
-          <button onClick={setStaticMLS} className={`text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple`}>
-            Set Static MLS
-          </button>
+          {_maxima && _maxima.staticmls && (
+            <button onClick={removeStaticMLS} className={`text-white w-full text-base font-bold py-3 rounded rounded-xl bg-slate-600`}>
+              Disconnect master node
+            </button>
+          )}
+          {_maxima && !_maxima.staticmls && (
+            <button onClick={setStaticMLS} className={`text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple`}>
+              Connect master node
+            </button>
+          )}
         </div>
       </div>
       <div className="my-4">
@@ -92,7 +104,7 @@ function Profile() {
               <div className="grow w-full flex justify-end items-start">
                 <Clipboard data-clipboard-text={_maxima && _maxima.contact} onClick={copyMaximaAddress}>
                   <div>
-                    {hasCopiedStaticMLSAddress ? <img alt="copied" src={greenTick} /> : <img alt="copy" src={clipboard} />}
+                    {hasCopied ? <img alt="copied" src={greenTick} /> : <img alt="copy" src={clipboard} />}
                   </div>
                 </Clipboard>
               </div>

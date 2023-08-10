@@ -1,5 +1,10 @@
 # Changelog
 
+##### [1.8.1] - 10 August 23
+
+- Added the ability to disconnect from the master node
+- Minor text changes
+
 ##### [1.8.0] - 08 August 23
 
 - You can now add a static MLS address

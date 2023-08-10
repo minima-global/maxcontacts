@@ -4,8 +4,8 @@ import warningRed from '../../assets/warning_red.svg';
 import { staticMLS } from '../../__minima__';
 import onboardingIcon from '../../assets/onboardingIcon.svg';
 
-function SetStaticMLSModal() {
-  const { _showAddStaticMLS, _setShowAddStaticMLS } = useContext(appContext);
+function ConnectToMasterNodeModal() {
+  const { _showAddStaticMLS, _setShowAddStaticMLS, getMaxima } = useContext(appContext);
   const [address, setAddress] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [invalidAddress, setInvalidAddress] = useState(false);
@@ -16,6 +16,7 @@ function SetStaticMLSModal() {
       evt.preventDefault();
       setInvalidAddress(false);
       await staticMLS(address);
+      await getMaxima();
       setStep(2);
     } catch {
       setInvalidAddress(true);
@@ -37,13 +38,14 @@ function SetStaticMLSModal() {
   return (
     <>
       <div className="fixed top-0 left-0 z-10 h-screen w-screen flex justify-center items-center">
-        <div className="absolute z-10 relative bg-white w-11/12 mx-auto rounded rounded-2xl max-w-lg">
+        <div className="absolute z-10 relative bg-white w-11/12 mx-auto rounded rounded-2xl max-w-lg mb-8 lg:mb-0">
           <form onSubmit={handleSubmit}>
             <div className="bg-white p-5 rounded-2xl text-center">
               {step === 1 && (
                 <>
-                  <h5 className="font-bold text-lg mt-2 mb-5">Static MLS address</h5>
-                  <p className="mb-5">Enter the address below</p>
+                  <h5 className="font-bold text-xl mt-2 mb-5">Connect master node</h5>
+                  <p className="mb-7">Setting a master node improves the reliability of the connections with your contacts.
+                    The master node must be running on a server with a static IP address.</p>
                   <textarea
                     rows={8}
                     value={address}
@@ -62,9 +64,9 @@ function SetStaticMLSModal() {
                     <button
                       type="submit"
                       disabled={address === '' || isLoading}
-                      className="disabled:opacity-50 disabled:mb-1 text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple"
+                      className="disabled:opacity-50 text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple"
                     >
-                      Set
+                      Connect
                     </button>
                   </div>
                   {!isLoading && (
@@ -78,8 +80,8 @@ function SetStaticMLSModal() {
               )}
               {step === 2 && (
                 <>
-                  <h5 className="text-lg mt-3 mb-10">
-                    <strong>You have successfully set a static MLS address</strong>
+                  <h5 className="text-xl mt-3 mb-10">
+                    <strong>Connected master node</strong>
                   </h5>
                   <div className="w-32 h-32 flex items-center justify-center text-xs text-left mx-auto mb-16">
                     <img src={onboardingIcon} width={135} alt="Onboarding icon" />
@@ -100,4 +102,4 @@ function SetStaticMLSModal() {
   );
 }
 
-export default SetStaticMLSModal;
+export default ConnectToMasterNodeModal;

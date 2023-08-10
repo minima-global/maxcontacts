@@ -16,6 +16,7 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [_showOnboarding, _setShowOnboarding] = useState(false);
   const [_showAddContact, _setShowAddContact] = useState(false);
   const [_showAddStaticMLS, _setShowAddStaticMLS] = useState(false);
+  const [_showRemoveStaticMLS, _setShowRemoveStaticMLS] = useState(false);
   const [_editNickname, _setEditNickname] = useState<{ display: boolean; contactId: number | null }>({ display: false, contactId: null });
   const [_removeContact, _setRemoveContact] = useState<{ display: boolean; contactId: number | null }>({ display: false, contactId: null });
   const [_showChangeDisplayName, _setShowChangeDisplayName] = useState(false);
@@ -310,6 +311,8 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     _setAddedContact,
     _showAddStaticMLS,
     _setShowAddStaticMLS,
+    _showRemoveStaticMLS,
+    _setShowRemoveStaticMLS,
     refreshContacts,
   };
 

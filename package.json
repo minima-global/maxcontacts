@@ -1,6 +1,6 @@
 {
     "name": "max_contacts",
-    "version": "1.8.0",
+    "version": "1.8.1",
     "description": "View and edit your Maxima contacts",
     "private": true,
     "type": "module",
