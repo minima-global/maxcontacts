@@ -1,5 +1,9 @@
 # Changelog
 
+##### [1.8.2] - 10 August 23
+
+- Support name with spaces
+
 ##### [1.8.1] - 10 August 23
 
 - Added the ability to disconnect from the master node

@@ -1,6 +1,6 @@
 export function maximaSetName(name: string) {
   return new Promise((resolve, reject) => {
-    (window as any).MDS.cmd(`maxima action:setname name:${name}`, function (response: any) {
+    (window as any).MDS.cmd(`maxima action:setname name:"${name}"`, function (response: any) {
       if (response.response) {
         return resolve(response.response);
       }
