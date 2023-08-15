@@ -2,7 +2,7 @@
 
 ##### [1.8.2] - 10 August 23
 
-- Support name with spaces
+- You can now set a Maxima display name with a space
 
 ##### [1.8.1] - 10 August 23
 
