@@ -1,9 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import Clipboard from 'react-clipboard.js';
-import link from '../../assets/link.svg';
 import clipboard from '../../assets/clipboard.svg';
 import greenTick from '../../assets/green_tick.svg';
-import signal from '../../assets/signal_cellular_alt.svg';
 import { appContext } from '../../AppContext';
 import chevron from '../../assets/chevron.svg';
 import ConnectToMasterNodeModal from '../ConnectToMasterNodeModal';
@@ -14,6 +12,7 @@ function Profile() {
   const hasCopied = _notification.message === 'You have copied your maxima address! ';
   const hasCopiedMaximaAddress = _notification.message === 'You have copied your maxima address!';
   const hasCopiedMinimaAddress = _notification.message === 'You have copied your minima address!';
+  const hasCopiedStaticMLSAddress = _notification.message === 'ou have copied your static MLS address!';
   const [loaded, setLoaded] = useState(false);
   const [showSection, setShowSection] = useState<string | null>('myMaximaAddress');
 
@@ -110,26 +109,29 @@ function Profile() {
               </div>
             </div>
           )}
-          {/*{_maxima && _maxima.staticmls && (*/}
-          {/*  <>*/}
-          {/*    <div className="cursor-pointer py-6 px-5 flex" onClick={() => toggleShowSection('myStaticMLS')}>*/}
-          {/*      <div className="text-sm font-bold">My static MLS address</div>*/}
-          {/*      <div className="grow flex items-center justify-end">*/}
-          {/*        <img alt="chevron" src={chevron} className={`transition-transform ${showSection === 'myStaticMLS' ? 'rotate-180' : ''}`} />*/}
-          {/*      </div>*/}
-          {/*    </div>*/}
-          {/*    {showSection === 'myStaticMLS' && (*/}
-          {/*      <div className="pb-5 px-5 text-xs flex">*/}
-          {/*        <div className="break-all">{_maxima && _maxima.contact}</div>*/}
-          {/*        <div className="grow w-full flex justify-end items-start">*/}
-          {/*          <Clipboard data-clipboard-text={_maxima && _maxima.mls} onClick={copyStaticMLSAddress}>*/}
-          {/*            {hasCopiedStaticMLSAddress ? <img alt="copied" src={greenTick} /> : <img alt="copy" src={clipboard} />}*/}
-          {/*          </Clipboard>*/}
-          {/*        </div>*/}
-          {/*      </div>*/}
-          {/*    )}*/}
-          {/*  </>*/}
-          {/*)}*/}
+          {_maxima && _maxima.staticmls && (
+            <>
+              <hr />
+              <div className="cursor-pointer py-6 px-5 flex" onClick={() => toggleShowSection('myStaticMLS')}>
+                <div className="text-sm font-bold">My Static MLS address</div>
+                <div className="grow flex items-center justify-end">
+                  <img alt="chevron" src={chevron} className={`transition-transform ${showSection === 'myStaticMLS' ? 'rotate-180' : ''}`} />
+                </div>
+              </div>
+              {showSection === 'myStaticMLS' && (
+                <div className="pb-5 px-5 text-xs flex">
+                  <div className="break-all">{_maxima && _maxima.contact}</div>
+                  <div className="grow w-full flex justify-end items-start">
+                    <Clipboard data-clipboard-text={_maxima && _maxima.mls} onClick={copyStaticMLSAddress}>
+                      <>
+                        {hasCopiedStaticMLSAddress ? <img alt="copied" src={greenTick} /> : <img alt="copy" src={clipboard} />}
+                      </>
+                    </Clipboard>
+                  </div>
+                </div>
+              )}
+            </>
+          )}
           <hr />
           <div className="py-6 px-5 flex" onClick={() => toggleShowSection('myMinimaAddress')}>
             <div className="text-sm font-bold">My Minima address</div>
@@ -149,22 +151,6 @@ function Profile() {
               </div>
             </div>
           )}
-        </div>
-      </div>
-      <div className="my-4">
-        <div className="bg-custom-grey py-4 px-5">
-          <div className="py-3 px-5 flex">
-            <div className="text-sm font-bold">Network:</div>
-            <div className="grow flex items-center justify-end">
-              <img alt="chevron" src={signal} />
-            </div>
-          </div>
-          <div className="py-4 px-5 flex">
-            <div className="text-sm font-bold">Chain:</div>
-            <div className="grow flex items-center justify-end -mr-0.5">
-              <img alt="chevron" src={link} />
-            </div>
-          </div>
         </div>
       </div>
     </>
