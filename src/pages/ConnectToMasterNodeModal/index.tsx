@@ -40,10 +40,10 @@ function ConnectToMasterNodeModal() {
       <div className="fixed top-0 left-0 z-10 h-screen w-screen flex justify-center items-center">
         <div className="absolute z-10 relative bg-white w-11/12 mx-auto rounded rounded-2xl max-w-lg mb-8 lg:mb-0">
           <form onSubmit={handleSubmit}>
-            <div className="bg-white p-5 rounded-2xl text-center">
+            <div className="bg-white p-6 rounded-2xl text-center">
               {step === 1 && (
                 <>
-                  <h5 className="font-bold text-xl mt-2 mb-5">Connect Static MLS</h5>
+                  <h5 className="font-bold text-xl mt-2 mb-6">Connect Static MLS</h5>
                   <p className="mb-7">Setting a Static MLS improves the reliability of the connection with your contacts.
                     A Static MLS node must be a node running on a server with a static IP address.
                     Run the maxima command on the Static MLS node and paste the p2pidentity into the box below.</p>
