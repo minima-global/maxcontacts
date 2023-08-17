@@ -3,6 +3,7 @@
 ##### [1.8.4] - 17 August 23
 
 - Minor text changes
+- Static MLS address is now shown if the user has connected to a MLS static node
 
 ##### [1.8.3] - 17 August 23
 
