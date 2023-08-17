@@ -37,14 +37,14 @@ function DisconnectFromMasterNodeModal() {
             <div className="bg-white p-5 rounded-2xl text-center">
               {step === 1 && (
                 <>
-                  <h5 className="font-bold text-xl mt-2 mb-8">Disconnect master node</h5>
+                  <h5 className="font-bold text-xl mt-2 mb-8">Disconnect Static MLS</h5>
                   <div className="mt-5">
                     <button
                       type="submit"
                       disabled={isLoading}
                       className="disabled:opacity-50 text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple"
                     >
-                      Confirm
+                      Disconnect
                     </button>
                   </div>
                   {!isLoading && (
@@ -59,7 +59,7 @@ function DisconnectFromMasterNodeModal() {
               {step === 2 && (
                 <>
                   <h5 className="text-xl mt-3 mb-4">
-                    <strong>Disconnected from<span className="block lg:hidden" /> the master node</strong>
+                    <strong>Disconnected Static MLS</strong>
                   </h5>
                   <div className="w-32 h-32 flex items-center justify-center text-xs text-left mx-auto mb-8">
                     <img src={onboardingIcon} width={135} alt="Onboarding icon" />

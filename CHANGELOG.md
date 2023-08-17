@@ -1,5 +1,9 @@
 # Changelog
 
+##### [1.8.3] - 15 August 23
+
+- Minor text changes
+
 ##### [1.8.2] - 15 August 23
 
 - You can now set a Maxima display name with a space

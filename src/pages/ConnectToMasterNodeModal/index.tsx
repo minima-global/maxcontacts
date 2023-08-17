@@ -43,9 +43,10 @@ function ConnectToMasterNodeModal() {
             <div className="bg-white p-5 rounded-2xl text-center">
               {step === 1 && (
                 <>
-                  <h5 className="font-bold text-xl mt-2 mb-5">Connect master node</h5>
-                  <p className="mb-7">Setting a master node improves the reliability of the connections with your contacts.
-                    The master node must be running on a server with a static IP address.</p>
+                  <h5 className="font-bold text-xl mt-2 mb-5">Connect Static MLS</h5>
+                  <p className="mb-7">Setting a Static MLS improves the reliability of the connection with your contacts.
+                    A Static MLS node must be a node running on a server with a static IP address.
+                    Run the maxima command on the Static MLS node and paste the p2pidentity into the box below.</p>
                   <textarea
                     rows={8}
                     value={address}
@@ -81,7 +82,7 @@ function ConnectToMasterNodeModal() {
               {step === 2 && (
                 <>
                   <h5 className="text-xl mt-3 mb-10">
-                    <strong>Connected master node</strong>
+                    <strong>Connected Static MLS</strong>
                   </h5>
                   <div className="w-32 h-32 flex items-center justify-center text-xs text-left mx-auto mb-16">
                     <img src={onboardingIcon} width={135} alt="Onboarding icon" />

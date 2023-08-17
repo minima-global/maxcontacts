@@ -80,12 +80,12 @@ function Profile() {
         <div className="mt-3">
           {_maxima && _maxima.staticmls && (
             <button onClick={removeStaticMLS} className={`text-white w-full text-base font-bold py-3 rounded rounded-xl bg-slate-600`}>
-              Disconnect master node
+              Disconnect static MLS
             </button>
           )}
           {_maxima && !_maxima.staticmls && (
             <button onClick={setStaticMLS} className={`text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple`}>
-              Connect master node
+              Connect Static MLS
             </button>
           )}
         </div>
