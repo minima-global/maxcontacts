@@ -1,5 +1,9 @@
 # Changelog
 
+##### [1.8.5] - 24 August 23
+
+- Fixed layout issues on desktop
+
 ##### [1.8.4] - 17 August 23
 
 - Minor text changes

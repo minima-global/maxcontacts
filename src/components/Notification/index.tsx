@@ -21,7 +21,7 @@ const Notification = () => {
     }
 
     return (
-        <div className="absolute left-0 bottom-0 p-5 w-full">
+        <div className="fixed left-0 bottom-0 p-5 w-full">
             <div className="w-full text-custom-black py-3 font-medium text-sm text-center bg-custom-pale-yellow rounded rounded-xl">
                 {_notification.message}
             </div>

@@ -34,32 +34,34 @@ function ContentContainer() {
   };
 
   return (
-    <div className="h-full">
+    <div>
       <AddContact />
       <EditDisplayName />
       <RemoveContactModal />
       <EditNickname />
-      <div className="h-full relative flex flex-col">
-        <div className="grow overflow-auto relative w-full mx-auto">
-          <TitleBar>
-            <button disabled={isLoading} onClick={refresh} className="disabled:cursor-not-allowed text-sm py-1 px-2 font-bold border-white">
-              {!isLoading && <img src="./assets/refresh-cw.svg" alt="refresh" className="w-5 h-5" />}
-              {isLoading && (
-                <div className="spinner-border" role="status">
-                  <span className="sr-only">Loading...</span>
-                </div>
-              )}
-            </button>
-          </TitleBar>
-          <DesktopNavBar />
-          <div className="mx-auto" style={{ maxWidth: '480px' }}>
-            <div className={`${hideNavBar ? 'h-full overflow-scroll lg:overflow-auto' : ''}`}>
+      <div className="h-screen flex flex-col">
+        <TitleBar>
+          <button disabled={isLoading} onClick={refresh} className="disabled:cursor-not-allowed text-sm py-1 px-2 font-bold border-white">
+            {!isLoading && <img src="./assets/refresh-cw.svg" alt="refresh" className="w-5 h-5" />}
+            {isLoading && (
+              <div className="spinner-border" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
+            )}
+          </button>
+        </TitleBar>
+        <div className="flex flex-col lg:flex-row flex-grow items-stretch">
+          <div className="hidden lg:block max-w-[58px] w-full col-span-1 bg-red-300">
+            <DesktopNavBar />
+          </div>
+          <div className="flex-1 flex-grow">
+            <div className="max-w-[640px] mx-auto lg:px-4">
               <Outlet />
             </div>
           </div>
+          {!hideNavBar && <MobileNavBar />}
           <Notification />
         </div>
-        {!hideNavBar && <MobileNavBar />}
       </div>
     </div>
   );

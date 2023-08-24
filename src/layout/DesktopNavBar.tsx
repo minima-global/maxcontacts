@@ -12,8 +12,8 @@ const DesktopNavBar = () => {
     const location = useLocation()
 
     return (
-        <div className="desktop-nav-bar hidden lg:block">
-            <div className="flex items-start text-white font-bold pt-5 pb-1" style={{ height: '100vh', background: '#363A3F', fontSize: '10px' }}>
+        <div className="h-full w-28 flex hidden lg:block" style={{ background: '#363A3F', fontSize: '10px' }}>
+            <div className="flex items-start text-white font-bold pt-5 pb-1 ">
                 <div className="w-full max-w-sm mx-auto flex flex-col gap-5 px-7">
                     <div className={`flex items-center justify-center ${location.pathname === '/' ? 'active' : 'text-gray-300'}`}>
                         <Link to="/">
