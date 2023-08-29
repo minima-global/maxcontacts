@@ -1,5 +1,9 @@
 # Changelog
 
+##### [1.8.6] - 24 August 23
+
+- Fixed nicknames load issue when saving nicknames
+
 ##### [1.8.5] - 24 August 23
 
 - Fixed layout issues on desktop

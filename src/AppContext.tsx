@@ -38,7 +38,7 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
             // await sql(`DROP TABLE IF EXISTS cache;`);
             await sql(`CREATE TABLE IF NOT EXISTS cache (name varchar(255), data longtext);`);
             const showOnboarding = await sql(`SELECT * FROM cache WHERE name = 'SHOW_ONBOARDING'`);
-            const nicknames: any = await sql(`SELECT * FROM cache WHERE name = 'NICKNAMES'`);
+            const nicknames: any = await sql(`SELECT * FROM cache WHERE name = 'NICKNAMES' ORDER BY ID 'desc'`);
             const favourites: any = await sql(`SELECT * FROM cache WHERE name = 'FAVOURITES'`);
 
             if (!showOnboarding) {
@@ -189,9 +189,9 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     // update favourites
     _setNicknames(updatedNicknames);
 
-    const favourites = await sql(`SELECT * FROM cache WHERE name = 'FAVOURITES'`);
+    const nicknames = await sql(`SELECT * FROM cache WHERE name = 'NICKNAMES'`);
 
-    if (!favourites) {
+    if (!nicknames) {
       await sql(`INSERT INTO cache (name, data) VALUES ('NICKNAMES', '${JSON.stringify(updatedNicknames)}')`);
     } else {
       await sql(`UPDATE cache SET data = '${JSON.stringify(updatedNicknames)}' WHERE name = 'NICKNAMES'`);
