@@ -1,8 +1,9 @@
 # Changelog
 
-##### [1.8.6] - 24 August 23
+##### [1.8.6] - 29 August 23
 
 - Fixed nicknames load issue when saving nicknames
+- Nickname/name circle will now display emojis correctly
 
 ##### [1.8.5] - 24 August 23
 

@@ -72,6 +72,31 @@ function ViewContact() {
   const displayYellowChain = _contact && !!(displayRedNetwork && _contact.samechain);
   const displayRedChain = _contact && !_contact.samechain;
 
+  /**
+   * Method to extract emoji from name and display it as the name/nickname first letter
+   * since emojis are composed of more than one character
+   */
+  const renderName = () => {
+    const regexp = /[\p{Extended_Pictographic}\u{1F3FB}-\u{1F3FF}\u{1F9B0}-\u{1F9B3}]/gu;
+    const nameEmojiMatches = _contact.extradata.name.match(regexp);
+
+    if (hasNickname) {
+      const nicknameEmojiMatches = hasNickname.match(regexp);
+
+      if (nicknameEmojiMatches && nicknameEmojiMatches.length > 0) {
+        return nicknameEmojiMatches[0];
+      }
+
+      return hasNickname.charAt(0);
+    }
+
+    if (nameEmojiMatches && nameEmojiMatches.length > 0) {
+      return nameEmojiMatches[0];
+    }
+
+    return _contact.extradata.name.charAt(0);
+  };
+
   return (
     <>
       <div className="p-5">
@@ -82,7 +107,7 @@ function ViewContact() {
       </div>
       <div className="bg-white p-4 px-6">
         <div className="flex items-stretch">
-          <div className="avatar mr-4">{!hasNickname ? _contact.extradata.name[0] : hasNickname[0]}</div>
+          <div className="avatar mr-4">{renderName()}</div>
           <div className="w-full flex items-center">
             <div className="w-full">
               <div className="font-bold text-md mb-1">

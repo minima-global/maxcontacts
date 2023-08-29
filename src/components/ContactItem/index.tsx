@@ -31,13 +31,38 @@ const ContactItem: React.FC<ContactItemsProps> = ({ id, name, sameChain, lastSee
   const displayYellowChain = sameChain && !!(displayRedNetwork && sameChain);
   const displayRedChain = !sameChain;
 
+  /**
+   * Method to extract emoji from name and display it as the name/nickname first letter
+   * since emojis are composed of more than one character
+   */
+  const renderName = () => {
+    const regexp = /[\p{Extended_Pictographic}\u{1F3FB}-\u{1F3FF}\u{1F9B0}-\u{1F9B3}]/gu;
+    const nameEmojiMatches = name.match(regexp);
+
+    if (hasNickname) {
+      const nicknameEmojiMatches = hasNickname.match(regexp);
+
+      if (nicknameEmojiMatches && nicknameEmojiMatches.length > 0) {
+        return nicknameEmojiMatches[0];
+      }
+
+      return hasNickname.charAt(0);
+    }
+
+    if (nameEmojiMatches && nameEmojiMatches.length > 0) {
+      return nameEmojiMatches[0];
+    }
+
+    return name.charAt(0);
+  };
+
   return (
     <div className={`${styles.card} py-4 px-3`}>
       <Link to={`/contacts/${id}`}>
         <div className="cursor-pointer px-3">
           <div className="flex items-stretch items-center h-full">
             <div className="relative mr-5">
-              <div className="avatar">{!hasNickname ? name[0] : hasNickname[0]}</div>
+              <div className="avatar">{renderName()}</div>
               {favourite && (
                 <div className="absolute bottom-0 right-0">
                   <div className="flex justify-center rounded rounded-xl bg-custom-yellow p-1 px-0.5 rounded rounded-xl">
