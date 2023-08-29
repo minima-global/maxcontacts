@@ -38,7 +38,7 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
             // await sql(`DROP TABLE IF EXISTS cache;`);
             await sql(`CREATE TABLE IF NOT EXISTS cache (name varchar(255), data longtext);`);
             const showOnboarding = await sql(`SELECT * FROM cache WHERE name = 'SHOW_ONBOARDING'`);
-            const nicknames: any = await sql(`SELECT * FROM cache WHERE name = 'NICKNAMES' ORDER BY ID 'desc'`);
+            const nicknames: any = await sql(`SELECT * FROM cache WHERE name = 'NICKNAMES'`);
             const favourites: any = await sql(`SELECT * FROM cache WHERE name = 'FAVOURITES'`);
 
             if (!showOnboarding) {
