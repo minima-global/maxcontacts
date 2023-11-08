@@ -1,5 +1,9 @@
 # Changelog
 
+##### [1.8.7] - 12 September 23
+
+- update mds.js
+
 ##### [1.8.6] - 29 August 23
 
 - Fixed nicknames load issue when saving nicknames

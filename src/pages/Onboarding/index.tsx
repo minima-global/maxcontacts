@@ -22,10 +22,13 @@ function Onboarding() {
   }, [loaded, _maxima, name]);
 
   useEffect(() => {
-    if (!_showOnboarding) {
+
+    if ((_maxima && _maxima.name && _maxima.name !== 'noname')) {
+        dismissOnboarding();
+    } else if (!_showOnboarding) {      
       navigate('/');
     }
-  }, [_showOnboarding, navigate]);
+  }, [_showOnboarding, navigate, _maxima]);
 
   const handleSetDisplayName = async (evt: React.FormEvent) => {
     evt.preventDefault();
