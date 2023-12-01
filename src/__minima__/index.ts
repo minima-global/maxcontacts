@@ -37,9 +37,11 @@ export function getAddress() {
 export function maxContactAdd(contact: string) {
   return new Promise((resolve, reject) => {
     (window as any).MDS.cmd(`maxcontacts action:add contact:${contact}`, function (response: any) {
+      console.log(response);
       if (response.response && response.response.maxima.delivered) {
         return resolve(response.response);
       }
+
 
       return reject();
     });

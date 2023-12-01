@@ -4,6 +4,8 @@ import { appContext } from '../../AppContext';
 import SearchBar from '../../components/SearchBar';
 import AddContact from '../../components/AddContact';
 import ContactItem from '../../components/ContactItem';
+import ImportContacts from '../../components/ImportContacts';
+import ExportContacts from '../../components/ExportContacts';
 
 const ContactsList: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -22,7 +24,12 @@ const ContactsList: React.FC = () => {
   return (
     <div>
       <SearchBar searchQuery={searchQuery} onSearchQueryChange={setSearchQuery} />
-      <AddContact />
+      <div className="flex flex-wrap md:flex-nowrap">
+        <AddContact />
+        <ImportContacts />
+        <ExportContacts />
+      </div>
+
       <div className="grid grid-col-12">
         {searchQuery !== '' && queriedContacts.length === 0 && (
           <div className="h-fit flex items-center justify-center">

@@ -10,6 +10,7 @@ import RemoveContactModal from '../pages/RemoveContact';
 import EditNickname from '../pages/EditNickname';
 import DesktopNavBar from './DesktopNavBar';
 import TitleBar from '../components/TitleBar';
+import BatchImportModal from '../pages/BatchImport';
 
 function ContentContainer() {
   const location = useLocation();
@@ -36,6 +37,7 @@ function ContentContainer() {
   return (
     <div>
       <AddContact />
+      <BatchImportModal/>
       <EditDisplayName />
       <RemoveContactModal />
       <EditNickname />

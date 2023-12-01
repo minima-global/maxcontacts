@@ -132,13 +132,13 @@ function AddContactModal() {
                     <strong>{latestContactName}</strong> was added
                     <br /> to your contacts
                   </h5>
-                  <div className="w-32 h-32 rounded rounded-full flex items-center justify-center text-xs text-left mx-auto mb-16" style={{ background: '#7A17F9' }}>
+                  <div className="w-32 h-32 rounded-full flex items-center justify-center text-xs text-left mx-auto mb-16" style={{ background: '#7A17F9' }}>
                     <svg width="49" height="36" viewBox="0 0 49 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M17.2468 35.1763L0.804199 18.7337L3.96058 15.5773L17.2468 28.8635L45.434 0.67627L48.5904 3.83265L17.2468 35.1763Z" fill="white" />
                     </svg>
                   </div>
                   <div className="mb-1">
-                    <button onClick={dismiss} className="cursor-pointer text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple">
+                    <button onClick={dismiss} className="cursor-pointer text-white w-full text-base font-bold py-3 rounded-xl bg-custom-purple">
                       Close
                     </button>
                   </div>

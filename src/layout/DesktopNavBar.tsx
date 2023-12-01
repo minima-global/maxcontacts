@@ -6,6 +6,8 @@ import favourites from '../assets/nav_bar/favourites.svg'
 import favouritesActive from '../assets/nav_bar/favourites_filled.svg'
 import profile from '../assets/nav_bar/profile.svg'
 import profileActive from '../assets/nav_bar/profile_filled.svg'
+import track from "../assets/nav_bar/track.svg"
+import trackActive from "../assets/nav_bar/track_filled.svg"
 import { Link, useLocation } from 'react-router-dom'
 
 const DesktopNavBar = () => {
@@ -26,7 +28,7 @@ const DesktopNavBar = () => {
                         <Link to="/last-active">
                             {location.pathname !== '/last-active' && <img alt="Last active" width={30} height={30} src={lastActive} className="mx-auto mb-1" />}
                             {location.pathname === '/last-active' && <img alt="Last active" width={30} height={30} src={lastActiveActive} className="mx-auto mb-1" />}
-                            <div>Last active</div>
+                            <div className="text-center center flex items-center justify-center">Last active</div>
                         </Link>
                     </div>
                     <div className={`flex items-center justify-center ${location.pathname === '/favourites' ? 'active' : 'text-gray-300'}`}>
@@ -42,7 +44,7 @@ const DesktopNavBar = () => {
                             {location.pathname === '/profile' && <img alt="Profile" width={30} height={30} src={profileActive} className="mx-auto mb-1" />}
                             <div>Profile</div>
                         </Link>
-                    </div>
+                    </div>                   
                 </div>
             </div>
         </div>

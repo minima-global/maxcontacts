@@ -9,6 +9,8 @@ import LastActive from './pages/LastActive';
 import Favourites from './pages/Favourites';
 import Splash from './components/Splash';
 
+import 'flowbite';
+
 function App() {
   const { loaded } = useContext(appContext);
 
@@ -25,7 +27,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/favourites" element={<Favourites />} />
           <Route path="/last-active" element={<LastActive />} />
-          <Route path="/contacts/:id" element={<ViewContact />} />
+          <Route path="/contacts/:id" element={<ViewContact />} />          
         </Route>
       </Routes>
     </div>

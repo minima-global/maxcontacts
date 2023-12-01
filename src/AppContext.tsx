@@ -2,6 +2,8 @@ import * as React from 'react';
 import { createContext, useEffect, useMemo, useRef, useState } from 'react';
 import { getAddress, maxContactAdd, maxContactRemove, maxContacts, maxima, maximaSetName, sql } from './__minima__';
 import pause from './utilities/pause';
+import exportToJson from './utilities/exportToJson';
+import { format } from 'date-fns';
 
 export const appContext = createContext({} as any);
 
@@ -17,6 +19,7 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [_showAddContact, _setShowAddContact] = useState(false);
   const [_showAddStaticMLS, _setShowAddStaticMLS] = useState(false);
   const [_showRemoveStaticMLS, _setShowRemoveStaticMLS] = useState(false);
+  const [_showImportContacts, _setShowImportContacts] = useState(false);
   const [_editNickname, _setEditNickname] = useState<{ display: boolean; contactId: number | null }>({ display: false, contactId: null });
   const [_removeContact, _setRemoveContact] = useState<{ display: boolean; contactId: number | null }>({ display: false, contactId: null });
   const [_showChangeDisplayName, _setShowChangeDisplayName] = useState(false);
@@ -90,6 +93,10 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const addContact = async (contactAddress: string) => {
     return maxContactAdd(contactAddress);
   };
+
+  const exportContacts = () => {
+    exportToJson(_contacts.map((_c: any) => _c.currentaddress), `myMaximaContacts_${format(new Date(), "yyyy-MM-dd_HH-mm-ss")}`)
+  }
 
   const removeContact = async (contactId: number) => {
     let previousLength = _contacts.length;
@@ -179,6 +186,15 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const dismissRemoveContact = async () => {
     _setRemoveContact({ display: false, contactId: null });
   };
+
+  const promptImportContacts = async () => {
+    _setShowImportContacts(true);
+  }
+  
+  const dismissImportContacts = async () => {
+    _setShowImportContacts(false);
+  }
+
 
   const editNickname = async (contactId: number, nickname: number) => {
     const updatedNicknames = {
@@ -273,6 +289,7 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   const value = {
     addContact,
+    exportContacts,
     removeContact,
     getMaxima,
     getContacts,
@@ -314,6 +331,9 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     _showRemoveStaticMLS,
     _setShowRemoveStaticMLS,
     refreshContacts,
+    _showImportContacts,
+    promptImportContacts,
+    dismissImportContacts
   };
 
   return <appContext.Provider value={value}>{children}</appContext.Provider>;
