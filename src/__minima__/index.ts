@@ -37,9 +37,34 @@ export function getAddress() {
 export function maxContactAdd(contact: string) {
   return new Promise((resolve, reject) => {
     (window as any).MDS.cmd(`maxcontacts action:add contact:${contact}`, function (response: any) {
-      console.log(response);
       if (response.response && response.response.maxima.delivered) {
         return resolve(response.response);
+      }
+
+
+      return reject();
+    });
+  });
+}
+
+export function maxContactExport(): Promise<string> {
+  return new Promise((resolve, reject) => {
+    (window as any).MDS.cmd(`maxcontacts action:export`, function (response: any) {
+      if (response.response) {
+        return resolve(response.response.contactlist);
+      }
+
+
+      return reject();
+    });
+  });
+}
+
+export function maxContactImport(contactlist: string): Promise<number> {
+  return new Promise((resolve, reject) => {
+    (window as any).MDS.cmd(`maxcontacts action:import contactlist:${contactlist}`, function (response: any) {
+      if (response.response) {
+        return resolve(response.response.size);
       }
 
 

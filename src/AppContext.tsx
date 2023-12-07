@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createContext, useEffect, useMemo, useRef, useState } from 'react';
-import { getAddress, maxContactAdd, maxContactRemove, maxContacts, maxima, maximaSetName, sql } from './__minima__';
+import { getAddress, maxContactAdd, maxContactExport, maxContactRemove, maxContacts, maxima, maximaSetName, sql } from './__minima__';
 import pause from './utilities/pause';
 import exportToJson from './utilities/exportToJson';
 import { format } from 'date-fns';
@@ -94,8 +94,9 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     return maxContactAdd(contactAddress);
   };
 
-  const exportContacts = () => {
-    exportToJson(_contacts.map((_c: any) => _c.currentaddress), `myMaximaContacts_${format(new Date(), "yyyy-MM-dd_HH-mm-ss")}`)
+  const exportContacts = async () => {
+    const contactList = await maxContactExport();
+    exportToJson(contactList, `myMaximaContacts_${format(new Date(), "yyyy-MM-dd_HH-mm-ss")}`)
   }
 
   const removeContact = async (contactId: number) => {

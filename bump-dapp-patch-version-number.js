@@ -5,7 +5,6 @@ const dappConfPath = __dirname + '/public/dapp.conf'
 fs.readFile(dappConfPath, 'utf8', (err, data) => {
     if (err) throw err
     const config = JSON.parse(data)
-    console.log(config.version)
     const major = parseInt(config.version.split('.')[0])
     const minor = parseInt(config.version.split('.')[1])
     let patch = parseInt(config.version.split('.')[2])

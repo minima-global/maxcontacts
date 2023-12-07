@@ -1,11 +1,10 @@
-import  { useContext, useState } from 'react';
-import { appContext } from '../../AppContext';
+import  { useState } from 'react';
+import { maxContactImport } from '../../__minima__';
 
-const InputImportContacts = ({setStep, setLength, setPassed, setFailed, setCurrent}: any) => {
-  const { addContact} = useContext(appContext);
+const InputImportContacts = ({setStep, setLength}: any) => {
+  // const { addContact} = useContext(appContext);
   const [selectedFile, setSelectedFile] = useState(null);
   
-  const [loading, setLoading] = useState(false);  
   
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -16,35 +15,23 @@ const InputImportContacts = ({setStep, setLength, setPassed, setFailed, setCurre
 
   const handleImport = () => {
     if (selectedFile) {
-      setLoading(true);
       const reader = new FileReader();
-      reader.onload = (e: any) => {
-        const _contacts = JSON.parse(e.target.result);
+      reader.onload = async (e: any) => {
+        const _contacts = e.target.result;
         
         setStep(2);
-        // Do something with the imported JSON data
+        // Do something with the imported data
         try {
-          
-          setLength(_contacts.length);
+        
 
-          const promises = _contacts.map((_c, i) => {
-            setCurrent(i+1);
-            addContact(_c);
-          });
+          const sizeImported = await maxContactImport(_contacts);          
 
-          Promise.allSettled(promises).then((results) => {
-            const totalFailed = results.filter(r => r.status !== 'fulfilled').length;
-            const totalPassed = results.filter(r => r.status !== 'rejected').length; 
-            setPassed(totalPassed);
-            setFailed(totalFailed);
-          });
+          setLength(sizeImported);          
 
           setStep(3);
           
         } catch (error) {
-          console.error(error);
-          setLoading(false);
-                 
+          console.error(error);                 
         }
 
         
@@ -63,7 +50,7 @@ const InputImportContacts = ({setStep, setLength, setPassed, setFailed, setCurre
       <input
         id="contacts"
         type="file"
-        accept=".json"
+        accept=".txt"
         onChange={handleFileChange}
         className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
       />
@@ -73,7 +60,7 @@ const InputImportContacts = ({setStep, setLength, setPassed, setFailed, setCurre
             disabled={!selectedFile}
             className="disabled:opacity-50 disabled:mb-1 text-white w-full text-base font-bold py-3 rounded-xl bg-custom-purple"
           >
-            Import contacts
+            Import Contacts
           </button>                
       </div>
     </div>

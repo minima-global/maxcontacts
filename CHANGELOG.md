@@ -1,5 +1,10 @@
 # Changelog
 
+##### [1.10.0] - 07 December 23
+
+- Switched JS batch imports to mds function import/export
+- Added blob fileDownload support for internal browser
+
 ##### [1.8.7] - 12 September 23
 
 - update mds.js
