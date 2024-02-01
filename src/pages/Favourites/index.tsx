@@ -4,6 +4,7 @@ import AddContact from '../../components/AddContact';
 import ContactItem from '../../components/ContactItem';
 import { appContext } from '../../AppContext';
 import SearchBar from '../../components/SearchBar';
+import ImportContacts from '../../components/ImportContacts';
 
 const Favourites: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -24,7 +25,10 @@ const Favourites: React.FC = () => {
     <>
       <div>
         <SearchBar searchQuery={searchQuery} onSearchQueryChange={setSearchQuery} />
-        <AddContact />
+        <div className="flex flex-wrap md:flex-nowrap">
+          <AddContact />
+          <ImportContacts />        
+        </div>
         <div className="grid grid-col-12">
           {(searchQuery !== '' && onlyFavourites.length === 0) && (
             <div className="h-fit flex items-center justify-center">

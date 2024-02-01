@@ -4,12 +4,7 @@ import { appContext } from '../../AppContext'
 
 
 function ImportContacts() {
-    const { _hasContacts, promptImportContacts } = useContext(appContext)
-
-
-    if (!_hasContacts) {
-      return null;
-    }
+    const { promptImportContacts } = useContext(appContext)
 
     return (
         <div className="cursor-pointer p-3 pb-4" onClick={promptImportContacts}>

@@ -2,8 +2,9 @@ import * as React from 'react';
 import { createContext, useEffect, useMemo, useRef, useState } from 'react';
 import { getAddress, maxContactAdd, maxContactExport, maxContactRemove, maxContacts, maxima, maximaSetName, sql } from './__minima__';
 import pause from './utilities/pause';
-import exportToJson from './utilities/exportToJson';
+import  { webDownload } from './utilities/webDownload';
 import { format } from 'date-fns';
+import downloadBlobWithMinima from './__minima__/downloadBlobWithMinima';
 
 export const appContext = createContext({} as any);
 
@@ -96,7 +97,17 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   const exportContacts = async () => {
     const contactList = await maxContactExport();
-    exportToJson(contactList, `myMaximaContacts_${format(new Date(), "yyyy-MM-dd_HH-mm-ss")}`)
+    const name = `myMaximaContacts_${format(new Date(), "yyyy-MM-dd_HH-mm-ss")}.txt`;
+    
+
+    if (
+      window.navigator.userAgent.includes("Minima Browser")
+    ) {
+  
+      return downloadBlobWithMinima(name, contactList);
+    }
+
+    webDownload(contactList, name, "text/plain");
   }
 
   const removeContact = async (contactId: number) => {

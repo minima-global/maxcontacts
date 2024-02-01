@@ -1,5 +1,5 @@
-function pause() {
-  return new Promise((resolve) => setTimeout(resolve, 500));
+function pause(length = 500) {
+  return new Promise((resolve) => setTimeout(resolve, length));
 }
 
 export default pause;

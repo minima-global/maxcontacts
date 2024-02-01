@@ -120,7 +120,7 @@ function Profile() {
               </div>
               {showSection === 'myStaticMLS' && (
                 <div className="pb-5 px-5 text-xs flex">
-                  <div className="break-all">{_maxima && _maxima.contact}</div>
+                  <div className="break-all">{_maxima && _maxima.mls}</div>
                   <div className="grow w-full flex justify-end items-start">
                     <Clipboard data-clipboard-text={_maxima && _maxima.mls} onClick={copyStaticMLSAddress}>
                       <>

@@ -63,6 +63,7 @@ export function maxContactExport(): Promise<string> {
 export function maxContactImport(contactlist: string): Promise<number> {
   return new Promise((resolve, reject) => {
     (window as any).MDS.cmd(`maxcontacts action:import contactlist:${contactlist}`, function (response: any) {
+
       if (response.response) {
         return resolve(response.response.size);
       }
