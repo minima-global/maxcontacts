@@ -1,5 +1,9 @@
 # Changelog
 
+##### [1.11.0] - 21 May 24
+
+- Fix overflowing of names throughout app
+
 ##### [1.10.0] - 07 December 23
 
 - Switched JS batch imports to mds function import/export

@@ -58,20 +58,20 @@ const ContactItem: React.FC<ContactItemsProps> = ({ id, name, sameChain, lastSee
 
   return (
     <div className={`${styles.card} py-4 px-3`}>
-      <Link to={`/contacts/${id}`}>
+      <Link className='break-all' to={`/contacts/${id}`}>
         <div className="cursor-pointer px-3">
-          <div className="flex items-stretch items-center h-full">
+          <div className="grid grid-cols-[auto_1fr_auto] items-center">
             <div className="relative mr-5">
               <div className="avatar">{renderName()}</div>
               {favourite && (
                 <div className="absolute bottom-0 right-0">
-                  <div className="flex justify-center rounded rounded-xl bg-custom-yellow p-1 px-0.5 rounded rounded-xl">
+                  <div className="flex justify-center bg-custom-yellow p-1 px-0.5 rounded-xl">
                     <img alt="Star" src={star} className="-mt-0.5" />
                   </div>
                 </div>
               )}
             </div>
-            <div className="grow flex items-center">
+            <div className="mr-6">
               <div>
                 <div className="font-bold mb-1">
                   {hasNickname && (
@@ -79,7 +79,8 @@ const ContactItem: React.FC<ContactItemsProps> = ({ id, name, sameChain, lastSee
                       {hasNickname} <span className="text-custom-grey-2">({name})</span>
                     </span>
                   )}
-                  {!hasNickname && name}
+                  {!hasNickname && <input className="w-full bg-transparent truncate focus:outline-none" readOnly value={name} /> }
+                  
                 </div>
                 <div className="text-xs text-custom-grey">Last seen {format(new Date(lastSeen), 'p dd/MM/yyyy')}</div>
               </div>

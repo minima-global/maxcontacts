@@ -5,8 +5,59 @@ import pause from './utilities/pause';
 import  { webDownload } from './utilities/webDownload';
 import { format } from 'date-fns';
 import downloadBlobWithMinima from './__minima__/downloadBlobWithMinima';
+// import { faker } from '@faker-js/faker';
 
 export const appContext = createContext({} as any);
+
+// interface ExtraData {
+//   name: string;
+//   minimaaddress: string;
+//   topblock: string;
+//   checkblock: string;
+//   checkhash: string;
+//   mls: string;
+// }
+
+// interface FakeData {
+//   id: number;
+//   publickey: string;
+//   currentaddress: string;
+//   myaddress: string;
+//   lastseen: number;
+//   date: string;
+//   extradata: ExtraData;
+//   chaintip: string;
+//   samechain: boolean;
+//   favourite: boolean;
+// }
+
+// const generateFakeData = (num: number): FakeData[] => {
+//   const fakeData: FakeData[] = [];
+
+//   for (let i = 0; i < num; i++) {
+//     fakeData.push({
+//       id: i + 1,
+//       publickey: faker.string.alphanumeric(512),
+//       currentaddress: `Mx${faker.string.alphanumeric(60)}@${faker.internet.ip()}:9001`,
+//       myaddress: `Mx${faker.string.alphanumeric(60)}@${faker.internet.ip()}:9001`,
+//       lastseen: Date.now() - faker.number.int({ min: 0, max: 100000000 }),
+//       date: faker.date.recent().toString(),
+//       extradata: {
+//         name: "234oij23io4io23i4ouo2i3u4oiu23oi4uoi2u34oiu23oi4uoi23u4oi2u3o4iu2oi3u4oi32",
+//         minimaaddress: `Mx${faker.string.alphanumeric(60)}`,
+//         topblock: faker.number.int({ min: 800000, max: 900000 }).toString(),
+//         checkblock: faker.number.int({ min: 800000, max: 900000 }).toString(),
+//         checkhash: `0x${faker.string.alphanumeric(64)}`,
+//         mls: `Mx${faker.string.alphanumeric(60)}@${faker.internet.ip()}:9001`
+//       },
+//       chaintip: faker.number.int({ min: 800000, max: 900000 }).toString(),
+//       samechain: faker.datatype.boolean(),
+//       favourite: faker.datatype.boolean()
+//     });
+//   }
+
+//   return fakeData;
+// };
 
 const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const loaded = useRef<boolean>(false);
@@ -142,7 +193,9 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
 
     return maxContacts()
       .then((response: any) => {
+
         _setContacts(response.contacts);
+        // _setContacts(generateFakeData(500) as any);
         return response.contacts;
       })
       .finally(() => {

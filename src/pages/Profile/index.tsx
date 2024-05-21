@@ -58,11 +58,11 @@ function Profile() {
       <DisconnectFromMasterNodeModal />
       <div className="p-5 bg-white" />
       <div className="bg-white p-4 px-6">
-        <div className="flex items-stretch">
+        <div className="grid grid-cols-[auto_1fr]">
           {_maxima && <div className="avatar mr-4">{_maxima.name[0]}</div>}
-          <div className="flex items-center">
+          <div className="my-auto">
             <div>
-              {_maxima && <div className="font-bold text-md mb-1">{_maxima.name}</div>}
+              {_maxima && <input value={_maxima.name} readOnly className='truncate focus:outline-none font-bold bg-transparent' />}
               <p onClick={promptChangeDisplayName} className="cursor-pointer text-xs text-custom-grey">
                 Edit display name
               </p>
@@ -71,19 +71,19 @@ function Profile() {
         </div>
         <div className="mt-5">
           <Clipboard className="w-full" data-clipboard-text={_maxima && _maxima.contact} onClick={copyShare}>
-            <button className={`text-white w-full text-base font-bold py-3 rounded rounded-xl ${hasCopiedMaximaAddress ? 'bg-custom-green' : 'bg-custom-purple'}`}>
+            <button className={`text-white w-full text-base font-bold py-3 rounded-xl ${hasCopiedMaximaAddress ? 'bg-custom-green' : 'bg-custom-purple'}`}>
               {hasCopiedMaximaAddress ? 'Copied my address' : 'Share contact'}
             </button>
           </Clipboard>
         </div>
         <div className="mt-3">
           {_maxima && _maxima.staticmls && (
-            <button onClick={removeStaticMLS} className={`text-white w-full text-base font-bold py-3 rounded rounded-xl bg-slate-600`}>
+            <button onClick={removeStaticMLS} className={`text-white w-full text-base font-bold py-3 rounded-xl bg-slate-600`}>
               Disconnect static MLS
             </button>
           )}
           {_maxima && !_maxima.staticmls && (
-            <button onClick={setStaticMLS} className={`text-white w-full text-base font-bold py-3 rounded rounded-xl bg-custom-purple`}>
+            <button onClick={setStaticMLS} className={`text-white w-full text-base font-bold py-3 rounded-xl bg-custom-purple`}>
               Connect Static MLS
             </button>
           )}

@@ -106,27 +106,29 @@ function ViewContact() {
         </button>
       </div>
       <div className="bg-white p-4 px-6">
-        <div className="flex items-stretch">
+        <div className="grid grid-cols-[auto_1fr] items-center">
           <div className="avatar mr-4">{renderName()}</div>
-          <div className="w-full flex items-center">
-            <div className="w-full">
-              <div className="font-bold text-md mb-1">
-                {hasNickname && (
-                  <span>
-                    {hasNickname} <span className="text-custom-grey-2">({_contact.extradata.name})</span>
-                  </span>
-                )}
-                {!hasNickname && _contact.extradata.name}
-              </div>
-              <p onClick={editNickname} className="cursor-pointer text-xs text-custom-grey">
-                {hasNickname ? 'Edit' : 'Add'} nickname
-              </p>
+          <div className='grid grid-cols-[1fr_25px] items-center gap-2'>
+          <div className='truncate'>
+            <div className="font-bold text-md mb-1 truncate">
+              {hasNickname && (
+                <span>
+                  {hasNickname} <span className="text-custom-grey-2">({_contact.extradata.name})</span>
+                </span>
+              )}
+              {!hasNickname && _contact.extradata.name}
             </div>
+            <p onClick={editNickname} className="cursor-pointer text-xs text-custom-grey">
+              {hasNickname ? 'Edit' : 'Add'} nickname
+            </p>
           </div>
-          <div className="flex items-center justify-end" style={{ minWidth: '25px' }}>
+          
+          <div>
             <span className="cursor-pointer" onClick={() => toggleFavourite(_contact.id)}>
               {isFavourited ? <img src={starFilled} alt="Star filled" width="25" /> : <img src={starOutline} alt="Star outline" width="25" />}
             </span>
+          </div>
+
           </div>
         </div>
         <div className="mt-5">
