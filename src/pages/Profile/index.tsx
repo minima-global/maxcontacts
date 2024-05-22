@@ -7,6 +7,10 @@ import chevron from '../../assets/chevron.svg';
 import ConnectToMasterNodeModal from '../ConnectToMasterNodeModal';
 import DisconnectFromMasterNodeModal from '../DisconnectFromMasterNodeModal';
 
+import QRCode from "react-qr-code";
+import BiggerQrCode from '../../components/BiggerQRCode';
+
+
 function Profile() {
   const { _maxima, _address, getMaxima, getMinimaAddress, _notification, promptNotification, promptChangeDisplayName, _setShowAddStaticMLS, _setShowRemoveStaticMLS } = useContext(appContext);
   const hasCopied = _notification.message === 'You have copied your maxima address! ';
@@ -15,7 +19,9 @@ function Profile() {
   const hasCopiedStaticMLSAddress = _notification.message === 'ou have copied your static MLS address!';
   const [loaded, setLoaded] = useState(false);
   const [showSection, setShowSection] = useState<string | null>('myMaximaAddress');
+  const [_promptQrCode, setPromptQrCode] = useState(false);
 
+  
   useEffect(() => {
     if (!loaded) {
       getMaxima();
@@ -51,13 +57,22 @@ function Profile() {
   const removeStaticMLS = () => {
     _setShowRemoveStaticMLS(true);
   }
-
+  const promptQrCode = () => {
+    setPromptQrCode(prevState => !prevState);
+  }
   return (
     <>
       <ConnectToMasterNodeModal />
       <DisconnectFromMasterNodeModal />
       <div className="p-5 bg-white" />
-      <div className="bg-white p-4 px-6">
+      <div className="bg-white p-4 px-6 pt-0">        
+        {_maxima.contact && (
+        <BiggerQrCode
+          data={_maxima.contact}
+          dismiss={promptQrCode}
+          active={_promptQrCode}
+        />
+      )}
         <div className="grid grid-cols-[auto_1fr]">
           {_maxima && <div className="avatar mr-4">{_maxima.name[0]}</div>}
           <div className="my-auto">
@@ -69,12 +84,13 @@ function Profile() {
             </div>
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-5 grid grid-cols-[1fr_auto] gap-1">
           <Clipboard className="w-full" data-clipboard-text={_maxima && _maxima.contact} onClick={copyShare}>
-            <button className={`text-white w-full text-base font-bold py-3 rounded-xl ${hasCopiedMaximaAddress ? 'bg-custom-green' : 'bg-custom-purple'}`}>
+            <div className={`text-white w-full text-base font-bold py-3 rounded-xl ${hasCopiedMaximaAddress ? 'bg-custom-green' : 'bg-custom-purple'}`}>
               {hasCopiedMaximaAddress ? 'Copied my address' : 'Share contact'}
-            </button>
+            </div>
           </Clipboard>
+          <div className='my-auto'><div onClick={promptQrCode}><QRCode className='rounded shadow-lg shadow-violet-300' size={42} value={_maxima.contact} /></div></div>
         </div>
         <div className="mt-3">
           {_maxima && _maxima.staticmls && (

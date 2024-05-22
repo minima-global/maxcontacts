@@ -15,6 +15,8 @@ import Clipboard from 'react-clipboard.js';
 import greenTick from '../../assets/green_tick.svg';
 import clipboard from '../../assets/clipboard.svg';
 import { isAfter, isBefore, subMinutes } from 'date-fns';
+import BiggerQrCode from '../../components/BiggerQRCode';
+import QRCode from 'react-qr-code';
 
 function ViewContact() {
   const params = useParams();
@@ -23,6 +25,9 @@ function ViewContact() {
     useContext(appContext);
   const [showSection, setShowSection] = useState<string | null>(null);
   const [loaded, setLoaded] = useState(false);
+
+  const [_promptQrCode, setPromptQrCode] = useState(false);
+
 
   useEffect(() => {
     if (!loaded) {
@@ -97,8 +102,19 @@ function ViewContact() {
     return _contact.extradata.name.charAt(0);
   };
 
+  const promptQrCode = () => {
+    setPromptQrCode(prevState => !prevState);
+  }
+
   return (
     <>
+    {_contact.currentaddress && (
+        <BiggerQrCode
+          data={_contact.currentaddress}
+          dismiss={promptQrCode}
+          active={_promptQrCode}
+        />
+      )}
       <div className="p-5">
         <button className="flex items-center" onClick={goBack}>
           <img alt="Back arrow" src={backArrow} width={20} className="mr-3" />
@@ -131,12 +147,13 @@ function ViewContact() {
 
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-5 grid grid-cols-[1fr_auto] gap-1">
           <Clipboard className="w-full" data-clipboard-text={_contact && _contact.currentaddress} onClick={() => promptNotification(copySharePublicKeyText)}>
-            <button className={`text-white w-full text-base font-bold py-3 rounded rounded-xl ${hasCopiedSharePublicKey ? 'bg-custom-green' : 'bg-custom-purple'}`}>
+            <div className={`text-white w-full text-base font-bold py-3 rounded rounded-xl ${hasCopiedSharePublicKey ? 'bg-custom-green' : 'bg-custom-purple'}`}>
               {hasCopiedSharePublicKey ? 'Copied contact address' : 'Share contact'}
-            </button>
+            </div>
           </Clipboard>
+          <div className='my-auto'><div onClick={promptQrCode}><QRCode className='rounded shadow-lg shadow-violet-300' size={42} value={_contact.currentaddress} /></div></div>
         </div>
       </div>
       <div className="my-4">

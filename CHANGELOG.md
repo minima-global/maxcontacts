@@ -1,6 +1,10 @@
 # Changelog
 
-##### [1.11.0] - 21 May 24
+##### [1.12.1] - 22 May 24
+
+- Add QR Code to profiles
+
+##### [1.12.0] - 21 May 24
 
 - Fix overflowing of names throughout app
 
