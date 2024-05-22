@@ -6,6 +6,9 @@ import AddContact from '../../components/AddContact';
 import ContactItem from '../../components/ContactItem';
 import ImportContacts from '../../components/ImportContacts';
 import ExportContacts from '../../components/ExportContacts';
+import AddContactMobile from '../../components/AddContactMobile';
+import ImportContactsMobile from '../../components/ImportContactsMobile';
+import ExportContactsMobile from '../../components/ExportContactsMobile';
 
 const ContactsList: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -24,10 +27,22 @@ const ContactsList: React.FC = () => {
   return (
     <div>
       <SearchBar searchQuery={searchQuery} onSearchQueryChange={setSearchQuery} />
-      <div className="flex flex-wrap md:flex-nowrap">
+      
+      
+      <div className="hidden md:grid grid-cols-3">
         <AddContact />
         <ImportContacts />
         <ExportContacts />
+      </div>
+      
+      <div className="grid md:hidden max-w-lg mx-auto mb-2">
+        <div />
+        <div className="flex justify-evenly px-3 gap-1">
+        <AddContactMobile />
+        <ImportContactsMobile />
+        <ExportContactsMobile />
+        </div>
+        <div />
       </div>
 
       <div className="grid grid-col-12">
@@ -37,7 +52,7 @@ const ContactsList: React.FC = () => {
           </div>
         )}
         {queriedContacts &&
-          queriedContacts.map((c: any) => <ContactItem key={c.id} id={c.id} name={c.extradata.name} lastSeen={c.lastseen} sameChain={c.samechain} favourite={c.favourite} />)}
+          queriedContacts.map((c: any) => <ContactItem key={c.id} id={c.id} name={c.extradata.name} lastSeen={c.lastseen} sameChain={c.samechain} favourite={c.favourite} icon={c.extradata.icon} />)}
       </div>
     </div>
   );

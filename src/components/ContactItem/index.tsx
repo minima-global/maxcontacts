@@ -18,9 +18,10 @@ type ContactItemsProps = {
   name: string;
   sameChain: boolean;
   lastSeen: number;
+  icon?: string;
 };
 
-const ContactItem: React.FC<ContactItemsProps> = ({ id, name, sameChain, lastSeen, favourite }) => {
+const ContactItem: React.FC<ContactItemsProps> = ({ id, name, sameChain, lastSeen, favourite, icon }) => {
   const { _nicknames } = useContext(appContext);
   const hasNickname = _nicknames[id];
   const displayGreenNetwork = lastSeen ? isBefore(subMinutes(new Date(), 30), new Date(lastSeen)) : null;
@@ -36,6 +37,12 @@ const ContactItem: React.FC<ContactItemsProps> = ({ id, name, sameChain, lastSee
    * since emojis are composed of more than one character
    */
   const renderName = () => {
+
+    if (icon && icon.length > 0) {
+
+      return <img src={decodeURIComponent(icon)} alt="user-icon" />;
+    }
+
     const regexp = /[\p{Extended_Pictographic}\u{1F3FB}-\u{1F3FF}\u{1F9B0}-\u{1F9B3}]/gu;
     const nameEmojiMatches = name.match(regexp);
 
@@ -55,6 +62,7 @@ const ContactItem: React.FC<ContactItemsProps> = ({ id, name, sameChain, lastSee
 
     return name.charAt(0);
   };
+
 
   return (
     <div className={`${styles.card} py-4 px-3`}>

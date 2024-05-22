@@ -60,6 +60,9 @@ function Profile() {
   const promptQrCode = () => {
     setPromptQrCode(prevState => !prevState);
   }
+  
+  const HAS_ICON = _maxima && _maxima.icon && _maxima.icon.length;
+
   return (
     <>
       <ConnectToMasterNodeModal />
@@ -73,8 +76,8 @@ function Profile() {
           active={_promptQrCode}
         />
       )}
-        <div className="grid grid-cols-[auto_1fr]">
-          {_maxima && <div className="avatar mr-4">{_maxima.name[0]}</div>}
+        <div className="grid grid-cols-[auto_1fr]">        
+          {_maxima && <div className="avatar mr-4">{HAS_ICON ? <img src={decodeURIComponent(_maxima.icon)} alt="user-icon" /> : _maxima.name[0]}</div>}
           <div className="my-auto">
             <div>
               {_maxima && <input value={_maxima.name} readOnly className='truncate focus:outline-none font-bold bg-transparent' />}

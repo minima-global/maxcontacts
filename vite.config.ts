@@ -7,9 +7,13 @@ import legacy from '@vitejs/plugin-legacy'
 
 export default ({ mode }) => {
   let devEnv = '';
-  const env = Object.assign(globalThis.process.env, loadEnv(mode, globalThis.process.cwd()));
+  // Load environment variables based on the mode
+  const env = loadEnv(mode, process.cwd());
 
-  if (mode === 'development') {
+  console.log('env', env);
+  console.log('running with MODE', mode);
+
+  if (mode === 'development' || mode === 'second') {
     devEnv = `
       <script>
         var DEBUG = "${env.VITE_DEBUG}" === 'true';
@@ -18,6 +22,8 @@ export default ({ mode }) => {
         var DEBUG_UID = "${env.VITE_DEBUG_UID}";
       </script>
     `;
+
+    console.log('devEnv', devEnv);
   }
 
   return defineConfig({

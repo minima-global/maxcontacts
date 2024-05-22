@@ -82,6 +82,11 @@ function ViewContact() {
    * since emojis are composed of more than one character
    */
   const renderName = () => {
+    if (_contact.extradata.icon && _contact.extradata.icon.length > 0) {
+
+      return <img src={decodeURIComponent(_contact.extradata.icon)} alt="user-icon" />
+    }
+
     const regexp = /[\p{Extended_Pictographic}\u{1F3FB}-\u{1F3FF}\u{1F9B0}-\u{1F9B3}]/gu;
     const nameEmojiMatches = _contact.extradata.name.match(regexp);
 
