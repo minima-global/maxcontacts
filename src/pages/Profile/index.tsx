@@ -9,6 +9,7 @@ import DisconnectFromMasterNodeModal from '../DisconnectFromMasterNodeModal';
 
 import QRCode from "react-qr-code";
 import BiggerQrCode from '../../components/BiggerQRCode';
+import renderIcon from '../../utilities/renderIcon';
 
 
 function Profile() {
@@ -16,13 +17,12 @@ function Profile() {
   const hasCopied = _notification.message === 'You have copied your maxima address! ';
   const hasCopiedMaximaAddress = _notification.message === 'You have copied your maxima address!';
   const hasCopiedMinimaAddress = _notification.message === 'You have copied your minima address!';
-  const hasCopiedStaticMLSAddress = _notification.message === 'ou have copied your static MLS address!';
+  const hasCopiedStaticMLSAddress = _notification.message === 'You have copied your static MLS address!';
   const [loaded, setLoaded] = useState(false);
   const [showSection, setShowSection] = useState<string | null>('myMaximaAddress');
   const [_promptQrCode, setPromptQrCode] = useState(false);
 
-  
-  useEffect(() => {
+  useEffect(() => { 
     if (!loaded) {
       getMaxima();
       getMinimaAddress();
@@ -61,7 +61,7 @@ function Profile() {
     setPromptQrCode(prevState => !prevState);
   }
   
-  const HAS_ICON = _maxima && _maxima.icon && _maxima.icon.length;
+
 
   return (
     <>
@@ -77,12 +77,16 @@ function Profile() {
         />
       )}
         <div className="grid grid-cols-[auto_1fr]">        
-          {_maxima && <div className="avatar mr-4">{HAS_ICON ? <img src={decodeURIComponent(_maxima.icon)} alt="user-icon" /> : _maxima.name[0]}</div>}
+          
+          <div className="mr-2">
+            {renderIcon(_maxima)}
+          </div>
+
           <div className="my-auto">
             <div>
               {_maxima && <input value={_maxima.name} readOnly className='truncate focus:outline-none font-bold bg-transparent' />}
               <p onClick={promptChangeDisplayName} className="cursor-pointer text-xs text-custom-grey">
-                Edit display name
+                Edit profile
               </p>
             </div>
           </div>

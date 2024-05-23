@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createContext, useEffect, useMemo, useRef, useState } from 'react';
-import { getAddress, maxContactAdd, maxContactExport, maxContactRemove, maxContacts, maxima, maximaSetName, sql } from './__minima__';
+import { getAddress, maxContactAdd, maxContactExport, maxContactRemove, maxContacts, maxima, maximaSetIcon, maximaSetName, sql } from './__minima__';
 import pause from './utilities/pause';
 import  { webDownload } from './utilities/webDownload';
 import { format } from 'date-fns';
@@ -138,6 +138,12 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   const setDisplayName = async (displayName: string) => {
     return maximaSetName(displayName === '' ? 'noname' : displayName).then(() => {
+      return getMaxima();
+    });
+  };
+
+  const setDisplayIcon = async (icon: string) => {
+    return maximaSetIcon(icon).then(() => {
       return getMaxima();
     });
   };
@@ -361,6 +367,7 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     queryContacts,
     editNickname,
     setDisplayName,
+    setDisplayIcon,
     promptAddContact,
     dismissAddContact,
     dismissOnboarding,

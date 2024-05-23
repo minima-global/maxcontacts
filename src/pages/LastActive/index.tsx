@@ -7,6 +7,8 @@ import SearchBar from '../../components/SearchBar';
 import ImportContacts from '../../components/ImportContacts';
 import AddContactMobile from '../../components/AddContactMobile';
 import ImportContactsMobile from '../../components/ImportContactsMobile';
+import ExportContacts from '../../components/ExportContacts';
+import ExportContactsMobile from '../../components/ExportContactsMobile';
 
 const LastActive: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -32,6 +34,7 @@ const LastActive: React.FC = () => {
         <div className="hidden md:grid grid-cols-2">
         <AddContact />
         <ImportContacts />
+        <ExportContacts/>
         
       </div>
       
@@ -40,6 +43,7 @@ const LastActive: React.FC = () => {
         <div className="flex justify-evenly px-3 gap-1">
         <AddContactMobile />
         <ImportContactsMobile />
+        <ExportContactsMobile />
         </div>
         <div />
       </div>
@@ -59,6 +63,7 @@ const LastActive: React.FC = () => {
                 lastSeen={c.lastseen}
                 sameChain={c.samechain}
                 favourite={c.favourite}
+                icon={c.extradata.icon}
               />
             ))}
         </div>

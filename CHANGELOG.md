@@ -1,5 +1,11 @@
 # Changelog
 
+##### [1.13.0] - 23 May 24
+
+- Added Profile icon support
+- Edit Profile Icon set to 50kb max size
+- Supports .png,.jpeg,.jpg,.svg,.xml,.gif
+
 ##### [1.12.1] - 22 May 24
 
 - Add QR Code to profiles

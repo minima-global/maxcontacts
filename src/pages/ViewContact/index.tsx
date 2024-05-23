@@ -82,9 +82,14 @@ function ViewContact() {
    * since emojis are composed of more than one character
    */
   const renderName = () => {
-    if (_contact.extradata.icon && _contact.extradata.icon.length > 0) {
+    const dataImageBase64Regex = /^data:image\/(?:png|jpeg|gif|bmp|webp|svg\+xml);base64,(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
+    const isBase64 = _contact.extradata.icon ? dataImageBase64Regex.test(decodeURIComponent(_contact.extradata.icon)) : false;
 
-      return <img src={decodeURIComponent(_contact.extradata.icon)} alt="user-icon" />
+
+    if (isBase64) {
+        return <div className="avatar relative"> 
+                <img className={`w-[64px]`} src={decodeURIComponent(_contact.extradata.icon!)} alt="user-avatar" />                        
+            </div> 
     }
 
     const regexp = /[\p{Extended_Pictographic}\u{1F3FB}-\u{1F3FF}\u{1F9B0}-\u{1F9B3}]/gu;
