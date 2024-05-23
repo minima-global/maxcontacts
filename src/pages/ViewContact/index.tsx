@@ -87,8 +87,8 @@ function ViewContact() {
 
 
     if (isBase64) {
-        return <div className="avatar relative"> 
-                <img className={`w-[64px]`} src={decodeURIComponent(_contact.extradata.icon!)} alt="user-avatar" />                        
+        return <div className="relative"> 
+                <img className={`avatar`} src={decodeURIComponent(_contact.extradata.icon!)} alt="user-avatar" />                        
             </div> 
     }
 

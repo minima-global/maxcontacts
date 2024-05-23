@@ -13,9 +13,9 @@ const SearchItem: React.FC<SearchBarProps> = ({ searchQuery, onSearchQueryChange
 
     return (
         <label className="block pt-4 px-4 lg:px-0 pb-2">
-            <div className="flex bg-white rounded rounded-xl py-4 px-4">
+            <div className="flex bg-white  rounded-xl py-4 px-4">
                 <img alt="search" src={search} width={20} height={20} className="mr-4" />
-                <input value={searchQuery} onChange={handleOnChange} className="text-sm" placeholder="Search by name"></input>
+                <input value={searchQuery} onChange={handleOnChange} className="text-sm focus:outline-none" placeholder="Search by name"></input>
             </div>
         </label>
     )

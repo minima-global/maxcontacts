@@ -13,7 +13,7 @@ export function maximaSetName(name: string) {
 export function maximaSetIcon(icon: string) {
   return new Promise((resolve, reject) => {
     (window as any).MDS.cmd(`maxima action:seticon icon:"${encodeURIComponent(icon)}"`, function (response: any) {
-      console.log(response);
+      
       if (response.response) {
         return resolve(response.response);
       }

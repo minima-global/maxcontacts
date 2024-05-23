@@ -14,8 +14,8 @@ const renderIcon = (_maximaUser: MaximaIdentity, handleClearDefaultIcon?: () => 
 
 
     if (isBase64) {
-        return <div className="avatar relative"> 
-                <img className={`w-[64px] ${extraClass && extraClass}`} src={decodeURIComponent(_maximaUser.icon)} alt="user-avatar" />        
+        return <div className="relative"> 
+                <img className={`avatar ${extraClass && extraClass}`} src={decodeURIComponent(_maximaUser.icon)} alt="user-avatar" />        
                 {handleClearDefaultIcon && <div onClick={handleClearDefaultIcon} className={`absolute left-0 right-0 top-0 bottom-0 bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100 avatar`}> <CloseIcon fill="red" extraClass="" /> </div>}
             </div> 
     }

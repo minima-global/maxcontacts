@@ -1,5 +1,10 @@
 # Changelog
 
+##### [1.13.1] - 23 May 24
+
+- Tweak design of the profile icon
+- Some other design fixes
+
 ##### [1.13.0] - 23 May 24
 
 - Added Profile icon support
