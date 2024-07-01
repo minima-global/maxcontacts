@@ -3,6 +3,8 @@ import { appContext } from '../../AppContext'
 import CloseIcon from '../../components/UI/icons/CloseIcon'
 import renderIcon from '../../utilities/renderIcon'
 
+import { compressImage, base64ToBlob } from '../../utilities/compressImage'
+
 function EditDisplayName() {
     const { _maxima, _showChangeDisplayName, dismissChangeDisplay, promptNotification, setDisplayName, setDisplayIcon } = useContext(appContext)
     const [name, setName] = useState('')
@@ -10,6 +12,7 @@ function EditDisplayName() {
     const [isLoading, setIsLoading] = useState(false)
 
     const [previewIcon, setPreviewIcon] = useState<{file: File, preview: string}|null>(null);
+    const [compressedFileSize, setCompressFileSize] = useState<number|null>(null);
     const [clearIcon, setClearIcon] = useState(false);
     const inputRef = useRef<HTMLInputElement | null> (null);
 
@@ -32,6 +35,8 @@ function EditDisplayName() {
         setName(evt.target.value)
     }
 
+
+
     const handleChangeIcon = async (evt: React.ChangeEvent<HTMLInputElement>) => {
         const {  files } = evt.target;
 
@@ -44,7 +49,10 @@ function EditDisplayName() {
         }
 
         if (files) {     
-            const imageSrc = await handleFileToBase64(files[0]);       
+            const imageSrc = await handleFileToBase64(files[0]);    
+            const blob = base64ToBlob(imageSrc as string);
+            const compressedFileSize = new File([blob], "test");            
+            setCompressFileSize(compressedFileSize.size as number);
             setPreviewIcon({file: files[0], preview: imageSrc as string});
         }
     };
@@ -53,9 +61,10 @@ function EditDisplayName() {
         return new Promise((resolve) => {
             const fileRead = new FileReader();
             fileRead.readAsDataURL(file);
-            fileRead.onload = () => {
+            fileRead.onload = async () => {
                 const base64 = fileRead.result as string;
-                resolve(base64);
+                const compressedBase64 = await compressImage(base64);
+                resolve(compressedBase64);
             };
             
             fileRead.onerror = () => {                
@@ -64,9 +73,15 @@ function EditDisplayName() {
         });
     }
 
+    
+
     const handleClear = (evt) => {
         evt.stopPropagation();
         setPreviewIcon(null);
+        setCompressFileSize(null);
+        if (inputRef.current) {
+            inputRef.current.value = '';
+        }
     };    
 
     const handleClearDefaultIcon = () => {
@@ -92,7 +107,7 @@ function EditDisplayName() {
         return <div />
     }
 
-    const fileTooBig = previewIcon && previewIcon.file && previewIcon.file.size > 55000;
+    const fileTooBig = compressedFileSize && compressedFileSize > 55000;
 
     return (
         <>
@@ -113,11 +128,11 @@ function EditDisplayName() {
                                     <p className="text-left font-medium mb-3 ml-2">Choose an icon</p>                               
                                     <div className="mb-2">
                                         <div onClick={() => inputRef.current?.click()} className="cursor-pointer text-left p-3 border-2 rounded-lg bg-[#7A17F9] border-[#7A17F9] truncate">
-                                            <input onChange={handleChangeIcon} ref={inputRef} type="file" accept=".png,.jpeg,.jpg,.svg,.xml,.gif" className='hidden' />
+                                            <input onChange={handleChangeIcon} ref={inputRef} type="file" accept=".png,.jpeg,.jpg,.svg" className='hidden' />
                                             <div className='grid grid-cols-[1fr_16px]'>
-                                                <div>
+                                                <div className='truncate'>
                                                     <span className='text-white truncate'>{previewIcon === null && "Select a profile avatar"} {previewIcon !== null && "Selected avatar"}</span>
-                                                    {previewIcon && <span className="block truncate text-white text-opacity-80 text-xs">{previewIcon.file.name}</span>}
+                                                    {previewIcon && <span className="block truncate break-all text-white text-opacity-80 text-xs">{previewIcon.file.name}</span>}
                                                 </div>
                                                 {previewIcon !== null &&                                                
                                                     <div onClick={handleClear} className='my-auto text-white'>
